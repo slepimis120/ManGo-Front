@@ -1,0 +1,21 @@
+.logo {
+    float: left;
+    min-height: 95px;
+    height: 9vmax;
+    max-height: 110px;
+    padding: 10px;
+}
+
+nav {
+    padding: 0;
+    background-color: black;
+    font-size: 40px;    
+}
+
+nav a {
+    color: white;
+}
+
+.push-right{
+    float: right;
+}

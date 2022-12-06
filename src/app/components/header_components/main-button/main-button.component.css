@@ -1,0 +1,16 @@
+.btn {
+background: rgba(0, 0, 0, 0.63);
+border-radius: 10px;
+color: white ;
+font-family: 'Noto Sans HK', sans-serif ;
+font-style: normal;
+font-size: 32px;
+line-height: 46px;
+letter-spacing: 0.02em;
+text-decoration: none;
+width: 7em;
+height: 4em;
+display: inline-block;
+margin: 1em;
+}
+
