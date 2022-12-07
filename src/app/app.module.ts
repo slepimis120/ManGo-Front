@@ -9,6 +9,8 @@ import { StartComponent } from './components/header_components/mainImage/mainIma
 import { MainButtonComponent } from './components/header_components/main-button/main-button.component';
 import { HomeComponent } from './components/unregistered_components/home/home.component';
 import { FooterComponent } from './components/footer_components/footer/footer.component';
+import { LoginComponent } from './components/header_components/login/login.component';
+import { SignupComponent } from './components/header_components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FooterComponent } from './components/footer_components/footer/footer.co
     MainButtonComponent,
     HomeComponent,
     FooterComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
