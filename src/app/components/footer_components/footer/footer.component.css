@@ -1,0 +1,63 @@
+
+.footer_logo {
+
+    font-family: 'Unica One', cursive;
+    font-size: 64px ;
+    text-align: center;
+    justify-content: left;
+    padding: 2vmax 1vmax 0vmax 0;
+    line-height: 60px;
+    height: fit-content;
+}
+
+.vertical_line{
+    border-right: thin solid white;
+}
+
+.footer_logo_description p{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+}
+
+
+
+h5{
+    font-size: 32px;
+    width: fit-content;
+}
+
+.navigation p {
+    font-size: 16px;
+    color: var(--dark_orange);
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.join_us p{
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn{
+    background-color: var(--dark_orange);
+    color: white;
+    border-radius: 0px 14px 14px 0px;
+    margin-left: 5%;
+    width: 30%;
+    font-size: 24px;
+    padding: 0px 5px 2px 5px;
+    margin-bottom: 8px;
+}
+
+.join_us input{
+    border: medium solid var(--dark_orange);
+    background-color: black;
+    color: white;
+    padding: 1.2%;
+
+}
+
+.contact_info div p{
+    display: inline;
+}
