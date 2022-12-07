@@ -1,3 +1,8 @@
+
+
+
+
+
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
 
@@ -20,14 +25,93 @@
         </div>
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <button class="btn btn-primary" (click)="openloginModal(loginModal)">Log in</button>
+                
+                </li>
                 <li  class="nav-item" >
-                    <a class="nav-link" aria-current="page" href="{{menuItems.at(-2)?.linkUrl}}">{{menuItems.at(-2)?.linkName}}</a>
-                </li>`
-                <li  class="nav-item" >
-                    <a class="nav-link" aria-current="page" href="{{menuItems.at(-1)?.linkUrl}}">{{menuItems.at(-1)?.linkName}}</a>
+                    <button class="btn btn-primary" (click)="opensignupModal(signupModal)">Sign up</button>
                 </li>`
             </ul>
         </div>
         
     </div>
 </nav>
+
+
+
+<div class="modal" tabindex="-1" #loginModal id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form name="LoginForma" id="LoginForma">
+                <div class="modal-body text-center">
+
+                    <p>
+                        <label for="email">E-mail:</label>
+                        <br />
+                        <input type="text" name="email_login" id="email_login">
+                    </p>
+
+                    <p>
+                        <label for="sifra">Šifra:</label>
+                        <br />
+                        <input type="password" name="sifra_login" id="sifra_login">
+                    </p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ZatvoriDugme">Zatvori</button>
+                    <button type="submit" class="btn btn-primary">Prijavite se</button>
+
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" #signupModal id="signupModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form name="RegistracijaForma" id="RegistracijaForma">
+            <div class="modal-body">
+                    <label for="ime_registracija">Ime:</label>
+                    <br />
+                    <input type="text" name="ime_registracija" id="ime_registracija">
+                    <label for="prezime_registracija">Prezime:</label>
+                    <br />
+                    <input type="text" name="prezime_registracija" id="prezime_registracija">
+                    <label for="email_registracija">E-mail:</label>
+                    <br />
+                    <input type="text" name="email_registracija" id="email_registracija">
+                    <label for="korisnickoime_registracija">Korisničko ime:</label>
+                    <br />
+                    <input type="text" name="korisnickoime_registracija" id="korisnickoime_registracija">
+                    <label for="sifra_registracija">Šifra:</label>
+                    <br />
+                    <input type="password" name="sifra_registracija" id="sifra_registracija">
+                    <label for="datumRodjenja_registracija">Datum rođenja:</label>
+                    <br />
+                    <input type="date" name="datumRodjenja_registracija" id="datumRodjenja_registracija">
+                    <label for="adresa_registracija">Adresa:</label>
+                    <br />
+                    <input type="text" name="adresa_registracija" id="adresa_registracija">
+                    <label for="telefon_registracija">Telefon: </label>
+                    <br>
+                    <input type="tel" name="telefon_registracija" id="telefon_registracija">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ZatvoriDugme2">Zatvori</button>
+                <button type="submit" class="btn btn-primary">Registrujte se</button>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>
