@@ -1,26 +1,14 @@
-<div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-<form name="LoginForma" id="LoginForma">
-    <div class="modal-body text-center">
-
-        <p>
-            <label for="email">E-mail:</label>
-            <br />
-            <input type="text" name="email_login" id="email_login">
-        </p>
-
-        <p>
-            <label for="sifra">Šifra:</label>
-            <br />
-            <input type="password" name="sifra_login" id="sifra_login">
-        </p>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ZatvoriDugme">Zatvori</button>
-        <button type="submit" class="btn btn-primary">Prijavite se</button>
-
-
-    </div>
-    <div class="modal-footer">
-
-    </div>
-</form>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins|Noto Sans">
+<body>
+    <form name="LoginForma" id="LoginForma">
+        <div class="modal-body text-center">
+            <h1 style="font-size:40px">Login</h1>
+            <p style="font-size:20px">Hey! Enter your credentials to sign in to your account!</p>
+            <input type="text" id="email_login" placeholder="E-mail">
+            <input type="password" id="sifra_login" placeholder="Password">
+            <p style="font-size:20px; text-align:left; margin-left: 8px"><b>Having troubles logging in?</b></p>
+            <button class="btn btn-primary">Log in</button>
+            <p style="margin-top:2vw">Don't have an account?<b> Register now</b></p>
+        </div>
+    </form>
+</body>
