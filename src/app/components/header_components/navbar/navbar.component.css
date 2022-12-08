@@ -19,3 +19,19 @@ nav a {
 .push-right{
     float: right;
 }
+button {
+    background: none!important;
+    border: none;
+    padding: 5;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 40px;
+  }
+
+  nav {
+    overflow-x:hidden;
+  }
+
+  .modal-content{
+    border-radius: 30px;
+  }

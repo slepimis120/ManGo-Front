@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
 
@@ -20,14 +21,33 @@
         </div>
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <button class="btn btn-primary" (click)="openloginModal(loginModal)">Log in</button>
+                
+                </li>
                 <li  class="nav-item" >
-                    <a class="nav-link" aria-current="page" href="{{menuItems.at(-2)?.linkUrl}}">{{menuItems.at(-2)?.linkName}}</a>
-                </li>`
-                <li  class="nav-item" >
-                    <a class="nav-link" aria-current="page" href="{{menuItems.at(-1)?.linkUrl}}">{{menuItems.at(-1)?.linkName}}</a>
+                    <button class="btn btn-primary" (click)="opensignupModal(signupModal)">Sign up</button>
                 </li>`
             </ul>
         </div>
         
     </div>
 </nav>
+
+
+
+<div class="modal" tabindex="-1" #loginModal id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-login></app-login>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" #signupModal id="signupModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <app-signup></app-signup>
+    </div>
+</div>
+</div>

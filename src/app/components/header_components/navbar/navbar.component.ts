@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import * as bootstrap from 'bootstrap';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +15,22 @@ export class NavbarComponent {
     {linkId : 3, linkName : 'Login', linkUrl : 'login'},
     {linkId : 4, linkName : 'Register', linkUrl : 'register'}
   ]
+
+  modalName: bootstrap.Modal | undefined
+  loginModal: any;
+  signupModal: any;
+  save(){
+      this.loginModal?.toggle()
+  }
+  openloginModal(element: string | Element){
+    this.loginModal = new bootstrap.Modal(element,{} ) 
+    this.loginModal?.show()
+  }
+  opensignupModal(element: string | Element){
+    this.signupModal = new bootstrap.Modal(element,{} ) 
+    this.signupModal?.show()
+  }
+  
 
   constructor() { }
 
