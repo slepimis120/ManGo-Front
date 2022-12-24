@@ -11,6 +11,9 @@ import { HomeComponent } from './components/unregistered_components/home/home.co
 import { FooterComponent } from './components/footer_components/footer/footer.component';
 import { LoginComponent } from './components/header_components/login/login.component';
 import { SignupComponent } from './components/header_components/signup/signup.component';
+import { MapComponent } from './components/map_components/map/map.component';
+import { MapModule } from './components/map_components/map/map.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { SignupComponent } from './components/header_components/signup/signup.co
     BrowserModule,
     MatToolbarModule,
     RouterModule,
+    MapModule,
+    HttpClientModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]
