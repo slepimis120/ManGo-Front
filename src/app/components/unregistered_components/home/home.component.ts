@@ -8,5 +8,16 @@ import {Component} from '@angular/core';
 export class HomeComponent{
   constructor() {
    }
+    
+  startLocation!: string;
+  endLocation!: string;
+  
+
+   getLocations(): void{
+      this.startLocation = (<HTMLInputElement>document.getElementById("start-location")).value;
+      this.endLocation = (<HTMLInputElement>document.getElementById("end-location")).value;
+     
+   }
+
 
 }
