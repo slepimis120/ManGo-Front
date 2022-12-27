@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
 export class HomeComponent{
   constructor() {
    }
