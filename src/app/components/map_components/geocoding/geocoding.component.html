@@ -1,1 +1,4 @@
-<p>geocoding works!</p>
+<div class="address-lookup">
+    <input type="text" placeholder="Search..."
+           (keyup)="addressLookup($event.target)" (click)="$event.stopPropagation()"/>
+  </div>

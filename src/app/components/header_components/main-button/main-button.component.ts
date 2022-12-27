@@ -12,6 +12,4 @@ export class MainButtonComponent {
 
     ngOnInit(): void {
     }
-    
-
 }

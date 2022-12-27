@@ -1,9 +1,6 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 :root{
     --dark_orange : #FF5C00;
-    --light_gray : #F1F0F0;
-    --orange : #FDB600;
-    --background: #EEEEEE;
 }
 
 * {
@@ -12,23 +9,13 @@
 }
 
 body {
-    background-color: var(--background);
+    background-color: rgba(233, 226, 213, 0.39);
 }
+
+
 
 header{
     font-family: 'Unica One', cursive;
-}
-
-.noto-sans{
-    font-family: 'Noto Sans HK', sans-serif;
-}
-.open-sans{
-    font-family: 'Open Sans', sans-serif;
-}
-
-.main_page{
-    background-color: var(--background);
-    font-family: 'Noto Sans HK', sans-serif;
 }
 
 footer{

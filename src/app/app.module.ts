@@ -15,7 +15,7 @@ import { MapModule } from './components/map_components/map/map.module';
 import { HttpClientModule } from '@angular/common/http';
 import { GeocodingComponent } from './components/map_components/geocoding/geocoding.component';
 import { MapPointFormComponent } from './components/map_components/map-point-form/map-point-form.component';
-import { ResultListComponent } from './components/map_components/result-list/result-list.component';
+import { ResultsListComponent } from './components/map_components/result-list/result-list.component';
 import { NominatimService } from './services/nominatim_service';
 import { AppRoutingModule } from 'src/infrastructure/app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -34,7 +34,7 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     SignupComponent,
     GeocodingComponent,
     MapPointFormComponent,
-    ResultListComponent,
+    ResultsListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NominatimService} from '../../../services/nominatim_service';
 import {NominatimResponse} from '../../../models/nominatim_response.model';
 
@@ -11,11 +11,19 @@ export class GeocodingComponent {
 
   @Output() onSearch = new EventEmitter();
   @Output() locationSelect = new EventEmitter();
-  searchResults: NominatimResponse[] = [];
+  searchResults!: NominatimResponse[];
 
   constructor(private nominatimService: NominatimService) {
-    this.nominatimService;
   }
-
+  addressLookup(address : any) {
+    if (address.value!.length > 3) {
+      this.nominatimService.addressLookup(address.value).subscribe(results => {
+        this.searchResults = results;
+      });
+    } else {
+      this.searchResults = [];
+    }
+    this.onSearch.emit(this.searchResults);
+  }
 
 }

@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {NominatimResponse} from '../../../models/nominatim_response.model';
 
 @Component({
-  selector: 'app-result-list',
-  templateUrl: './result-list.component.html',
-  styleUrls: ['./result-list.component.css']
+  selector: 'app-results-list',
+  templateUrl: './results-list.component.html',
+  styleUrls: ['./results-list.component.scss']
 })
-export class ResultListComponent {
+export class ResultsListComponent {
+
+  @Input()
+  results!: NominatimResponse[];
+
+  @Output()
+  locationSelected = new EventEmitter();
+
+  constructor() {
+  }
+
+  selectResult(result: NominatimResponse) {
+    this.locationSelected.emit(result);
+  }
 
 }
