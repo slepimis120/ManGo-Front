@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 export class HomeComponent{
   constructor() {
    }
@@ -24,12 +25,17 @@ export class HomeComponent{
 =======
 =======
 >>>>>>> parent of 4f60d75 (Merge branch '#3.1.3-Implement-form-for-ride-booking' into #3.1.4-Implement-map)
+=======
+>>>>>>> parent of 4f60d75 (Merge branch '#3.1.3-Implement-form-for-ride-booking' into #3.1.4-Implement-map)
 export class HomeComponent {
   constructor() { }
 
   ngOnInit(): void {
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 4f60d75 (Merge branch '#3.1.3-Implement-form-for-ride-booking' into #3.1.4-Implement-map)
+=======
 >>>>>>> parent of 4f60d75 (Merge branch '#3.1.3-Implement-form-for-ride-booking' into #3.1.4-Implement-map)
 =======
 >>>>>>> parent of 4f60d75 (Merge branch '#3.1.3-Implement-form-for-ride-booking' into #3.1.4-Implement-map)
