@@ -29,14 +29,14 @@
             
                     <form class="booking-form" id="booking-form">
                         <div class="input-field">
-                            <input type="text" name="start-location" id="start-location" placeholder="Starting Location" class="form-control-material" required />
+                            <input type="text" #start_location name="start-location" id="start-location" placeholder="Starting Location" class="form-control-material" required />
                         </div>
                         <div class="input-field">
-                            <input type="text" name="end-location" id="end-location" placeholder="Ending location" class="form-control-material" required />
+                            <input type="text"  #end_location name="end-location" id="end-location" placeholder="Ending location" class="form-control-material" required />
                         </div >
                     </form>
                 </div>
-                <a id="set-route" class="open-sans">
+                <a id="set-route" class="open-sans" (click)="getAddresses(start_location.value, end_location.value)">
                     Set route
                     <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
                 </a>
@@ -48,4 +48,10 @@
             <app-map></app-map>
         </div>
     </div>
+
+    <div>
+        <app-stepper></app-stepper>
+    </div>
+
+
 </div>

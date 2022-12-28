@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { MapService } from '../map.service';
+import { MarkerService } from 'src/app/services/marker.service';
 
 @Component({
   selector: 'app-map',
@@ -10,8 +11,31 @@ import { MapService } from '../map.service';
 })
 export class MapComponent implements AfterViewInit {
   private map: any;
+  longitude! : number;
+  latitude! : number;
+  lastLayer: any;
 
-  constructor(private mapService: MapService) {}
+  getMap(){
+    return this.map;
+  }
+
+  setMap(newMap : any){
+    this.map = newMap;
+  }
+
+  constructor(private mapService: MapService, private markerService: MarkerService) {
+    this.listenToButtonClicks();
+  }
+
+  listenToButtonClicks() {
+    this.markerService.getData().subscribe((res) => {
+      console.log(res);
+      console.log(this.map);
+      this.addMarkers(res); // Check if you're getting the data
+      // Do whatever you need to do here with the shared data
+      //this.toggleSidenave(); // Call the function that toggles the Sidenav
+    })
+  }
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -65,16 +89,9 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
- 
 
-  private addMarker(): void {
-    const lat: number = 45.25;
-    const lon: number = 19.8228;
-
-    L.marker([lat, lon])
-      .addTo(this.map)
-      .bindPopup('Trenutno se nalazite ovde.')
-      .openPopup();
+  addMarkers(address: string) : void{
+    this.markerService.placeMarkerOne(this.map, address);
   }
 
   ngAfterViewInit(): void {
@@ -84,5 +101,7 @@ export class MapComponent implements AfterViewInit {
 
     L.Marker.prototype.options.icon = DefaultIcon;
     this.initMap();
+    console.log(this.map);
+    //this.addMarkers("Mise dimitrijevica Novi Sad");
   }
 }
