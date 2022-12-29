@@ -1,46 +1,102 @@
-<div class="main_page">
+<div id="main-page">
     <div class="row">
         <div class="col-6" id="booking-input-container">
             <p id="book-ride-title" class="noto-sans">Book ride</p>
-            <div class="stepper white-bg" id="stepper">
-                <div class="step">
-                    <img src="../../../../assets/images/icons/locationOrangeIcon.png" class="step-icon">
-                    <div class="right-line"></div>
-                    <div class="left-line"></div>
-                </div>
-                <div class="step">
-                    <img src="../../../../assets/images/icons/optionGrayIcon.png" class="step-icon">
-                    <div class="right-line"></div>
-                    <div class="left-line"></div>
-                </div>
-                <div class="step">
-                    <img src="../../../../assets/images/icons/carGrayIcon.png" class="step-icon">
-                    <div class="right-line"></div>
-                    <div class="left-line"></div>
-                </div>
-            </div>
+            <app-stepper>
+                <cdk-step>
 
-            <div  class="white-bg" id="main-container" >
-
-                <div id="booking-input-form">
-                    <div style="padding-top: 2vw;">
-                        <img class="align-vertical" id="start-end-icon"src="../../../../assets/images/icons/startToEndIcon.png">
-                    </div>
-            
-                    <form class="booking-form" id="booking-form">
-                        <div class="input-field">
-                            <input type="text" #start_location name="start-location" id="start-location" placeholder="Starting Location" class="form-control-material" required />
+                <!--The first step for address input-->
+                    <div class="white-bg main-container">
+                        <div id="address-input-form">
+                            <div style="padding-top: 2vw;">
+                                <img class="align-vertical" id="start-end-icon"src="../../../../assets/images/icons/startToEndIcon.png">
+                            </div>
+                    
+                            <form id="address-form">
+                                <div class="input-field">
+                                    <input type="text" #start_location name="start-location" id="start-location" placeholder="Starting Location" class="form-control-material" required />
+                                </div>
+                                <div class="input-field">
+                                    <input type="text"  #end_location name="end-location" id="end-location" placeholder="Ending location" class="form-control-material" required />
+                                </div >
+                            </form>
                         </div>
-                        <div class="input-field">
-                            <input type="text"  #end_location name="end-location" id="end-location" placeholder="Ending location" class="form-control-material" required />
-                        </div >
-                    </form>
-                </div>
-                <a id="set-route" class="open-sans" (click)="getAddresses(start_location.value, end_location.value)">
-                    Set route
-                    <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
-                </a>
-            </div>
+                    </div>
+                    <div class="stepper-footer">
+                        <button cdkStepperNext class="stepper-footer">
+                            <a id="set-route" class="open-sans" (click)="getAddresses(start_location.value, end_location.value)">
+                              Set route
+                            <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
+                          </a>
+                        </button>
+                    </div>
+                </cdk-step>
+
+
+                <!--Second step for vehicle type selection-->
+                <cdk-step>
+                    <div class="white-bg main-container">
+                        <div class="vehicle-form">
+                            <form id="vehicle-type-form" class="noto-sans">
+                                <label for="vehicle-type-select">Vehicle type:</label>
+                                <select name="vehicle-type-select" id="vehicle-type-select" #vehicle_type_select>
+                                    <option value="standard">Standard</option>
+                                    <option value="luxury">Luxury</option>
+                                    <option value="van">Van</option>
+                                </select>
+                                <label for="children-tag" class="checkbox-label">
+                                    <input type="checkbox" class="checkbox" id="children-tag" name="children-tag" value="children" #children_tag>
+                                    Transporting children?
+                                </label>
+
+                                
+                                <label class="checkbox-label" for="pets-tag">
+                                    <input class="checkbox" type="checkbox" id="pets-tag" name="pets-tag" value="pets" #pets_tag>
+                                    Transporting pets?
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="stepper-footer">
+                        <button cdkStepperNext class="stepper-footer">
+                            <a id="set-route" class="open-sans" (click)="calculate_price(vehicle_type_select.value)">
+                              Find vehicle
+                            <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
+                          </a>
+                        </button>
+                    </div>
+                </cdk-step>
+
+
+                <!--Third step for booking a ride-->
+                <cdk-step>
+                    <div class="white-bg main-container">
+                        <div class="information-display noto-sans">
+                            <div class="information">
+                                <img src="../../../../assets/images/icons/dollarIcon.png" class="info-icon">
+                                Price: {{price}}din
+                            </div>
+                            <div class="information">
+                                <img src="../../../../assets/images/icons/hourGlassIcon.png" class="info-icon">
+                                Duration: {{duration}}min
+                            </div>
+                            <div class="information">
+                                <img src="../../../../assets/images/icons/distanceIcon.png" class="info-icon">
+                                Distance: {{distance}}km
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stepper-footer">
+                        <button cdkStepperNext class="stepper-footer" (click)="callLogin()">
+                            <a id="set-route" class="open-sans">
+                              Book ride
+                            <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
+                          </a>
+                        </button>
+                    </div>
+                
+                </cdk-step>
+            </app-stepper>
         </div>
         
 
@@ -48,10 +104,5 @@
             <app-map></app-map>
         </div>
     </div>
-
-    <div>
-        <app-stepper></app-stepper>
-    </div>
-
 
 </div>
