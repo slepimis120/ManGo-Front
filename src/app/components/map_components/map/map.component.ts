@@ -5,6 +5,9 @@ import { MapService } from '../map.service';
 import { MarkerService } from 'src/app/services/marker.service';
 import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../model/vehicle';
+import { CoordinateModel } from 'src/app/models/coordinate.model';
+import { thisMonth } from '@igniteui/material-icons-extended';
+import { VehicleType } from 'src/app/models/vehicle.model';
 
 @Component({
   selector: 'app-map',
@@ -19,6 +22,9 @@ export class MapComponent implements AfterViewInit {
   vehicles: Vehicle[] = [];
   carIcon: L.Icon;
   
+  private coordinates : CoordinateModel[] = [];
+  private price! : number;
+  private distance! : number;
 
   getMap(){
     return this.map;
@@ -40,11 +46,17 @@ export class MapComponent implements AfterViewInit {
 
   listenToButtonClicks() {
     this.markerService.getData().subscribe((res) => {
-      console.log(res);
-      console.log(this.map);
-      this.addMarkers(res); // Check if you're getting the data
-      // Do whatever you need to do here with the shared data
-      //this.toggleSidenave(); // Call the function that toggles the Sidenav
+      if(res instanceof CoordinateModel){
+        this.coordinates.push(res);
+        if(this.coordinates.length == 2){
+          this.createRoute(this.coordinates[0], this.coordinates[1]);
+        } 
+      }else if(Array.isArray(res)){
+        this.price = res[0];
+        this.distance = res[1];
+      }else {
+          this.addMarkers(res);
+      }
     })
   }
 
@@ -103,6 +115,14 @@ export class MapComponent implements AfterViewInit {
 
   addMarkers(address: string) : void{
     this.markerService.placeMarkerOne(this.map, address);
+  }
+
+  createRoute(address1 : CoordinateModel, address2 : CoordinateModel) : void {
+    this.markerService.connectMarkers(this.map, address1, address2);
+  }
+
+  calculateInfo(){
+    
   }
 
   ngAfterViewInit(): void {

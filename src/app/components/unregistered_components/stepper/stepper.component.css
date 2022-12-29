@@ -8,8 +8,8 @@
 	margin:0 auto;
 }
 .step-icon {
-    width: 5vw;
-    height: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
 	display: block;
 	margin: 0 auto;
 }
@@ -30,7 +30,7 @@
 	position:absolute;
 	top:50%;
 	height:1px;
-	border-top:3px solid #8F8F8F;
+	border-top:2px solid #8F8F8F;
 }
 .step .right-line {
 	right:0;
@@ -41,56 +41,4 @@
 	right:73%;
 }
 
-#book-ride-title{
-	font-size: 48px;
-	text-align: center ;
-}
 
-#booking-input-container{
-	padding: 4vw;
-}
-
-#booking-input-form{
-	display: grid;
-	grid-template-columns: 2fr 15fr;
-	align-items: center;
-	padding: 20px 3vw;
-}
-
-.input-field{
-	text-align: center;
-	color: var(--light_gray);
-	font-size: 28px;
-}
-
-input{
-	border: none;
-	background-color: black;
-	padding: 5px 10px;
-	margin-top: 2vw;
-	width: 100%;
-	color: var(--light_gray);
-}
-
-#start-end-icon{
-	height: 120px;
-}
-
-#set-route{
-	font-size: 30px;
-	text-decoration: none;
-	cursor: pointer;
-	color: black;
-	padding: 2vw 0px;
-}
-
-#next-stepper-icon{
-	height: 20px;
-	text-align: center;
-}
-
-#main-container{
-	text-align: center;
-	padding: 1vw 0 3vw 0;
-	margin-top: 2vw;
-}
