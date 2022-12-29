@@ -3,6 +3,8 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { MapService } from '../map.service';
 import { MarkerService } from 'src/app/services/marker.service';
+import { HttpClient } from '@angular/common/http';
+import { Vehicle } from '../model/vehicle';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +16,9 @@ export class MapComponent implements AfterViewInit {
   longitude! : number;
   latitude! : number;
   lastLayer: any;
+  vehicles: Vehicle[] = [];
+  carIcon: L.Icon;
+  
 
   getMap(){
     return this.map;
@@ -23,8 +28,14 @@ export class MapComponent implements AfterViewInit {
     this.map = newMap;
   }
 
-  constructor(private mapService: MapService, private markerService: MarkerService) {
+  constructor(private mapService: MapService, private markerService: MarkerService, private http:HttpClient) {
     this.listenToButtonClicks();
+    this.carIcon = L.icon({
+      iconUrl: 'assets/images/icons/caricon.png',
+  
+      iconSize:     [38, 38], // size of the icon
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
   }
 
   listenToButtonClicks() {
@@ -102,6 +113,29 @@ export class MapComponent implements AfterViewInit {
     L.Marker.prototype.options.icon = DefaultIcon;
     this.initMap();
     console.log(this.map);
+    this.getAllVehicles();
     //this.addMarkers("Mise dimitrijevica Novi Sad");
+  }
+
+
+  getAllVehicles(){
+    let url = "http://localhost:8080/api/vehicle";
+    this.http.get<Vehicle[]>(url).subscribe(
+      res => {
+        this.vehicles = res;
+        this.addVehiclesToMap();
+      },
+      err => {
+        alert("An Error has occured");
+      }
+    );
+  }
+
+  addVehiclesToMap(){
+    console.log(this.vehicles.length)
+    for(let i=0; i<this.vehicles.length; i++){
+      console.log(this.vehicles[i].currentLocation.latitude)
+      let marker = L.marker([this.vehicles[i].currentLocation.latitude, this.vehicles[i].currentLocation.longitude],{icon:this.carIcon}).addTo(this.map);
+    }
   }
 }
