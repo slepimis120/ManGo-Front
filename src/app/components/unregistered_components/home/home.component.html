@@ -38,19 +38,19 @@
                     <div class="white-bg main-container">
                         <div class="vehicle-form">
                             <form id="vehicle-type-form" class="noto-sans">
-                                <label for="vehicle-type-select">Vehicle type:</label>
-                                <select name="vehicle-type-select" id="vehicle-type-select" #vehicle_type_select>
+                                <label for="vehicle-type-select" class="vehicle-form-text">Vehicle type:</label>
+                                <select name="vehicle-type-select" id="vehicle-type-select" class="minimal" #vehicle_type_select>
                                     <option value="standard">Standard</option>
                                     <option value="luxury">Luxury</option>
                                     <option value="van">Van</option>
                                 </select>
-                                <label for="children-tag" class="checkbox-label">
+                                <label for="children-tag" class="checkbox-label vehicle-form-text">
                                     <input type="checkbox" class="checkbox" id="children-tag" name="children-tag" value="children" #children_tag>
                                     Transporting children?
                                 </label>
 
                                 
-                                <label class="checkbox-label" for="pets-tag">
+                                <label class="checkbox-label vehicle-form-text" for="pets-tag">
                                     <input class="checkbox" type="checkbox" id="pets-tag" name="pets-tag" value="pets" #pets_tag>
                                     Transporting pets?
                                 </label>
@@ -58,8 +58,14 @@
                         </div>
                     </div>
                     <div class="stepper-footer">
+                        <button cdkStepperPrevious class="stepper-footer">
+                            <a id="set-route-previous" class="open-sans">
+                                <img  id="next-stepper-icon" src="../../../../assets/images/icons/previousIcon.png">
+                                Set destination
+                          </a>
+                        </button>
                         <button cdkStepperNext class="stepper-footer">
-                            <a id="set-route" class="open-sans" (click)="calculate_price(vehicle_type_select.value)">
+                            <a id="find-vehicle" class="open-sans" (click)="calculate_price(vehicle_type_select.value)">
                               Find vehicle
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
                           </a>
@@ -87,7 +93,13 @@
                         </div>
                     </div>
                     <div class="stepper-footer">
-                        <button cdkStepperNext class="stepper-footer" (click)="callLogin()">
+                        <button cdkStepperPrevious class="stepper-footer">
+                            <a id="vehicle-details" class="open-sans">
+                                <img  id="next-stepper-icon" src="../../../../assets/images/icons/previousIcon.png">
+                                Vehicle details
+                          </a>
+                        </button>
+                        <button cdkStepperNext class="stepper-footer" (click)="openloginModal(loginModal)">
                             <a id="set-route" class="open-sans">
                               Book ride
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
@@ -102,6 +114,21 @@
 
         <div class="col-6">
             <app-map></app-map>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" #loginModal id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <app-login></app-login>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" #signupModal id="signupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-signup></app-signup>
         </div>
     </div>
 

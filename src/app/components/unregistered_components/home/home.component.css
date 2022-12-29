@@ -38,7 +38,7 @@ input{
 	height: 120px;
 }
 
-#set-route{
+button a{
 	font-size: 30px;
 	text-decoration: none;
 	cursor: pointer;
@@ -64,11 +64,15 @@ input{
 
 button {
 	border: 0;
-	margin: 2vw 0;
+	margin: 2vw 2vw;
 }
+
 
 #vehicle-type-form{
 	text-align: left;
+}
+
+.vehicle-form-text{
 	font-size: 30px;
 }
 
@@ -86,7 +90,9 @@ button {
 	position: relative;
 	top: -1px;
 	cursor: pointer;
+	accent-color: #FDB600;;
   }
+
 
 .vehicle-form{
 	display: table;
@@ -108,5 +114,54 @@ button {
 	width: 30px;
 	opacity: 80%;
 }
+
+select {
+	margin-left: 1vw;
+    padding: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: var(--light_gray);
+    width: 60%;
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+
+
+
+select.minimal {
+	background-image:
+	  linear-gradient(45deg, transparent 50%, gray 50%),
+	  linear-gradient(135deg, gray 50%, transparent 50%),
+	  linear-gradient(to right, #ccc, #ccc);
+	background-position:
+	  calc(100% - 20px) calc(1em + 2px),
+	  calc(100% - 15px) calc(1em + 2px),
+	  calc(100% - 2em) 0.3em;
+	background-size:
+	  5px 5px,
+	  5px 5px,
+	  1px 1.5em;
+	background-repeat: no-repeat;
+  }
+  
+  select.minimal:focus-visible {
+	background-image:
+	  linear-gradient(45deg, #FDB600 50%, transparent 50%),
+	  linear-gradient(135deg, transparent 50%, #FDB600 50%),
+	  linear-gradient(to right, #ccc, #ccc);
+	background-position:
+	  calc(100% - 15px) 1em,
+	  calc(100% - 20px) 1em,
+	  calc(100% - 2em) 0.3em;
+	background-size:
+	  5px 5px,
+	  5px 5px,
+	  1px 1.5em;
+	background-repeat: no-repeat;
+	outline: 0;
+  }
 
   
