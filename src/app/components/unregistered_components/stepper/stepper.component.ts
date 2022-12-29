@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {CdkStepper, STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { content } from '@igniteui/material-icons-extended';
 
 @Component({
   selector: 'app-stepper',
@@ -12,16 +13,24 @@ import { DomSanitizer } from "@angular/platform-browser";
 }
 )
 
-export class StepperComponent{
+export class StepperComponent extends CdkStepper{
   @Input()
   activeClass = 'active';
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
-    this.matIconRegistry.addSvgIcon(
-      `carRedIcon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/images/icons/carRedIcon.svg")
-      
-    );
+  footerText: string[] = ["Set route", "Find vehicle", "Book ride"]
+  locationIcons: string[] = ["../../../../assets/images/icons/locationGrayIcon.png",
+   "../../../../assets/images/icons/locationOrangeIcon.png",
+   "../../../../assets/images/icons/locationRedIcon.png"]
+  optionsIcons: string[] = ["../../../../assets/images/icons/optionGrayIcon.png",
+   "../../../../assets/images/icons/optionOrangeIcon.png",
+   "../../../../assets/images/icons/optionRedIcon.png"]
+  carIcons: string[] = ["../../../../assets/images/icons/carGrayIcon.png",
+   "../../../../assets/images/icons/carOrangeIcon.png",
+   "../../../../assets/images/icons/carRedIcon.png"]
+
+
+  clickReact(){
+    console.log();
   }
 
 }

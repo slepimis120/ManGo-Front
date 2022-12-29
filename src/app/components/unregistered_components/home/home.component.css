@@ -2,59 +2,21 @@
 	background-color:#FFFFFF;
 }
 
-.stepper {
-    display:table;
-	width:100%;
-	margin:0 auto;
-}
-.step-icon {
-    width: 5vw;
-    height: 5vw;
-	display: block;
-	margin: 0 auto;
-}
-
-.step {
-    display:table-cell;
-	position:relative;
-	padding:24px;
-}
-
-.step:first-child .left-line,
-.step:last-child .right-line {
-	display:none;
-}
-
-.step .right-line,
-.step .left-line {
-	position:absolute;
-	top:50%;
-	height:1px;
-	border-top:3px solid #8F8F8F;
-}
-.step .right-line {
-	right:0;
-	left:73%;
-}
-.step .left-line{
-	left:0;
-	right:73%;
-}
-
 #book-ride-title{
 	font-size: 48px;
 	text-align: center ;
+	margin-bottom: 2vw;
 }
 
 #booking-input-container{
-	padding: 4vw;
+	padding: 6vw;
 }
 
-#booking-input-form{
+#address-input-form{
 	display: grid;
 	grid-template-columns: 2fr 15fr;
 	align-items: center;
-	padding: 20px 3vw;
+	padding: 0px 3vw;
 }
 
 .input-field{
@@ -89,8 +51,62 @@ input{
 	text-align: center;
 }
 
-#main-container{
+.main-container{
 	text-align: center;
-	padding: 1vw 0 3vw 0;
-	margin-top: 2vw;
+	padding: 1vw 0;
+	margin-top: 2.3vw;
 }
+
+.stepper-footer{
+	text-align: center;
+	background-color: white;
+}
+
+button {
+	border: 0;
+	margin: 2vw 0;
+}
+
+#vehicle-type-form{
+	text-align: left;
+	font-size: 30px;
+}
+
+.checkbox-label {
+	display: block;
+	padding-left: 15px;
+	text-indent: -15px;
+	float: left;
+  }
+  
+.checkbox {
+	margin-left: 1vw;
+	height: 1vw;
+	width: 1vw;
+	position: relative;
+	top: -1px;
+	cursor: pointer;
+  }
+
+.vehicle-form{
+	display: table;
+	padding: 1vw 2vw;
+}
+
+.information-display{
+	text-align: left;
+	padding: 1vw 3vw;
+}
+
+
+.information{
+	font-size: 30px;
+	margin-top: 1vw
+}
+
+.info-icon{
+	width: 30px;
+	opacity: 80%;
+}
+
+  

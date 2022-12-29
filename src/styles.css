@@ -44,3 +44,7 @@ footer{
     align-items: center;
     justify-content: center;
 }
+
+.leaflet-routing-alternatives-container{
+    display: none;
+}
