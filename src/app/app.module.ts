@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header_components/header/header.component';
 import { NavbarComponent } from './components/header_components/navbar/navbar.component';
@@ -31,10 +31,18 @@ import { DriverMapComponent } from './components/driver_components/driver-map/dr
 import { DriverHomeComponent } from './components/driver_components/driver-home/driver-home.component';
 import { PassengerHomeComponent } from './components/passenger_components/passenger-home/passenger-home.component';
 
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'passenger', component: PassengerHomeComponent },
+  { path: 'driver', component: DriverHomeComponent },
+  { path: '**', component: HomeComponent }
+];
+
 
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     HeaderComponent,
     NavbarComponent,
@@ -50,7 +58,7 @@ import { PassengerHomeComponent } from './components/passenger_components/passen
     PassengerHomeComponent,
   ],
   imports: [
-    
+    RouterModule.forRoot(routes),
     BrowserModule,
     MatToolbarModule,
     RouterModule,
@@ -69,6 +77,7 @@ import { PassengerHomeComponent } from './components/passenger_components/passen
     MatIconModule,
     CdkStepperModule,
   ],
+  exports: [RouterModule],
   providers: [MarkerService, MapComponent],
   bootstrap: [AppComponent]
 })
