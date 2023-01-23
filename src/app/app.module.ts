@@ -27,6 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { DriverMapComponent } from './components/driver_components/driver-map/driver-map.component';
+import { DriverHomeComponent } from './components/driver_components/driver-home/driver-home.component';
+import { PassengerHomeComponent } from './components/passenger_components/passenger-home/passenger-home.component';
 
 
 
@@ -42,6 +45,9 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     LoginComponent,
     SignupComponent,
     StepperComponent,
+    DriverMapComponent,
+    DriverHomeComponent,
+    PassengerHomeComponent,
   ],
   imports: [
     
