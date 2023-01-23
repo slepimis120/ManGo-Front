@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { accesstoken } from '../../map_components/model/accesstoken';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent {
   accessToken:accesstoken;
   email:String;
   password:String;
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService: AuthService, private router: Router) {
     this.accessToken = new accesstoken();
     this.email = "";
     this.password = "";
@@ -25,21 +27,24 @@ export class LoginComponent {
 
 
   public getAccessToken(){
-    let url = "http://localhost:8080/api/user/login";
-    observableAccess:new Observable<accesstoken>();
-    observableAccess = this.http.post<accesstoken>(url, {'email': this.email, 'password': this.password});
-    this.http.post<accesstoken>(url, {'email': this.email, 'password': this.password}).subscribe(data => {
-        this.accessToken.accesstoken = data.accesstoken;
-        this.accessToken.refreshtoken = data.refreshtoken;
-        console.log(this.accessToken.accesstoken);
-    }
-    );
+    
+    this.getUser().subscribe((res) => {
+      var json = JSON.parse(res);
+      this.accessToken.accesstoken = json['accessToken'];
+      this.accessToken.refreshtoken = json['refreshToken'];
+      localStorage.setItem('user', this.accessToken.accesstoken);
+      this.authService.setUser();
+      this.router.navigate(['/']);
+    });
   }
 
-  public getUser(): Observable<accesstoken> {
+  public getUser(): Observable<any> {
     let url = "http://localhost:8080/api/user/login";
-    return this.http.get<accesstoken>(url, {'email': this.email, 'password': this.password});
-}
+    const options: any = {
+      responseType: 'text',
+    };
+    return this.http.post<string>(url, {email: this.email, password: this.password}, options);
+  }
 }
 
 

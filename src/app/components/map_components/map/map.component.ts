@@ -132,7 +132,6 @@ export class MapComponent implements AfterViewInit {
 
     L.Marker.prototype.options.icon = DefaultIcon;
     this.initMap();
-    console.log(this.map);
     this.getAllVehicles();
     //this.addMarkers("Mise dimitrijevica Novi Sad");
   }
@@ -152,9 +151,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   addVehiclesToMap(){
-    console.log(this.vehicles.length)
     for(let i=0; i<this.vehicles.length; i++){
-      console.log(this.vehicles[i].currentLocation.latitude)
       let marker = L.marker([this.vehicles[i].currentLocation.latitude, this.vehicles[i].currentLocation.longitude],{icon:this.carIcon}).addTo(this.map);
     }
   }
