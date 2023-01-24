@@ -1,0 +1,21 @@
+.map-container {
+    height: 100%;
+    width: 100%;
+    min-height: 500px;
+  }
+  
+  .map-frame {
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  #map-driver {
+    height: 100%;
+  }
+  
+  .leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+  }
+  .leaflet-routing-alternatives-container {
+    display: none !important;
+  }
