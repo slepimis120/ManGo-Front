@@ -27,6 +27,11 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { LeftmenuComponent } from './components/registered_components/leftmenu/leftmenu.component';
+import { ProfilesettingsComponent } from './components/registered_components/profilesettings/profilesettings.component';
+import { AccountinformationComponent } from './components/registered_components/accountinformation/accountinformation.component';
+import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
+import { ReportComponent } from './components/registered_components/report/report.component';
 
 
 
@@ -42,6 +47,11 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     LoginComponent,
     SignupComponent,
     StepperComponent,
+    LeftmenuComponent,
+    ProfilesettingsComponent,
+    AccountinformationComponent,
+    StatisticsComponent,
+    ReportComponent,
   ],
   imports: [
     
