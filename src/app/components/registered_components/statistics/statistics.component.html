@@ -4,11 +4,11 @@
     <div class="row">
         <div class="flex-child-element">
             <p class="titles">Start date</p>
-            <input type="date" name="startDate" class="inputField" [(ngModel)]="startDate">
+            <input (ngModelChange)="checkDates()" type="date" name="startDate" class="inputField" [(ngModel)]="startDate">
         </div>
         <div class="flex-child-element">
             <p class="titles">End Date</p>
-            <input type="date" name="endDate" class="inputField" [(ngModel)]="endDate">
+            <input (ngModelChange)="checkDates()" type="date" name="endDate" class="inputField" [(ngModel)]="endDate">
         </div>
     </div>
 

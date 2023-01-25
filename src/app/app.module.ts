@@ -13,7 +13,7 @@ import { LoginComponent } from './components/header_components/login/login.compo
 import { SignupComponent } from './components/header_components/signup/signup.component';
 import { MapComponent } from './components/map_components/map/map.component';
 import { MapModule } from './components/map_components/map/map.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MarkerService } from './services/marker.service';
 import { StepperComponent } from './components/unregistered_components/stepper/stepper.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -32,6 +32,7 @@ import { ProfilesettingsComponent } from './components/registered_components/pro
 import { AccountinformationComponent } from './components/registered_components/accountinformation/accountinformation.component';
 import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
 import { ReportComponent } from './components/registered_components/report/report.component';
+import { Interceptor } from './components/auth/interceptor/interceptor.interceptor';
 
 
 
@@ -73,7 +74,11 @@ import { ReportComponent } from './components/registered_components/report/repor
     MatIconModule,
     CdkStepperModule,
   ],
-  providers: [MarkerService, MapComponent],
+  providers: [MarkerService, MapComponent, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

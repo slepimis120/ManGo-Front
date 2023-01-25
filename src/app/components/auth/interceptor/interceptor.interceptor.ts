@@ -14,12 +14,11 @@ export class Interceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const accessToken: any = localStorage.getItem('user');
-    const decodedItem = JSON.parse(accessToken);
     if (req.headers.get('skip')) return next.handle(req);
 
     if (accessToken) {
       const cloned = req.clone({
-        headers: req.headers.set('X-Auth-Token', decodedItem.token),
+        headers: req.headers.set('Authorization', "Bearer " + accessToken),
       });
 
       return next.handle(cloned);
