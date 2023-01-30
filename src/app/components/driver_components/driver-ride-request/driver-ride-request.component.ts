@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AcceptRideService } from 'src/app/services/accept-ride.service';
 
 @Component({
   selector: 'app-driver-ride-request',
@@ -9,12 +10,16 @@ export class DriverRideRequestComponent {
   @Input() ride: any;
   showModal: boolean = false;
 
+  constructor(private acceptRideService: AcceptRideService) { }
+
   acceptRide() {
-    // code to handle ride acceptance
+    this.acceptRideService.acceptRide()
+    this.hide();
   }
 
   declineRide() {
-    // code to handle ride decline
+    this.acceptRideService.declineRide()
+    this.hide();
   }
 
   show() {

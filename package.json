@@ -29,6 +29,7 @@
     "igniteui-angular": "^15.0.4",
     "leaflet": "^1.7.1",
     "leaflet-routing-machine": "^3.2.12",
+    "leaflet.animatedmarker": "^1.0.0",
     "mapbox-gl": "^2.11.1",
     "mapbox-gl-leaflet": "^0.0.15",
     "minireset.css": "~0.0.4",

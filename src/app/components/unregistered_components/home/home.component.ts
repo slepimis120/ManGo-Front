@@ -1,9 +1,5 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import { MarkerService } from 'src/app/services/marker.service';
-import * as L from 'leaflet';
-import { MapComponent } from '../../map_components/map/map.component';
-import { VehicleType } from 'src/app/models/vehicle.model';
-import { thisMonth } from '@igniteui/material-icons-extended';
 import * as bootstrap from 'bootstrap';
 
 @Component({
