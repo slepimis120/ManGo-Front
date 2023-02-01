@@ -1,0 +1,50 @@
+.title{
+    margin:5%;
+}
+
+#profileImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+}
+
+.titles{
+    font-weight: bold;
+    margin: 10px;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .flex-child-element {
+    margin-left:5%;
+    margin-right:5%;
+    width: 40%;
+  }
+
+  .inputField{
+    margin:5px;
+    text-indent: 10px;
+    font-family: 'Noto Sans', Regular;
+    box-sizing:border-box;
+    width: 100%;
+    border-radius:10px;
+    stroke: 1px;
+    height: 8vh;
+    border-color:darkgrey;
+    border-style:solid;
+  }
+
+  #submitBtn{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    margin-bottom: 15px;
+    background-color: #FFE6A7;
+    border-color: #FFE6A7;
+    color: black;
+}
