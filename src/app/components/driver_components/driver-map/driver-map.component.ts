@@ -30,8 +30,8 @@ export class DriverMapComponent implements OnInit{
   ngOnInit(): void {
     this.markerService.getData().subscribe((res) => {
       if(res['driver-map']){
-        this.markerService.placeMarkerOne(this.map, res['start-address']);
-        this.markerService.placeMarkerOne(this.map, res['end-address']);
+        //this.markerService.placeMarkerOne(this.map, res['start-address']);
+        //this.markerService.placeMarkerOne(this.map, res['end-address']);
       }
       if(res['startCoordinate']){
         this.markerService.connectMarkers(this.map, res['startCoordinate'], res['endCoordinate']);

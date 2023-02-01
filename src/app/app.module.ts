@@ -31,6 +31,7 @@ import { DriverMapComponent } from './components/driver_components/driver-map/dr
 import { DriverHomeComponent } from './components/driver_components/driver-home/driver-home.component';
 import { PassengerHomeComponent } from './components/passenger_components/passenger-home/passenger-home.component';
 import { DriverRideRequestComponent } from './components/driver_components/driver-ride-request/driver-ride-request.component';
+import { PassengerMapComponent } from './components/passenger_components/passenger-map/passenger-map.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
     DriverHomeComponent,
     PassengerHomeComponent,
     DriverRideRequestComponent,
+    PassengerMapComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

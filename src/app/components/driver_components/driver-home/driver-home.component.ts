@@ -84,7 +84,6 @@ export class DriverHomeComponent implements OnInit{
   simulateMovement(){
     if(this.startCoordinate != undefined){
       let startLocation = new L.LatLng(this.startCoordinate.latitude, this.startCoordinate.longitude);
-      console.log("ti si mala princeza:" + startLocation);
       this.markerService.sendData({"simulate-current-location": true, "startLocation" : startLocation});
     }
   }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
-import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
-import { CoordinateModel } from '../models/coordinate.model';
-
+import { BehaviorSubject, Observable, retry, Subject, tap } from 'rxjs';
+import { MarkerStep, MarkerType, startIcon, endIcon, currentLocationIcon } from '../constants/constants';
 
 const BASE_NOMINATIM_URL: string = 'nominatim.openstreetmap.org';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,32 +36,47 @@ export class MarkerService {
     return this.observable$;
   }
 
-  placeMarkerOne(map: any, address: string) : void{
+  placeMarkerAddress(map: any, address: string, markerType : MarkerType) : void{
+    let markerIcon = this.determineMarkerIcon(markerType);
     let url = `https://${BASE_NOMINATIM_URL}/search?format=json&q=${address}`;
     this.http.get(url).subscribe(async (res : any) =>{
       const lat = res[0].lat;
       const lon = res[0].lon;
-      let coordinate = new CoordinateModel(lat, lon);
-      console.log(lat, lon);
-      this.sendData({'coordinate' : coordinate});
+      let marker = new L.Marker([lat, lon], {icon : markerIcon}).addTo(map);
+      this.sendData({"step" : MarkerStep.ReturnMarker, "marker" : marker, "marker-type" : markerType});
     });
   }
 
-  connectMarkers(map: any, coordinate1 :CoordinateModel, coordinate2 : CoordinateModel) : void {
-    console.log(coordinate1, coordinate2);
+  determineMarkerIcon(markerType : MarkerType) : L.Icon<L.IconOptions>{
+    switch(markerType){
+      case MarkerType.StartLocation: 
+        return startIcon;
+      case MarkerType.EndLocation:
+        return endIcon;
+      case MarkerType.CurrentLocation:
+        return currentLocationIcon;
+    }
+  }
+
+  connectMarkers(map: any, coordinate1 :L.LatLng, coordinate2 : L.LatLng) : void {
     let routing = L.Routing.control({
       waypoints: [
-        L.latLng(coordinate1.latitude, coordinate1.longitude),
-        L.latLng(coordinate2.latitude, coordinate1.longitude)
-      ]
+        L.latLng(coordinate1.lat, coordinate1.lng),
+        L.latLng(coordinate2.lat, coordinate2.lng)
+      ],
     }).addTo(map)
+    this.sendData({"step" : MarkerStep.ReturnRoute, "route" : routing});
     routing.on('routesfound', (e) => {
       let routes = e.routes;
       let summary = routes[0].summary;  
       let distance = summary.totalDistance / 1000;
       let price = distance * 120;
       let duration = Math.round(summary.totalTime % 3600 / 60);
-      this.sendData({"finished-connecting" : true, "price" : price, 'duration' : duration, "distance" : distance});})
+      this.sendData({
+        "step" : MarkerStep.ReturnRideDetails,
+        "price" : price,
+        'duration' : duration,
+        "distance" : distance});})
   }
 
   simulateMovement(start: L.LatLng, end: L.LatLng, map: L.Map) {
