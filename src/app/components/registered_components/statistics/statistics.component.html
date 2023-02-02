@@ -4,18 +4,18 @@
     <div class="row">
         <div class="flex-child-element">
             <p class="titles">Start date</p>
-            <input (ngModelChange)="checkDates()" type="date" name="startDate" class="inputField" [(ngModel)]="startDate">
+            <input [(ngModel)]="startDate" (ngModelChange)="checkDates()" type="date" name="startDate" class="inputField" >
         </div>
         <div class="flex-child-element">
             <p class="titles">End Date</p>
-            <input (ngModelChange)="checkDates()" type="date" name="endDate" class="inputField" [(ngModel)]="endDate">
+            <input [(ngModel)]="endDate" (ngModelChange)="checkDates()" type="date" name="endDate" class="inputField" >
         </div>
     </div>
 
     <br>
     <hr>
     
-    <h3 class="bottomTitle">12/02/2022 - 12/12/2022</h3>
+    <h3 class="bottomTitle" id="aaa" [textContent]="textDate"></h3>
 
     <p class="bottomTitles">Ride Cancelled:</p>
     <p class="bottomTitles">Ride Accepted:</p>
