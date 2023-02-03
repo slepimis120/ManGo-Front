@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-statistics',
@@ -10,8 +11,17 @@ export class StatisticsComponent {
   startDate:String;
   endDate:String;
   textDate:String;
-  constructor() {
-    
+  cancelledRides:String;
+  acceptedRides:String;
+  workHours:String;
+  earnings:String;
+  startDateInString:String;
+  endDateInString:String;
+  constructor(private http:HttpClient) {
+    this.cancelledRides = "Ride Cancelled:";
+    this.acceptedRides = "Ride Accepted:";
+    this.workHours = "Work Hours:";
+    this.earnings = "Earnings: ";
   }
 
  ngOnInit(): void {
@@ -21,15 +31,26 @@ export class StatisticsComponent {
  }
  
 checkDates(): void{
-  var startDate = new Date(Number(this.startDate.split('-')[0]), Number(this.startDate.split('-')[1]) - 1, Number(this.startDate.split('-')[2])); 
-  var endDate = new Date(Number(this.endDate.split('-')[0]), Number(this.endDate.split('-')[1]) - 1, Number(this.endDate.split('-')[2])); 
-  console.log(startDate);
-  console.log(endDate);  
-  if(startDate.getDate() >= endDate.getDate()){
+  var dateStart = new Date(Number(this.startDate.split('-')[0]), Number(this.startDate.split('-')[1]) - 1, Number(this.startDate.split('-')[2])); 
+  var dateEnd = new Date(Number(this.endDate.split('-')[0]), Number(this.endDate.split('-')[1]) - 1, Number(this.endDate.split('-')[2]));  
+  if(dateStart.getTime() >= dateEnd.getTime()){
       alert("Start date can't be bigger than end date!");
     }else{
-      
-      this.textDate = formatDate(startDate, 'dd/MM/yyyy', 'en_US') + " - " + formatDate(endDate, 'dd/MM/yyyy', 'en_US')
+      const accessToken: any = localStorage.getItem('user');
+      let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+      const httpHeaders = new HttpHeaders().set('Content-Type', 'text');
+      this.textDate = formatDate(dateStart, 'dd/MM/yyyy', 'en_US') + " - " + formatDate(dateEnd, 'dd/MM/yyyy', 'en_US')
+      this.startDateInString = formatDate(dateStart, 'yyyy-MM-ddT00:00:00Z', 'en_US');
+      this.endDateInString = formatDate(dateEnd, 'yyyy-MM-ddT00:00:00Z', 'en_US');
+      this.http.post<string>("http://localhost:8080/api/driver/stats/" + decodedJWT.id, {startDate: this.startDateInString, endDate: this.endDateInString}).subscribe((res) => {
+        var json = JSON.parse(JSON.stringify(res));  
+        console.log(json['acceptedRides']);
+        this.cancelledRides = "Cancelled rides:" + json['cancelledRides'];
+        this.earnings = "Earnings:" + json['earnings'];
+        this.acceptedRides = "Accepted Rides:" + json['acceptedRides'];
+        this.workHours = "Work Hours:" + json['workTime'];
+
+      });
     }
  }
 }
