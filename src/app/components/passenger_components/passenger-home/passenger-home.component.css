@@ -1,0 +1,238 @@
+.white-bg{
+	background-color:#FFFFFF;
+}
+
+#book-ride-title{
+	font-size: 48px;
+	text-align: center ;
+	margin-bottom: 2vw;
+}
+
+#booking-input-container{
+	padding: 6vw;
+}
+
+#address-input-form{
+	display: grid;
+	grid-template-columns: 2fr 15fr;
+	align-items: center;
+	padding: 0px 3vw;
+}
+
+.input-field{
+	text-align: center;
+	color: var(--light_gray);
+	font-size: 28px;
+}
+
+.address-input,
+.address-input:active,
+.address-input:focus{
+	border: none;
+	background-color: black;
+	padding: 5px 10px;
+	margin-top: 2vw;
+	width: 90%;
+	color: var(--light_gray);
+	vertical-align: bottom;
+}
+
+
+#start-end-icon{
+	height: 120px;
+}
+
+button a{
+	font-size: 30px;
+	text-decoration: none;
+	cursor: pointer;
+	color: black;
+	padding: 2vw 0px;
+}
+
+#next-stepper-icon{
+	height: 20px;
+	text-align: center;
+}
+
+.main-container{
+	text-align: center;
+	padding: 1vw 0;
+	margin-top: 2.3vw;
+}
+
+.stepper-footer{
+	text-align: center;
+	background-color: white;
+}
+
+button {
+	border: 0;
+	margin: 2vw 2vw;
+}
+
+
+#vehicle-type-form{
+	text-align: left;
+}
+
+.vehicle-form-text{
+	font-size: 30px;
+}
+
+.titilium-web{
+	font-family: 'Titillium Web', sans-serif;
+}
+
+.checkbox-label {
+	display: block;
+	margin-top: 0.5vw;
+	text-indent: -15px;
+	float: left;
+  }
+  
+.checkbox {
+	margin-left: 1vw;
+	height: 1.2vw;
+	width: 1.2vw;
+	position: relative;
+	top: -1px;
+	cursor: pointer;
+	accent-color: #323232;
+  }
+
+
+.vehicle-form{
+	display: table;
+	padding: 1vw 2vw;
+    width: -webkit-fill-available;
+}
+
+.information-display{
+	text-align: left;
+	padding: 1vw 3vw;
+}
+
+
+.information{
+	font-size: 30px;
+	margin-top: 1vw
+}
+
+.info-icon{
+	width: 30px;
+	opacity: 80%;
+}
+  
+.select-location{
+	opacity: 0.8;
+	background-color: white;
+	color: white;
+	height: fit-content;
+	width: 10%;
+	margin: 0;
+	vertical-align: middle;
+	padding: 0.4vw;
+}
+
+select {
+	margin-left: 1vw;
+    padding: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: var(--light_gray);
+    width: 60%;
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+
+
+
+select.minimal {
+	background-image:
+	  linear-gradient(45deg, transparent 50%, gray 50%),
+	  linear-gradient(135deg, gray 50%, transparent 50%),
+	  linear-gradient(to right, #ccc, #ccc);
+	background-position:
+	  calc(100% - 20px) calc(1em + 2px),
+	  calc(100% - 15px) calc(1em + 2px),
+	  calc(100% - 2em) 0.3em;
+	background-size:
+	  5px 5px,
+	  5px 5px,
+	  1px 1.5em;
+	background-repeat: no-repeat;
+	margin-bottom: 2vw;
+  }
+  
+  select.minimal:focus-visible {
+	background-image:
+	  linear-gradient(45deg, gray 50%, transparent 50%),
+	  linear-gradient(135deg, transparent 50%, gray 50%),
+	  linear-gradient(to right, #ccc, #ccc);
+	background-position:
+	  calc(100% - 15px) 1em,
+	  calc(100% - 20px) 1em,
+	  calc(100% - 2em) 0.3em;
+	background-size:
+	  5px 5px,
+	  5px 5px,
+	  1px 1.5em;
+	background-repeat: no-repeat;
+	outline: 0;
+  }
+
+  .time-selector {
+	display: none;
+	margin: auto 2vw;
+	filter: invert(1);
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	vertical-align: middle;
+
+	
+  }
+  .time-selector input{
+	padding: 0.2vw 2vw;
+  }
+  
+  #schedule-tag:checked ~ .time-selector {
+	display: inline;
+  }
+  
+  .loading-screen p{
+	font-family: 'Noto Sans HK', sans-serif;
+	font-size: 30px;
+	text-align: center;
+  }
+  .loading-screen {
+	text-align: center;
+  }
+
+.sad-face{
+	height: 6vw;
+    opacity: 0.8;
+    margin-top: 1vw;
+}
+  
+.yellow-btn{
+	font-size: 40px;
+    background: #FDB600;
+    color: white;
+    padding: 0.3vw 1vw;
+    border-radius: 6px;
+    box-shadow: 2px 1px 12px 3px #e3e3e3;
+}
+
+.warning{
+	background-color: white;
+	width: 100%;
+	color: red;
+	margin: 0;
+	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+}
+

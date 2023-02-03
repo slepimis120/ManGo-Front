@@ -13,6 +13,9 @@ export enum MarkerStep {
     ReturnRideDetails,
     ReturnMarker,
     ReturnRoute,
+    TargetLocation,
+    CheckMarkers,
+    CheckedMarkers,
   }
 
 export const startIcon = L.icon({
@@ -24,8 +27,8 @@ iconUrl: '../../assets/images/icons/end-location-icon.png',
 iconSize: [25, 40], 
 });
 export const currentLocationIcon  = L.icon({
-iconUrl: '../../assets/images/icons/current-location-icon.png',
-iconSize: [25, 40],
+iconUrl: '../../assets/images/icons/current_location_icon.png',
+iconSize: [35, 35],
 });
 export const invisibleIcon  = L.icon({
   iconUrl: '../../assets/images/icons/current-location-icon.png',

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
+import { MapService } from 'src/app/services/map.service';
 import { MarkerService } from 'src/app/services/marker.service';
-import { MapService } from '../../map_components/map.service';
 
 @Component({
   selector: 'app-driver-map',

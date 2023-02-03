@@ -1,4 +1,4 @@
-
+<p>navbar works!</p>
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
 
@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
                 <li  *ngFor="let items of menuItems" class="nav-item">
-                    <a class="nav-link" *ngIf="!(items.linkUrl == 'login' || items.linkUrl == 'register')" aria-current="page" href="{{items.linkUrl}}">{{items.linkName}}</a>
+                    <a class="nav-link" *ngIf="!(items.linkUrl == 'panic')" aria-current="page" href="{{items.linkUrl}}">{{items.linkName}}</a>
                 </li>
             </ul>
         </div>
@@ -33,7 +33,6 @@
         
     </div>
 </nav>
-
 
 
 <div class="modal" tabindex="-1" #loginModal id="loginModal">

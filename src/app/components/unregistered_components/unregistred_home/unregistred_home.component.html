@@ -1,9 +1,10 @@
-<app-passenger-header></app-passenger-header>
+
+<app-header></app-header>
 <div id="main-page">
     <div class="row">
         <div class="col-6" id="booking-input-container">
             <p id="book-ride-title" class="noto-sans">Book ride</p>
-            <app-stepper #cdkStepperPassenger id="cdkStepperPassenger">
+            <app-stepper #cdkStepperUnregistered id="cdkStepperUnregistered">
                 <cdk-step>
 
                 <!--The first step for address input-->
@@ -24,10 +25,8 @@
                                      placeholder="Ending location" (blur)="placeEnd(end_location.value)" />
                                      <button class="select-location" (click)="placeTargetEnd()"><img src="../../../../assets/images/icons/target-icon.png"></button>
                                 </div >
-                                
                             </form>
                         </div>
-
                     </div>
                     <div class="stepper-footer">
                         <div *ngIf="invalidMarkers" >
@@ -39,6 +38,7 @@
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
                           </a>
                         </button>
+
                     </div>
                 </cdk-step>
 
@@ -58,16 +58,11 @@
                                     <input type="checkbox" class="checkbox" id="children-tag" name="children-tag" value="children" #children_tag>
                                     Transporting children?
                                 </label>
+
+                                
                                 <label class="checkbox-label vehicle-form-text" for="pets-tag">
                                     <input class="checkbox" type="checkbox" id="pets-tag" name="pets-tag" value="pets" #pets_tag>
                                     Transporting pets?
-                                </label>
-                                <label class="checkbox-label vehicle-form-text" for="schedule-tag">
-                                    <input class="checkbox" type="checkbox" id="schedule-tag" name="schedule-tag" value="schedule" #schedule_tag>
-                                    Schedule the ride?
-                                    <div class="time-selector titilium-web">
-                                        <input type="time" id="ride-time" #ride_time value="14:30">
-                                    </div>
                                 </label>
                             </form>
                         </div>
@@ -75,14 +70,13 @@
                     <div class="stepper-footer">
                         <hr>
                         <button cdkStepperPrevious class="stepper-footer">
-
                             <a id="set-route-previous" class="open-sans">
                                 <img  id="next-stepper-icon" src="../../../../assets/images/icons/previousIcon.png">
                                 Set destination
                           </a>
                         </button>
                         <button cdkStepperNext class="stepper-footer">
-                            <a id="find-vehicle" class="open-sans" (click)="calculatePrice(vehicle_type_select.value)">
+                            <a id="find-vehicle" class="open-sans" (click)="calculate_price(vehicle_type_select.value)">
                               Ride details
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
                           </a>
@@ -117,7 +111,7 @@
                                 Vehicle details
                           </a>
                         </button>
-                        <button cdkStepperNext class="stepper-footer" (click)="createRideRequest()">
+                        <button cdkStepperNext class="stepper-footer" (click)="openloginModal(loginModal)">
                             <a id="set-route" class="open-sans">
                               Book ride
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
@@ -126,27 +120,28 @@
                     </div>
                 
                 </cdk-step>
-                <cdk-step>
-                    <div class="white-bg main-container loading-screen">
-                        <div *ngIf="showLoadingScreen" >
-                            <p >{{ message }}</p>
-                        </div>
-                        <div *ngIf="noDriverAvailible">
-                            <img src="../../../../assets/images/icons/sad-face-icon.png" class="sad-face">
-                            <p>No availible driver. Try again later or schedule a ride!</p>
-                            <button class="yellow-btn titilium-web" (click)="resetForm()">Try again</button>
-                        </div>
-                        <div *ngIf="driverFound">
-                            <app-passenger-ride-details></app-passenger-ride-details>
-                        </div>
-
-                    </div>
-                          
-                </cdk-step>
             </app-stepper>
         </div>
-    
+        
+
         <div class="col-6">
             <app-map></app-map>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" #loginModal id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <app-login></app-login>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" #signupModal id="signupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-signup></app-signup>
+        </div>
+    </div>
+
+</div>

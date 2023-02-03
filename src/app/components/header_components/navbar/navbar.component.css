@@ -1,37 +1,43 @@
+    
 .logo {
-    float: left;
-    min-height: 95px;
-    height: 9vmax;
-    max-height: 110px;
-    padding: 10px;
+float: left;
+min-height: 95px;
+height: 9vmax;
+max-height: 110px;
+padding: 10px;
+}
+
+.nav-item{
+    height: fit-content;
+    width: fit-content;
+    font-family: 'Unica One', cursive;
+    font-size: 40px;
 }
 
 nav {
-    padding: 0;
-    background-color: black;
-    font-size: 40px;    
+padding: 0;
+background-color: black;
+font-size: 40px;    
 }
 
 nav a {
-    color: white;
+color: white;
 }
 
 .push-right{
-    float: right;
+float: right;
 }
 button {
-    background: none!important;
-    border: none;
-    padding: 5;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    font-size: 40px;
-  }
+background: none!important;
+border: none;
+padding: 5;
+color: rgb(255, 255, 255);
+cursor: pointer;
+font-size: 40px;
+}
 
-  nav {
-    overflow-x:hidden;
-  }
 
-  .modal-content{
-    border-radius: 30px;
-  }
+
+.modal-content{
+border-radius: 30px;
+}

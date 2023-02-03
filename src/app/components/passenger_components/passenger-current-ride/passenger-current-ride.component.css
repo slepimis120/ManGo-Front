@@ -1,0 +1,133 @@
+
+.main_frame{
+    margin: 6vw 10vw;
+}
+
+.ride_info *{
+    font-family: 'Noto Sans HK', sans-serif;
+}
+
+.white_bg{
+    background-color: white;
+}
+
+#info-title{
+    text-align: center;
+    font-size: 32px;
+}
+
+hr{
+    width: 80%;
+    margin: auto;
+}
+
+.address_info{
+    background-color: var(--light_gray);
+    padding: 0.4vw 1vw;
+    margin: 1vw 2vw;
+}
+
+.address{
+    display: inline;
+    font-size: 20px;
+}
+
+.time{
+    float: right;
+    margin: 0.5vw 0 0 0;
+    opacity: 0.6;
+    font-size: 12px;
+}
+
+#destination_departure{
+    margin-top: 2vw
+}
+
+.detail{
+    margin-top: 0.2vw;
+}
+
+.detail p{
+    display: inline;
+    margin-left: 1vw;
+}
+
+.detail img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    display: inline;
+}
+
+#details{
+    padding: 1vw 2vw;
+}
+
+#remaining_details p{
+    margin: 0;
+}
+
+#remaining_details{
+    padding: 0 2vw;
+}
+
+.yellow_button{
+    display: inline;
+    background: var(--orange);
+    color: white !important;
+    border: 0 !important;
+    font-family: 'Assistant', sans-serif;
+    font-size: 28px;
+    padding: 0.5vw 1vw;
+    border-radius: 6px;
+    box-shadow: 0px 2px 7px 2px rgba(0, 0, 0, 0.2);
+    margin: 1vw 0.2vw;
+    text-align: center;
+    justify-content: center !important;
+    
+}
+
+.button {
+    margin-top: 1vw;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-bottom: 2vw;
+}
+
+#passengers-title{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 1vw;
+}
+
+.passengers{
+    padding: 2vw;
+}
+
+.passenger{
+    display: inline-block;
+    text-align: center;
+    margin-right: 1vw;
+}
+
+.passenger p{
+    margin: 0.2vw;
+    font-size: 14px;
+}
+
+.passenger img{
+    width: 4vw;
+    height: 4vw;
+    border-radius: 6vw;
+}
+
+.map{
+    z-index: 1;
+}
+
+.modal{
+    z-index: 9999;
+}
