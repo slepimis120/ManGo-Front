@@ -1,0 +1,61 @@
+<div class="main_frame " id="driver_main_container">
+    <div class="row">
+        <div class="ride_info col-4 white_bg " id="ride_details" #ride_details>
+            <p id="info-title" >Ride details</p>
+            <hr>
+            <div id="destination_departure">
+                <div id="start_address" class="address_info">
+                    <p class="address">{{currentRide.startAddress}}</p>
+                    <p class="time">13:23</p>
+                </div>
+                <div id="end_address" class="address_info">
+                    <p class="address">{{currentRide.endAddress}}</p>
+                    <p class="time">13:35</p>
+                </div>
+            </div>
+           
+            <div id="details" class="details">
+                <div id="price" class="detail">
+                    <img src="../../../../assets/images/icons/dollar_icon.png" alt="Price" class="icon">
+                    <p id="price">Price: {{currentRide.price}}din</p>
+                </div>
+                <div class="detail" id="duaration">
+                    <img src="../../../../assets/images/icons/hourglass_icon.png" alt="Duration" class="icon">
+                    <p id="duration">Duration: {{currentRide.duration}}min</p>
+                </div>
+                <div class="detail" id="distance">
+                    <img src="../../../../assets/images/icons/running_icon.png" alt="Distance" class="icon">
+                    <p id="distance">Distance: {{currentRide.distance}}km</p>
+                </div>
+                
+            </div>
+            <div id="passengers" class="passengers">
+                <p id="passengers-title">Your passengers</p>
+                <div class="passenger">
+                    <img src="../../../../assets//images/mockPhotos/mock_photo1.jpg" alt="Mock Photo 1">
+                    <p>Dusan</p>
+                </div>
+                <div class="passenger">
+                    <img src="../../../../assets//images/mockPhotos/mock_photo2.jpg" alt="Mock Photo 2">
+                    <p>Aleksandar</p>
+                </div>
+            </div>
+            <div class="remaining_details" id="remaining_details">
+                <p>Remaining time: 3min</p>
+                <p>Remaining distance: 0.6km</p>
+            </div>
+            <div class="button">
+                <button class="yellow_button assistant" id="end_ride">END RIDE</button>
+            </div>
+            
+        </div>
+        
+        <div class="map col-8" style="padding-left: 0;" id="map-container" #map_container> 
+            <app-driver-map></app-driver-map>
+        </div>     
+        
+        <div><app-driver-ride-request [ride]="currentRide"></app-driver-ride-request></div>
+
+    </div>
+
+</div>

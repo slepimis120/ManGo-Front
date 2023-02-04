@@ -25,7 +25,9 @@
 	font-size: 28px;
 }
 
-input{
+input,
+input:active,
+input:focus{
 	border: none;
 	background-color: black;
 	padding: 5px 10px;
@@ -33,6 +35,7 @@ input{
 	width: 100%;
 	color: var(--light_gray);
 }
+
 
 #start-end-icon{
 	height: 120px;

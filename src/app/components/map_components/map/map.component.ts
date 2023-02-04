@@ -8,6 +8,8 @@ import { Vehicle } from '../model/vehicle';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { thisMonth } from '@igniteui/material-icons-extended';
 import { VehicleType } from 'src/app/models/vehicle.model';
+import { invisibleIcon, MarkerStep, MarkerType, startIcon } from 'src/app/constants/constants';
+import { NONE_TYPE } from '@angular/compiler';
 
 @Component({
   selector: 'app-map',
@@ -16,15 +18,20 @@ import { VehicleType } from 'src/app/models/vehicle.model';
 })
 export class MapComponent implements AfterViewInit {
   private map: any;
+  private startMarker!: L.Marker<any>;
+  private endMarker! : L.Marker<any>;
+  private route! : L.Routing.Control;
+  price! : number;
+  duration! : number;
+  distance! : number;
+
+
   longitude! : number;
   latitude! : number;
   lastLayer: any;
   vehicles: Vehicle[] = [];
   carIcon: L.Icon;
   
-  private coordinates : CoordinateModel[] = [];
-  private price! : number;
-  private distance! : number;
 
   getMap(){
     return this.map;
@@ -38,24 +45,63 @@ export class MapComponent implements AfterViewInit {
     this.listenToButtonClicks();
     this.carIcon = L.icon({
       iconUrl: 'assets/images/icons/caricon.png',
-  
-      iconSize:     [38, 38], // size of the icon
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize:     [38, 38],
+      popupAnchor:  [-3, -76]
   });
   }
 
   listenToButtonClicks() {
     this.markerService.getData().subscribe((res) => {
-      if(res instanceof CoordinateModel){
-        this.coordinates.push(res);
-        if(this.coordinates.length == 2){
-          this.createRoute(this.coordinates[0], this.coordinates[1]);
-        } 
-      }else if(Array.isArray(res)){
-        this.price = res[0];
-        this.distance = res[1];
-      }else {
-          this.addMarkers(res);
+      switch(res["step"]){
+        case MarkerStep.ConnectMarkers:
+          if(this.route != undefined){
+            this.route.remove();
+          }
+          this.createRoute();
+          break;
+        case MarkerStep.PlaceMarker:
+
+          if(this.route != undefined){
+            this.route.remove();
+          }
+          if(res["start-address"]){
+            if(this.endMarker != undefined){
+              console.log(this.endMarker.getLatLng().lat, this.endMarker.getLatLng().lng);
+            }
+            if(this.startMarker != undefined){
+              this.startMarker.removeFrom(this.map);
+            }
+            this.markerService.placeMarkerAddress(this.map, res["start-address"], MarkerType.StartLocation);
+          }else if(res["end-address"]){
+            if(this.endMarker != undefined){
+              console.log(this.endMarker.getLatLng().lat, this.endMarker.getLatLng().lng);
+            }
+            if(this.endMarker != undefined){
+              this.endMarker.removeFrom(this.map);
+            }
+            this.markerService.placeMarkerAddress(this.map, res["end-address"], MarkerType.EndLocation);
+          }
+          break;
+        case MarkerStep.ReturnRideDetails:
+          this.price = res["price"];
+          this.duration = res["duration"];
+          this.distance = res["distance"];
+          break;
+        case MarkerStep.ReturnMarker:
+          if(res["marker-type"] == MarkerType.StartLocation){
+            this.startMarker = res["marker"];
+            if(this.endMarker != undefined){
+              console.log(this.endMarker.getLatLng().lat, this.endMarker.getLatLng().lng);
+            }
+          }else if(res["marker-type"] == MarkerType.EndLocation){
+            this.endMarker = res["marker"];
+            if(this.endMarker != undefined){
+              console.log(this.endMarker.getLatLng().lat, this.endMarker.getLatLng().lng);
+            }
+          }
+          break;
+        case MarkerStep.ReturnRoute:
+          this.route = res["route"];
       }
     })
   }
@@ -76,25 +122,8 @@ export class MapComponent implements AfterViewInit {
       }
     );
     tiles.addTo(this.map);
-
-    // this.search();
-    // this.addMarker();
-    // this.registerOnClick();
-    // this.route();
   }
 
-  search(): void {
-    this.mapService.search('Strazilovska 19').subscribe({
-      next: (result) => {
-        console.log(result);
-        L.marker([result[0].lat, result[0].lon])
-          .addTo(this.map)
-          .bindPopup('Pozdrav iz Strazilovske 19.')
-          .openPopup();
-      },
-      error: () => {},
-    });
-  }
 
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
@@ -102,38 +131,25 @@ export class MapComponent implements AfterViewInit {
       const lat = coord.lat;
       const lng = coord.lng;
       this.mapService.reverseSearch(lat, lng).subscribe((res) => {
-        console.log(res.display_name);
       });
-      console.log(
-        'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
-      );
       const mp = new L.Marker([lat, lng]).addTo(this.map);
       alert(mp.getLatLng());
     });
   }
 
-
-  addMarkers(address: string) : void{
-    this.markerService.placeMarkerOne(this.map, address);
-  }
-
-  createRoute(address1 : CoordinateModel, address2 : CoordinateModel) : void {
-    this.markerService.connectMarkers(this.map, address1, address2);
-  }
-
-  calculateInfo(){
+  createRoute() : void {
+    if(this.endMarker != undefined){
+      console.log(this.endMarker.getLatLng().lat, this.endMarker.getLatLng().lng);
+    }
+    this.markerService.connectMarkers(this.map, this.startMarker.getLatLng(), this.endMarker.getLatLng());
     
   }
 
-  ngAfterViewInit(): void {
-    let DefaultIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
-    });
 
-    L.Marker.prototype.options.icon = DefaultIcon;
+  ngAfterViewInit(): void {
+    L.Marker.prototype.options.icon = invisibleIcon;
     this.initMap();
     this.getAllVehicles();
-    //this.addMarkers("Mise dimitrijevica Novi Sad");
   }
 
 
