@@ -8,12 +8,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./accountinformation.component.css']
 })
 export class AccountinformationComponent {
-  firstLastName:String;
-  email:String;
-  phone:String;
-  address:String;
-  oldPassword:String;
-  newPassword:String;
+  firstLastName!:String;
+  email!:String;
+  phone!:String;
+  address!:String;
+  oldPassword!:String;
+  newPassword!:String;
   constructor(private http:HttpClient) {
    }
 

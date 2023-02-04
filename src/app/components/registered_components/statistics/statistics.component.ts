@@ -8,15 +8,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent {
-  startDate:String;
-  endDate:String;
-  textDate:String;
+  startDate!:String;
+  endDate!:String;
+  textDate!:String;
   cancelledRides:String;
   acceptedRides:String;
   workHours:String;
   earnings:String;
-  startDateInString:String;
-  endDateInString:String;
+  startDateInString!:String;
+  endDateInString!:String;
   constructor(private http:HttpClient) {
     this.cancelledRides = "Ride Cancelled:";
     this.acceptedRides = "Ride Accepted:";
