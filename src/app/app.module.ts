@@ -2,20 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header_components/header/header.component';
-import { NavbarComponent } from './components/header_components/navbar/navbar.component';
+import { UnregisteredHeaderComponent } from './components/unregistered_components/unregistered_header/unregistered_header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { StartComponent } from './components/header_components/mainImage/mainImage.component';
-import { MainButtonComponent } from './components/header_components/main-button/main-button.component';
-import { HomeComponent } from './components/unregistered_components/home/home.component';
+import { UnregisteredHomeComponent } from './components/unregistered_components/unregistred_home/unregistred_home.component';
 import { FooterComponent } from './components/footer_components/footer/footer.component';
 import { LoginComponent } from './components/header_components/login/login.component';
 import { SignupComponent } from './components/header_components/signup/signup.component';
-import { MapComponent } from './components/map_components/map/map.component';
-import { MapModule } from './components/map_components/map/map.module';
+import { UnregisteredMapComponent} from './components/unregistered_components/unregistered_map/unregistered_map.component';
+import { MapModule } from './components/unregistered_components/unregistered_map/unregistered_map.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MarkerService } from './services/marker.service';
-import { StepperComponent } from './components/unregistered_components/stepper/stepper.component';
+import { UnregisteredStepperComponent } from './components/unregistered_components/unregistred_stepper/unregistred_stepper.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxStepperModule } from 'igniteui-angular';
@@ -33,18 +30,23 @@ import { DriverHomeComponent } from './components/driver_components/driver-home/
 import { PassengerHomeComponent } from './components/passenger_components/passenger-home/passenger-home.component';
 import { DriverRideRequestComponent } from './components/driver_components/driver-ride-request/driver-ride-request.component';
 import { PassengerMapComponent } from './components/passenger_components/passenger-map/passenger-map.component';
+import { PassengerHeaderComponent } from './components/passenger_components/passenger-header/passenger-header.component';
+import { PassengerCurrentRideComponent } from './components/passenger_components/passenger-current-ride/passenger-current-ride.component';
+import { NavbarComponent } from './components/header_components/navbar/navbar.component';
+import { PassengerRideDetailsComponent } from './components/passenger_components/passenger-ride-details/passenger-ride-details.component';
+import { DriverHeaderComponent } from './components/driver_components/driver-header/driver-header.component';
 import { LeftmenuComponent } from './components/registered_components/leftmenu/leftmenu.component';
 import { ProfilesettingsComponent } from './components/registered_components/profilesettings/profilesettings.component';
 import { AccountinformationComponent } from './components/registered_components/accountinformation/accountinformation.component';
 import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
 import { ReportComponent } from './components/registered_components/report/report.component';
 import { Interceptor } from './components/auth/interceptor/interceptor.interceptor';
-
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: UnregisteredHomeComponent },
   { path: 'passenger', component: PassengerHomeComponent },
   { path: 'driver', component: DriverHomeComponent },
-  { path: '**', component: HomeComponent }
+  { path: 'passenger/:passengerId/active', component:PassengerCurrentRideComponent},
+  { path: '**', component: UnregisteredHomeComponent },
 ];
 
 
@@ -53,20 +55,22 @@ const routes: Routes = [
   declarations: [
     
     AppComponent,
-    HeaderComponent,
-    NavbarComponent,
-    StartComponent,
-    MainButtonComponent,
-    HomeComponent,
+    UnregisteredHeaderComponent,
+    UnregisteredHomeComponent,
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    StepperComponent,
+    UnregisteredStepperComponent,
     DriverMapComponent,
     DriverHomeComponent,
     PassengerHomeComponent,
     DriverRideRequestComponent,
     PassengerMapComponent,
+    PassengerHeaderComponent,
+    NavbarComponent,
+    PassengerCurrentRideComponent,
+    PassengerRideDetailsComponent,
+    DriverHeaderComponent,
     LeftmenuComponent,
     ProfilesettingsComponent,
     AccountinformationComponent,
@@ -94,7 +98,7 @@ const routes: Routes = [
     CdkStepperModule,
   ],
   exports: [RouterModule],
-  providers: [MarkerService, MapComponent, {
+  providers: [MarkerService, UnregisteredMapComponent, {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi: true,

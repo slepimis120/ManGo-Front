@@ -1,5 +1,3 @@
-
-<app-driver-header></app-driver-header>
 <div class="main_frame " id="driver_main_container">
     <div class="row">
         <div class="ride_info col-4 white_bg " id="ride_details" #ride_details>
@@ -52,12 +50,9 @@
             
         </div>
         
-        <div class="map col-8" style="padding-left: 0;" id="map-container" #map_container> 
-            <app-driver-map></app-driver-map>
+        <div class="map col-8" style="padding-left: 0;" id="map-container" #map_container>   
+            <app-passenger-map></app-passenger-map>
         </div>     
-        
-        <div><app-driver-ride-request [ride]="currentRide"></app-driver-ride-request></div>
-
     </div>
 
 </div>

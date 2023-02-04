@@ -1,0 +1,88 @@
+.simple-title{
+	text-align: left !important;
+    padding-left: 1.5vw;
+    font-size: 24px !important;
+}
+
+.circle-img{
+	height: 6vw;
+    border-radius: 801px;
+    width: 6vw;
+	float: left;
+    margin: 0.5vw 1.5vw 1vw 2vw;
+}
+
+.name-title{
+	font-size: 20px !important;
+	width: max-content;
+	margin: 0 !important;
+	font-family: 'Noto Sans HK', sans-serif;
+}
+
+.star-icon{
+	height: 1.5vw;
+}
+
+.rate-value{
+	display: inline;
+    font-size: 18px !important;
+    vertical-align: middle;
+    padding: 0.5vw;
+}
+
+#driver-details-container{
+	display: flex;
+}
+
+#rate{
+	text-align: left;
+}
+
+.car-icon{
+	width: 6vw;
+}
+
+.car-title{
+	font-family: 'Noto Sans HK', sans-serif;
+	font-size: 16px;
+	margin: auto;
+	padding-left: 1vw;
+	text-align: left;
+	padding-left: 2vw;
+}
+
+#car-details{
+	width: -webkit-fill-available;
+	padding-left: 1vw;
+}
+
+.car-color{
+	width: 14px;
+  height: 14px;
+  background-color: red;
+  border-radius: 25px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ride-details{
+	text-align: left;
+	font-size: 20px;
+}
+
+.ride-icon{
+	margin-left: 1.5vw;
+	width: 20px;
+	height: 20px;
+	opacity: 0.8;
+
+}
+
+.ride-details-container{
+    padding: 0 2vw 2vw 2vw;
+}
+
+#ride-accepted-title{
+    font-size: 30px;
+    font-family: 'Noto Sans HK', sans-serif;
+}

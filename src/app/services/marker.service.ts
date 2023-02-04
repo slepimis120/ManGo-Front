@@ -16,6 +16,7 @@ export class MarkerService {
   private observable$!: Observable<any>;
   private addressSubject : BehaviorSubject<any>;
   private address$!:Observable<any>;
+  private currentLocation : L.Marker | undefined;
 
   constructor(private http: HttpClient) {
     this.subject = new Subject();
@@ -45,6 +46,11 @@ export class MarkerService {
       let marker = new L.Marker([lat, lon], {icon : markerIcon}).addTo(map);
       this.sendData({"step" : MarkerStep.ReturnMarker, "marker" : marker, "marker-type" : markerType});
     });
+  }
+  placeMarkerCoordinate(map: any, coordinates : L.LatLng, markerType : MarkerType) : void{
+    let markerIcon = this.determineMarkerIcon(markerType);
+    let marker = new L.Marker([coordinates.lat, coordinates.lng], {icon : markerIcon}).addTo(map);
+    this.sendData({"step" : MarkerStep.ReturnMarker, "marker" : marker, "marker-type" : markerType});
   }
 
   determineMarkerIcon(markerType : MarkerType) : L.Icon<L.IconOptions>{
@@ -86,7 +92,6 @@ export class MarkerService {
     let numSteps = 30; // number of steps to move from start to end
     let deltaLat = (end.lat - start.lat) / numSteps;
     let deltaLng = (end.lng - start.lng) / numSteps;
-
     let animation = setInterval(function() {
       marker.setLatLng([start.lat + (deltaLat * step), start.lng + (deltaLng * step)]);
       step++;
@@ -95,6 +100,25 @@ export class MarkerService {
       }
     }, 1000); // duration of each step in milliseconds
 
+}
+
+followLocation(map : L.Map){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      map.setView([position.coords.latitude, position.coords.longitude], 13);
+      this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon}).addTo(map);  
+      this.currentLocation.bindPopup("This is your current location").openPopup();
+    });
+
+    navigator.geolocation.watchPosition(position => {
+      map.setView([position.coords.latitude, position.coords.longitude], 13);
+      if(this.currentLocation != undefined){
+        this.currentLocation.setLatLng([position.coords.latitude, position.coords.longitude]);
+      }
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
 }
 
 }

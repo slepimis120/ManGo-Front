@@ -1,0 +1,40 @@
+.img-btn {
+    background: rgba(0, 0, 0, 0.63) !important;
+    border-radius: 10px;
+    color: white ;
+    font-family: 'Noto Sans HK', sans-serif ;
+    font-style: normal;
+    font-size: 32px;
+    line-height: 46px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    width: 7em;
+    height: 4em;
+    display: inline-block;
+    margin: 1em;
+    vertical-align: middle;
+    }
+
+
+.main_image {
+    
+background-image: url("../../../../assets/images/indexMainBackground.jpg");
+min-height: 800px;
+height: 45vmax;
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.main_text{
+color: white;
+width: 100%;
+padding: 5px 0;
+font-family: 'Montserrat', sans-serif;
+font-size: 96px;
+text-align: left;
+margin-bottom: 0.6em;
+margin-top: 1em;
+}
+
