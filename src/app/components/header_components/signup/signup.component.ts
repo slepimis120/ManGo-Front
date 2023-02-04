@@ -14,7 +14,7 @@ export class SignupComponent {
   email:String;
   username:String;
   password:String;
-  birthdate:Date;
+  birthdate!:Date;
   address:String;
   telephone:String;
   response:String;
@@ -28,6 +28,7 @@ export class SignupComponent {
     this.password = "";
     this.address = "";
     this.telephone = "";
+    this.response = "";
   }
 
   ngOnInit(): void {

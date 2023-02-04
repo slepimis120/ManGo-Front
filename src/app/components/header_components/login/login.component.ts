@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { accesstoken } from '../../map_components/model/accesstoken';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { accesstoken } from 'src/app/models/accesstoken';
 
 @Component({
   selector: 'app-login',

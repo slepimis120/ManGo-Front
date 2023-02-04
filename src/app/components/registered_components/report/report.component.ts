@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent {
-  startDate:Date;
-  endDate:Date;
+  startDate!:Date;
+  endDate!:Date;
   constructor() {
 
   }
