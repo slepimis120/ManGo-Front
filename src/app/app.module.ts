@@ -24,11 +24,12 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+
+import { DriverMapComponent } from './components/driver_components/driver-map/driver-map.component';
 import { DriverHomeComponent } from './components/driver_components/driver-home/driver-home.component';
 import { PassengerHomeComponent } from './components/passenger_components/passenger-home/passenger-home.component';
 import { DriverRideRequestComponent } from './components/driver_components/driver-ride-request/driver-ride-request.component';
 import { PassengerMapComponent } from './components/passenger_components/passenger-map/passenger-map.component';
-import { DriverMapComponent } from './components/driver_components/driver-map/driver-map.component';
 import { PassengerHeaderComponent } from './components/passenger_components/passenger-header/passenger-header.component';
 import { PassengerCurrentRideComponent } from './components/passenger_components/passenger-current-ride/passenger-current-ride.component';
 import { NavbarComponent } from './components/header_components/navbar/navbar.component';
