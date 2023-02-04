@@ -3,16 +3,16 @@
     <form name="RegistracijaForma" id="RegistracijaForma">
         <div class="modal-body text-center">
             <h1 style="font-size:40px">Register</h1>
+            <p style = "font-size:17px;color:red;visibility:hidden" id="response">Check your email for verification!</p>
             <p style="font-size:17px">Hey! Enter your credentials to create a new account!</p>
-            <input type="text" name="ime_registracija" id="ime_registracija" placeholder="First name">
-            <input type="text" name="prezime_registracija" id="prezime_registracija" placeholder="Last name">
-            <input type="text" name="email_registracija" id="email_registracija" placeholder="Email">
-            <input type="text" name="korisnickoime_registracija" id="korisnickoime_registracija" placeholder="Username">
-            <input type="password" name="sifra_registracija" id="sifra_registracija" placeholder="Password">
-            <input type="date" name="datumRodjenja_registracija" id="datumRodjenja_registracija">
-            <input type="text" name="adresa_registracija" id="adresa_registracija" placeholder="Address">
-            <input type="tel" name="telefon_registracija" id="telefon_registracija" placeholder="Telephone">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <input type="text" name="ime_registracija" id="ime_registracija" placeholder="First name" [(ngModel)]="firstName">
+            <input type="text" name="prezime_registracija" id="prezime_registracija" placeholder="Last name" [(ngModel)]="lastName">
+            <input type="text" name="email_registracija" id="email_registracija" placeholder="Email" [(ngModel)]="email">
+            <input type="text" name="korisnickoime_registracija" id="korisnickoime_registracija" placeholder="Username" [(ngModel)]="username">
+            <input type="password" name="sifra_registracija" id="sifra_registracija" placeholder="Password" [(ngModel)]="password">
+            <input type="text" name="adresa_registracija" id="adresa_registracija" placeholder="Address" [(ngModel)]="address">
+            <input type="tel" name="telefon_registracija" id="telefon_registracija" placeholder="Telephone" [(ngModel)]="telephone">
+            <button type="submit" class="btn btn-primary" (click)="createPassenger()">Register</button>
         </div>
     </form>
 </body>

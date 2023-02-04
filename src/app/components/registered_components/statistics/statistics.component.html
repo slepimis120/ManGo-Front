@@ -1,0 +1,24 @@
+<div class="accountInformation">
+    <h3 class="title">Statistics</h3>
+
+    <div class="row">
+        <div class="flex-child-element">
+            <p class="titles">Start date</p>
+            <input [(ngModel)]="startDate" (ngModelChange)="checkDates()" type="date" name="startDate" class="inputField" >
+        </div>
+        <div class="flex-child-element">
+            <p class="titles">End Date</p>
+            <input [(ngModel)]="endDate" (ngModelChange)="checkDates()" type="date" name="endDate" class="inputField" >
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    
+    <h3 class="bottomTitle" id="aaa" [textContent]="textDate"></h3>
+
+    <p class="bottomTitles" [textContent]="cancelledRides" >Ride Cancelled:</p>
+    <p class="bottomTitles" [textContent]="acceptedRides" >Ride Accepted:</p>
+    <p class="bottomTitles" [textContent]="workHours" >Work Hours:</p>
+    <p class="bottomTitles" [textContent]="earnings" >Earnings:</p>
+</div>

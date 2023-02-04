@@ -10,7 +10,7 @@ import { LoginComponent } from './components/header_components/login/login.compo
 import { SignupComponent } from './components/header_components/signup/signup.component';
 import { UnregisteredMapComponent} from './components/unregistered_components/unregistered_map/unregistered_map.component';
 import { MapModule } from './components/unregistered_components/unregistered_map/unregistered_map.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MarkerService } from './services/marker.service';
 import { UnregisteredStepperComponent } from './components/unregistered_components/unregistred_stepper/unregistred_stepper.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -34,7 +34,12 @@ import { PassengerCurrentRideComponent } from './components/passenger_components
 import { NavbarComponent } from './components/header_components/navbar/navbar.component';
 import { PassengerRideDetailsComponent } from './components/passenger_components/passenger-ride-details/passenger-ride-details.component';
 import { DriverHeaderComponent } from './components/driver_components/driver-header/driver-header.component';
-
+import { LeftmenuComponent } from './components/registered_components/leftmenu/leftmenu.component';
+import { ProfilesettingsComponent } from './components/registered_components/profilesettings/profilesettings.component';
+import { AccountinformationComponent } from './components/registered_components/accountinformation/accountinformation.component';
+import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
+import { ReportComponent } from './components/registered_components/report/report.component';
+import { Interceptor } from './components/auth/interceptor/interceptor.interceptor';
 const routes: Routes = [
   { path: '', component: UnregisteredHomeComponent },
   { path: 'passenger', component: PassengerHomeComponent },
@@ -65,6 +70,11 @@ const routes: Routes = [
     PassengerCurrentRideComponent,
     PassengerRideDetailsComponent,
     DriverHeaderComponent,
+    LeftmenuComponent,
+    ProfilesettingsComponent,
+    AccountinformationComponent,
+    StatisticsComponent,
+    ReportComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -87,7 +97,11 @@ const routes: Routes = [
     CdkStepperModule,
   ],
   exports: [RouterModule],
-  providers: [MarkerService, UnregisteredMapComponent],
+  providers: [MarkerService, UnregisteredMapComponent, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
