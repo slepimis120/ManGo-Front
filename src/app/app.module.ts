@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: '', component: UnregisteredHomeComponent },
   { path: 'passenger', component: PassengerHomeComponent },
   { path: 'driver', component: DriverHomeComponent },
-  { path: 'passenger/:passengerId/active', component:PassengerCurrentRideComponent},
+  { path: 'passenger/active', component:PassengerCurrentRideComponent},
   { path: '**', component: UnregisteredHomeComponent },
 ];
 

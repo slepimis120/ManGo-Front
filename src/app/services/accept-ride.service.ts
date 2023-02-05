@@ -14,10 +14,11 @@ export class AcceptRideService {
   constructor() { }
 
   acceptRide() {
+    
     this.rideAcceptedSource.next(true);
   }
 
-  declineRide() {
+  declineRide(reason : string) {
     this.rideDeclinedSource.next(true);
   }
 }

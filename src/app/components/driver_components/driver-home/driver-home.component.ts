@@ -3,6 +3,7 @@ import { thisMonth } from '@igniteui/material-icons-extended';
 import * as bootstrap from 'bootstrap';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
+import { invisibleIcon, MarkerStep } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { AcceptRideService } from 'src/app/services/accept-ride.service';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -41,56 +42,43 @@ export class DriverHomeComponent implements OnInit{
       });
       this.declineSubscription = this.handleRideService.rideDeclined$.subscribe(
         rideDeclined => {
+
           this.handleDecline()
       });
-      this.markerService.getData().subscribe((res) => {
-        if(res['coordinate']){
-         if(this.startCoordinate == undefined){
-          this.startCoordinate = res['coordinate']
-         } else{
-          this.endCoordinate = res['coordinate']
-          this.markerService.sendData({
-            "startCoordinate" : this.startCoordinate,
-           "endCoordinate" : this.endCoordinate} )
-         }
-        }
-        if(res["finished-connecting"]){
-          this.currentRide.price = res["price"];
-          this.currentRide.distance = res["distance"];
-          this.currentRide.duration = res["duration"];
-          this.simulateMovement();
-        }
-      })
   }
 
   handleAccept(){
+    //TODO: handle acceptance, send to the backend that this driver has accepted this ride.
+    this.sendResponseToServer(true);
+
+
     if(this.rideDetails !=undefined){
       this.rideDetails.nativeElement.style.display = 'block';
     }   
     if(this.mapContainer != undefined){
       this.mapContainer.nativeElement.classList.add('col-8');
     }
-    console.log("jedan")
-    this.markerService.sendData({'driver-map': true,
-                                 'start-address' : this.currentRide.startAddress,
-                                  'end-address' : this.currentRide.endAddress});
+    this.markerService.sendData({
+      "step" : MarkerStep.PlaceMarker,
+      "start-address" : this.currentRide.startAddress});
+    this.markerService.sendData({
+      "step" : MarkerStep.PlaceMarker,
+      "end-address" : this.currentRide.endAddress});
+
   }
 
   handleDecline(){
+    //TODO: handle rejection, send to the backend that this driver has rejected the ride with this reason
+    this.sendResponseToServer(false)
+  }  
 
+  sendResponseToServer(accepted : boolean){
+    //TODO: In this function we will be sending data to the server
   }
 
 
-  simulateMovement(){
-    if(this.startCoordinate != undefined){
-      let startLocation = new L.LatLng(this.startCoordinate.latitude, this.startCoordinate.longitude);
-      this.markerService.sendData({"simulate-current-location": true, "startLocation" : startLocation});
-    }
-  }
 
-  
   ngAfterViewInit(): void {
-    
     if(this.rideDetails !=undefined){
       this.rideDetails.nativeElement.style.display = 'none';
     }   

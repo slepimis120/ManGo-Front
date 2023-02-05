@@ -2,22 +2,46 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ride Request</h5>
-        <button type="button" class="close" (click)="hide()">
-          <span aria-hidden="true">&times;</span>
+        <h4 class="modal-title">Ride request</h4>
+        <button type="button" class="close-btn" (click)="hide()">
+         &times;
         </button>
       </div>
       <div class="modal-body">
-        <p>Starting Address: {{ ride.startAddress }}</p>
-        <p>Ending Address: {{ ride.endAddress }}</p>
-        <p>Price: {{ ride.price }}</p>
-        <p>Duration: {{ ride.duration }}</p>
-        <p>Distance: {{ ride.distance }}</p>
+        <div class="line">
+          <img src="../../../../assets/images/icons/start-location-icon.png" class="icon">
+          <p class="info">Starting Address: {{ ride.startAddress }}</p>
+        </div>
+        <div class="line">
+          <img src="../../../../assets/images/icons/end-location-icon.png" class="icon">
+          <p class="info">Ending Address: {{ ride.endAddress }}</p>
+        </div>
+        <div class="line">
+          <img src="../../../../assets/images/icons/dollar_icon.png" class="icon">
+          <p class="info">Price: {{ ride.price }} din</p>
+        </div>
+        <div class="line">
+          <img src="../../../../assets/images/icons/hourglass_icon.png" class="icon">
+          <p class="info">Duration: {{ ride.duration }} min</p>
+        </div>
+        <div class="line">
+          <img src="../../../../assets/images/icons/running_icon.png" class="icon">
+          <p class="info">Distance: {{ ride.distance }} km</p>
+        </div>
+        <div class="line">
+          <label for="decline_reason" class="decline_label">Reason to decline:
+            <textarea cols="30" rows="1" id="decline_reason" class="decline_input" #decline_reason></textarea>
+            <p *ngIf="declined" class="warning">!</p>
+          </label>
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="declineRide()">Decline</button>
-        <button type="button" class="btn btn-primary" (click)="acceptRide()">Accept</button>
+
+        <button type="button" class="btn btn-decline" (click)="declineRide(decline_reason.value)">Decline</button>
+        <button type="button" class="btn btn-accept" (click)="acceptRide()">Accept</button>
       </div>
     </div>
   </div>
 </div>
+
