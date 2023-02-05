@@ -26,6 +26,7 @@ export class PassengerMapComponent{
           this.connectMarkers();
           break;
         case MarkerStep.PlaceMarker:
+          console.log("ulazi?");
           this.placeMarker(res);
           break;
         case MarkerStep.ReturnMarker:
@@ -33,6 +34,11 @@ export class PassengerMapComponent{
           break;
         case MarkerStep.ReturnRoute:
           this.route = res["route"];
+          break;
+        case MarkerStep.SimulateMovement:
+          setTimeout(() => {
+            this.markerService.simulateMovement(this.startMarker.getLatLng(), this.endMarker.getLatLng(), this.map, this.route);
+          }, 3000);
           break;
       }
     })
@@ -98,10 +104,12 @@ export class PassengerMapComponent{
   }
 
 
+
+
   ngAfterViewInit(): void {
     L.Marker.prototype.options.icon = invisibleIcon;
     this.initMap();
-    this.markerService.followLocation(this.map);
+    //this.markerService.followLocation(this.map);
   }
 
 

@@ -74,7 +74,9 @@ export class UnregisteredMapComponent implements AfterViewInit {
               this.markerService.sendData({"step" : MarkerStep.CheckedMarkers, "placed" : true});
             }
           }, 1000);
-          
+          break;
+          case MarkerStep.GetMarkers:
+            this.markerService.sendData({"step" : MarkerStep.SendMarkers, "start" : this.startMarker, "end" : this.endMarker});
       }
     })
   }

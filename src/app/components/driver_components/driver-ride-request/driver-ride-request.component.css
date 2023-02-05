@@ -12,3 +12,61 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4); 
 }
+
+
+.modal-title{
+    width: -webkit-fill-available;
+    text-align: center;
+    margin: 0;
+}
+
+.close-btn{
+    border: none;
+    background-color: white;
+    font-size: 40px;
+    vertical-align: top;
+}
+
+.icon{
+    width: 20px;
+}
+
+.info{
+    display: inline;
+    margin-left: 1vw;
+}
+
+.line{
+    padding: 0.5vw;
+}
+
+.btn-decline{
+    background-color: #FDB600;
+    color: white;
+}
+
+.btn-accept{
+    background-color: #FF5C00;
+    color: white;
+}
+
+.btn{
+    margin-right: 0.8vw;
+}
+
+.decline_label{
+    margin-top: 1vw;
+}
+
+.decline_input{
+    vertical-align: middle;
+    margin-left:  0.5vw;
+}
+
+.warning{
+    display: inline;
+    margin-left: 0.5vw;
+    vertical-align: middle;
+    color: red;
+    font-size: 30px;
+}

@@ -41,5 +41,7 @@ export class PassengerCurrentRideComponent {
     this.markerService.sendData({
       "step" : MarkerStep.PlaceMarker,
       "end-address" : this.currentRide.endAddress});
+    this.markerService.sendData({
+      "step" : MarkerStep.SimulateMovement})
   }
 }

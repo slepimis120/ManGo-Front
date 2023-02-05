@@ -6,6 +6,12 @@ export enum MarkerType {
     CurrentLocation
   }
 
+export enum VehicleType{
+  Van,
+  Standard,
+  Luxury,
+}
+
 export enum MarkerStep {
     ConnectMarkers,
     PlaceMarker,
@@ -16,6 +22,9 @@ export enum MarkerStep {
     TargetLocation,
     CheckMarkers,
     CheckedMarkers,
+    GetMarkers,
+    SendMarkers,
+    SimulateMovement,
   }
 
 export const startIcon = L.icon({

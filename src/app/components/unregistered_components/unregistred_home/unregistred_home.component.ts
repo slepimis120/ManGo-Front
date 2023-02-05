@@ -97,6 +97,10 @@ export class UnregisteredHomeComponent{
   
 
   calculate_price(selected :any){
+    //const httpHeaders = new HttpHeaders().set('Content-Type', 'text');
+    //this.http.get<string>("http://localhost:8080/api/unregisteredUser", {headers: httpHeaders}).subscribe((res) => {
+    //  console.log(res);
+    //});
     this.price = this.distance * 120;
     if(selected == "standard"){
       this.price += 120;

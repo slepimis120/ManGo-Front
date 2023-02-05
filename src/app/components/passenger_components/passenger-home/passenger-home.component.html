@@ -55,24 +55,27 @@
                                     <option value="van">Van</option>
                                 </select>
                                 <label for="children-tag" class="checkbox-label vehicle-form-text">
-                                    <input type="checkbox" class="checkbox" id="children-tag" name="children-tag" value="children" #children_tag>
+                                    <input type="checkbox" class="checkbox" id="children-tag" name="children-tag"  #children_tag>
                                     Transporting children?
                                 </label>
                                 <label class="checkbox-label vehicle-form-text" for="pets-tag">
-                                    <input class="checkbox" type="checkbox" id="pets-tag" name="pets-tag" value="pets" #pets_tag>
+                                    <input class="checkbox" type="checkbox" id="pets-tag" name="pets-tag"  #pets_tag>
                                     Transporting pets?
                                 </label>
                                 <label class="checkbox-label vehicle-form-text" for="schedule-tag">
-                                    <input class="checkbox" type="checkbox" id="schedule-tag" name="schedule-tag" value="schedule" #schedule_tag>
+                                    <input class="checkbox" type="checkbox" id="schedule-tag" name="schedule-tag" #schedule_tag>
                                     Schedule the ride?
                                     <div class="time-selector titilium-web">
-                                        <input type="time" id="ride-time" #ride_time value="14:30">
+                                        <input type="time" id="ride_time" #ride_time >
                                     </div>
                                 </label>
                             </form>
                         </div>
                     </div>
                     <div class="stepper-footer">
+                        <div *ngIf="invalidTime" >
+                            <p class="warning">You can only schedule the ride for the next 5 hours!</p>
+                        </div>
                         <hr>
                         <button cdkStepperPrevious class="stepper-footer">
 
@@ -81,8 +84,8 @@
                                 Set destination
                           </a>
                         </button>
-                        <button cdkStepperNext class="stepper-footer">
-                            <a id="find-vehicle" class="open-sans" (click)="calculatePrice(vehicle_type_select.value)">
+                        <button class="stepper-footer">
+                            <a id="find-vehicle" class="open-sans" (click)="calculatePrice(vehicle_type_select.value); checkTime()">
                               Ride details
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
                           </a>
@@ -117,7 +120,8 @@
                                 Vehicle details
                           </a>
                         </button>
-                        <button cdkStepperNext class="stepper-footer" (click)="createRideRequest()">
+                        <button cdkStepperNext class="stepper-footer" 
+                        (click)="collectRideInfo(start_location.value, end_location.value, vehicle_type_select.value, children_tag.checked, pets_tag.checked, ride_time.value)">
                             <a id="set-route" class="open-sans">
                               Book ride
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">

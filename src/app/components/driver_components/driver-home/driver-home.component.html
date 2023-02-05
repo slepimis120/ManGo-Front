@@ -6,14 +6,22 @@
             <p id="info-title" >Ride details</p>
             <hr>
             <div id="destination_departure">
-                <div id="start_address" class="address_info">
-                    <p class="address">{{currentRide.startAddress}}</p>
+                <div class="address_container">
+                    <div id="start_address" class="address_info">
+                        <p class="address">{{currentRide.startAddress}}</p>
+                        
+                    </div>
                     <p class="time">13:23</p>
                 </div>
+
+            <div class="address_container">
                 <div id="end_address" class="address_info">
                     <p class="address">{{currentRide.endAddress}}</p>
-                    <p class="time">13:35</p>
+                    
                 </div>
+                <p class="time">13:35</p>
+            </div>
+                
             </div>
            
             <div id="details" class="details">

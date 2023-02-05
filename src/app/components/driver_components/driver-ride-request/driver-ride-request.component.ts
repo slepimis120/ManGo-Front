@@ -9,6 +9,7 @@ import { AcceptRideService } from 'src/app/services/accept-ride.service';
 export class DriverRideRequestComponent {
   @Input() ride: any;
   showModal: boolean = false;
+  declined : boolean = false;
 
   constructor(private acceptRideService: AcceptRideService) { }
 
@@ -17,9 +18,14 @@ export class DriverRideRequestComponent {
     this.hide();
   }
 
-  declineRide() {
-    this.acceptRideService.declineRide()
-    this.hide();
+  declineRide(reason : string) {
+    if(reason.length < 5){
+      this.declined = true;
+      
+    }else{
+      this.hide();
+      this.acceptRideService.declineRide(reason);
+    }
   }
 
   show() {

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { invisibleIcon, MarkerStep, MarkerType } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { MapService } from 'src/app/services/map.service';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -10,10 +11,13 @@ import { MarkerService } from 'src/app/services/marker.service';
   templateUrl: './driver-map.component.html',
   styleUrls: ['./driver-map.component.css']
 })
-export class DriverMapComponent implements OnInit{
+export class DriverMapComponent {
   private map: any;
   private marker : any;
   private driverStartLocation: L.LatLng = new L.LatLng(0,0);
+  private startMarker!: L.Marker<any>;
+  private endMarker! : L.Marker<any>;
+  private route! : L.Routing.Control;
   
   getMap(){
     return this.map;
@@ -24,23 +28,67 @@ export class DriverMapComponent implements OnInit{
   }
 
   constructor(private mapService: MapService, private http:HttpClient, private markerService : MarkerService) {
-    
+    this.getIncomingData();
   }
 
-  ngOnInit(): void {
+  getIncomingData() {
     this.markerService.getData().subscribe((res) => {
-      if(res['driver-map']){
-        //this.markerService.placeMarkerOne(this.map, res['start-address']);
-        //this.markerService.placeMarkerOne(this.map, res['end-address']);
-      }
-      if(res['startCoordinate']){
-        this.markerService.connectMarkers(this.map, res['startCoordinate'], res['endCoordinate']);
-      }
-      if(res['simulate-current-location']){
-        console.log("Slusaj sad ovamo: " + this.driverStartLocation + res['startLocation']);
-        this.markerService.simulateMovement(this.driverStartLocation, res['startLocation'], this.map);
+      switch(res["step"]){
+        case MarkerStep.ConnectMarkers:
+          this.connectMarkers();
+          break;
+        case MarkerStep.PlaceMarker:
+          this.placeMarker(res);
+          break;
+        case MarkerStep.ReturnMarker:
+          this.returnMarker(res);
+          break;
+        case MarkerStep.ReturnRoute:
+          this.route = res["route"];
+          break;
       }
     })
+  }
+
+  private connectMarkers(){
+    this.removeRoute();
+    this.createRoute();
+  }
+
+  private removeRoute(){
+    if(this.route != undefined){
+      this.route.remove();
+    }
+  }
+
+  private placeMarker(res : any){
+    this.removeRoute();
+    if(res["start-address"]){
+      if(this.startMarker != undefined){
+        this.startMarker.removeFrom(this.map);
+      }
+      this.markerService.placeMarkerAddress(this.map, res["start-address"], MarkerType.StartLocation);
+    }else if(res["end-address"]){
+      if(this.endMarker != undefined){
+        this.endMarker.removeFrom(this.map);
+      }
+      this.markerService.placeMarkerAddress(this.map, res["end-address"], MarkerType.EndLocation);
+    }
+  }
+
+  private returnMarker(res : any){
+    if(res["marker-type"] == MarkerType.StartLocation){
+      this.startMarker = res["marker"];
+      this.startMarker.bindPopup("Start Location").openPopup();
+    }else if(res["marker-type"] == MarkerType.EndLocation){
+      this.endMarker = res["marker"];
+      this.endMarker.bindPopup("End Location").openPopup();
+      this.connectMarkers();
+    }
+  }
+
+  createRoute() : void {
+    this.markerService.connectMarkers(this.map, this.startMarker.getLatLng(), this.endMarker.getLatLng());
   }
 
  
@@ -59,65 +107,14 @@ export class DriverMapComponent implements OnInit{
       }
     );
     tiles.addTo(this.map);
-    this.getCurrentLocation();
-    this.getCurrentLocation().then(driverStartLocation => {
-      this.driverStartLocation = driverStartLocation;
-      this.setCurrentLocation(this.driverStartLocation);
-    });
+
   }
 
-  getCurrentLocation(): Promise<L.LatLng> {
-    return new Promise((resolve) => {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        const driverStartLocation = new L.LatLng(latitude, longitude)
-        resolve(driverStartLocation);
-      });
-    });
-  }
-
-  setCurrentLocation(coordinates : L.LatLng){
-    let currentLocation = L.icon({
-      iconUrl: '../../../../assets/images/current_location_marker.png',
-      iconSize:     [40, 40],
-    });
-    this.map.setView([coordinates.lat, coordinates.lng], 13);
-    this.marker = L.marker([coordinates.lat, coordinates.lng],{icon: currentLocation}).addTo(this.map);  
-    this.marker.bindPopup("This is your current location").openPopup();
-  }
-
-  followLocation(){
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        let currentLocation = L.icon({
-          iconUrl: '../../../../assets/images/current_location_marker.png',
-          iconSize:     [40, 40],
-        });
-        this.map.setView([position.coords.latitude, position.coords.longitude], 13);
-        this.marker = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocation}).addTo(this.map);  
-        this.marker.bindPopup("This is your current location").openPopup();
-      });
-
-      navigator.geolocation.watchPosition(position => {
-        this.map.setView([position.coords.latitude, position.coords.longitude], 13);
-        this.marker.setLatLng([position.coords.latitude, position.coords.longitude]);
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  }
-
-  simulateMovement(startLocation : L.LatLng, endLocation : L.LatLng){
-    this.markerService.simulateMovement(startLocation, endLocation, this.map);
-  } 
 
   ngAfterViewInit(): void {
-    let DefaultIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
-    });
-
-    L.Marker.prototype.options.icon = DefaultIcon;
+    L.Marker.prototype.options.icon = invisibleIcon;
     this.initMap();
+    this.markerService.followLocation(this.map);
   }
 
 
