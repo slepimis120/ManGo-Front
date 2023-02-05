@@ -11,6 +11,7 @@ import { SignupComponent } from './components/header_components/signup/signup.co
 import { UnregisteredMapComponent} from './components/unregistered_components/unregistered_map/unregistered_map.component';
 import { MapModule } from './components/unregistered_components/unregistered_map/unregistered_map.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { MarkerService } from './services/marker.service';
 import { UnregisteredStepperComponent } from './components/unregistered_components/unregistred_stepper/unregistred_stepper.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -41,6 +42,8 @@ import { AccountinformationComponent } from './components/registered_components/
 import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
 import { ReportComponent } from './components/registered_components/report/report.component';
 import { Interceptor } from './components/auth/interceptor/interceptor.interceptor';
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 const routes: Routes = [
   { path: '', component: UnregisteredHomeComponent },
   { path: 'passenger', component: PassengerHomeComponent },
@@ -51,9 +54,9 @@ const routes: Routes = [
 
 
 
+
 @NgModule({
   declarations: [
-    
     AppComponent,
     UnregisteredHeaderComponent,
     UnregisteredHomeComponent,
@@ -76,6 +79,7 @@ const routes: Routes = [
     AccountinformationComponent,
     StatisticsComponent,
     ReportComponent,
+    CanvasJSChart
   ],
   imports: [
     RouterModule.forRoot(routes),
