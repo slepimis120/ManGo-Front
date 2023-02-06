@@ -1,0 +1,45 @@
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Ride ended - Rate the ride?</h4>
+          <button type="button" class="close-btn" (click)="hide()">
+           &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Rate the driver</p>
+          <div class="rating">
+            <div *ngFor="let rate of ratings1">
+              <span class="fa fa-star"
+                    [ngClass]="{'filled': rate.filled}"
+                    (mouseenter)="onStarHover(rate)"
+                    (click)="onStarClick(rate)">
+              </span>
+            </div>
+            </div>
+            
+          </div>
+          <p>Rate the Vehicle</p>
+          <div class="rating">
+            <div *ngFor="let rate of ratings2">
+              <span class="fa fa-star"
+                    [ngClass]="{'filled': rate.filled}"
+                    (mouseenter)="onStarHover(rate)"
+                    (click)="onStarClick(rate)">
+              </span>
+            </div>
+          </div>
+        
+        <p>Leave a comment</p>
+        <textarea cols="12" rows="3"></textarea>
+
+        <div class="modal-footer">
+  
+          <button type="button" class="btn btn-decline">Rate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

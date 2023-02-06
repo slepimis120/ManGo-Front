@@ -1,4 +1,4 @@
-class Passenger {
+export class Passenger {
     private _id: number;
     private _firstName: string;
     private _lastName: string;
