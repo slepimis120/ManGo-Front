@@ -15,26 +15,39 @@ export class LoginComponent {
   accessToken:accesstoken;
   email:String;
   password:String;
+  isLoaded:boolean;
   constructor(private http:HttpClient, private authService: AuthService, private router: Router) {
     this.accessToken = new accesstoken();
     this.email = "";
     this.password = "";
+    this.isLoaded = true;
    }
 
   ngOnInit(): void {
+    this.isLoaded = true;
   }
 
 
 
   public getAccessToken(){
-    
+    this.isLoaded = false;
     this.getUser().subscribe((res) => {
       var json = JSON.parse(res);
       this.accessToken.accesstoken = json['accessToken'];
       this.accessToken.refreshtoken = json['refreshToken'];
       localStorage.setItem('user', this.accessToken.accesstoken);
       this.authService.setUser();
-      this.router.navigate(['/']);
+      const accessToken: any = localStorage.getItem('user');
+      let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+      if(decodedJWT.role == "PASSENGER"){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/passenger']));
+      }else if(decodedJWT.role == "DRIVER"){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/driver']));
+      }
+      
+      
     });
   }
 
@@ -45,6 +58,9 @@ export class LoginComponent {
     };
     return this.http.post<string>(url, {email: this.email, password: this.password}, options);
   }
+
+  
 }
+
 
 

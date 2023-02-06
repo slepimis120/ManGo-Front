@@ -197,9 +197,10 @@ export class PassengerHomeComponent {
 
 
   collectRideInfo(startAddress : string, endAddress: string, selected : string, childrenTag : boolean, petsTag : boolean, scheduledTime : string){
-    
-    //TODO1: get the passenger id
-    let id = 0;
+
+    const accessToken: any = localStorage.getItem('user');
+    let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+    let id = decodedJWT.id;
 
     this.markerService.sendData({"step" :MarkerStep.GetMarkers});
     while(this.startLocation == undefined){}
