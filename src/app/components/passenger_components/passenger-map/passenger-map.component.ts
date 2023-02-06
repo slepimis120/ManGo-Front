@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import * as L from 'leaflet';
-import { currentLocationIcon, invisibleIcon, MarkerStep, MarkerType } from 'src/app/constants/constants';
+import { currentLocationIcon, invisibleIcon, MarkerStep, MarkerType, RideStep } from 'src/app/constants/constants';
 import { MapService } from 'src/app/services/map.service';
 import { MarkerService } from 'src/app/services/marker.service';
+import { RideService } from 'src/app/services/ride-service.service';
 
 @Component({
   selector: 'app-passenger-map',
@@ -16,7 +17,7 @@ export class PassengerMapComponent{
   private endMarker! : L.Marker<any>;
   private route! : L.Routing.Control;
 
-  constructor(private markerService : MarkerService) {
+  constructor(private markerService : MarkerService, private rideService : RideService) {
     this.getIncomingData();
   }
   getIncomingData() {
@@ -36,9 +37,18 @@ export class PassengerMapComponent{
           this.route = res["route"];
           break;
         case MarkerStep.SimulateMovement:
+          console.log("sta je bilo?");
           setTimeout(() => {
-            this.markerService.simulateMovement(this.startMarker.getLatLng(), this.endMarker.getLatLng(), this.map, this.route);
-          }, 3000);
+            let coordinates = this.startMarker.getLatLng();
+            let marker = new L.Marker([coordinates.lat, coordinates.lng], {icon : currentLocationIcon}).addTo(this.map);
+            this.rideService.simulateMovement(this.startMarker.getLatLng(), this.endMarker.getLatLng(), this.map, this.route, marker);
+          }, 2000);
+          break;
+      }
+    })
+    this.rideService.getData().subscribe((res) =>{
+      switch(res["step"]){
+        case RideStep.FinishRidePassenger:
           break;
       }
     })

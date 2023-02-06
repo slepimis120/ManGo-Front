@@ -1,25 +1,23 @@
 <div class="main_frame " id="driver_main_container">
     <div class="row">
         <div class="ride_info col-4 white_bg " id="ride_details" #ride_details>
-            <p id="info-title" >Ride details</p>
+            <p id="info-title">Ride details</p>
             <hr>
             <div id="destination_departure">
                 <div class="address_container">
                     <div id="start_address" class="address_info">
-                        <p class="address">{{currentRide.startAddress}}</p>
+                        <p class="address">{{currentRide.locations[0].address}}</p>
                     </div>
                     <p class="time">13:23</p>
                 </div>
                 <div class="address_container">
                     <div id="end_address" class="address_info">
-                        <p class="address">{{currentRide.endAddress}}</p>
-                        
+                        <p class="address">{{currentRide.locations[1].address}}</p>
+
                     </div>
                     <p class="time">13:35</p>
                 </div>
-
             </div>
-           
             <div id="details" class="details">
                 <div id="price" class="detail">
                     <img src="../../../../assets/images/icons/dollar_icon.png" alt="Price" class="icon">
@@ -33,19 +31,34 @@
                     <img src="../../../../assets/images/icons/running_icon.png" alt="Distance" class="icon">
                     <p id="distance">Distance: {{currentRide.distance}}km</p>
                 </div>
-                
+
             </div>
             <div class="remaining_details" id="remaining_details">
-                <p>Remaining time: 3min</p>
-                <p>Remaining distance: 0.6km</p>
+                <p>Remaining time: {{currentTime}}min</p>
+                <p>Remaining distance: {{currentDistance.toFixed(1)}}km</p>
             </div>
-            
-            
-        </div>
-        
-        <div class="map col-8" style="padding-left: 0;" id="map-container" #map_container>   
-            <app-passenger-map></app-passenger-map>
-        </div>     
-    </div>
+            <div id="driver-details_for_passenger">
 
+                <p class="simple-title" id="driver-details-title">Driver details</p>
+                <hr class="hor_line">
+                <div class="driver-details" id="driver-details-container">
+                    <img src="../../../../assets//images/mockPhotos/mock_photo2.jpg" alt="Mock Photo 2"
+                        class="circle-img" id="driver-profile-pic">
+                    <div>
+                        <div class="name-title" id="driver-name-title">{{currentRide.driver.firstName}} {{currentRide.driver.lastName}}</div>
+                        <div id="rate">
+                            <img src="../../../../assets//images/icons/star-icon.png" class="star-icon" alt="Rate"
+                                id="star-icon">
+                            <p id="rate-value" class="rate-value">3.4</p>
+                        </div>
+                        <p class="car-title">Wolkswagen Golf 5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="map col-8" style="padding-left: 0;" id="map-container" #map_container>
+            <app-passenger-map></app-passenger-map>
+        </div>
+    </div>
+    <div><app-passenger-mark-ride></app-passenger-mark-ride></div>
 </div>

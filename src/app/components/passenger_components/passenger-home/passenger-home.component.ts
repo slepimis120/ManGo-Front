@@ -123,7 +123,8 @@ export class PassengerHomeComponent {
           }, 3000);
         }
       }
-    })}  
+    })
+  }  
 
   checkTime(){
     const now = new Date();

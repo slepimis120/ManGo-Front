@@ -27,6 +27,10 @@ export enum MarkerStep {
     SimulateMovement,
   }
 
+export enum RideStep{
+  FinishRidePassenger,
+}
+
 export const startIcon = L.icon({
 iconUrl: '../../assets/images/icons/start-location-icon.png',
 iconSize: [25, 40],

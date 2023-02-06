@@ -42,8 +42,13 @@ import { AccountinformationComponent } from './components/registered_components/
 import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
 import { ReportComponent } from './components/registered_components/report/report.component';
 import { Interceptor } from './components/auth/interceptor/interceptor.interceptor';
+
+import { RideService } from './services/ride-service.service';
+import { PassengerMarkRideComponent } from './components/passenger_components/passenger-mark-ride/passenger-mark-ride.component';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+
 const routes: Routes = [
   { path: '', component: UnregisteredHomeComponent },
   { path: 'passenger', component: PassengerHomeComponent },
@@ -79,6 +84,7 @@ const routes: Routes = [
     AccountinformationComponent,
     StatisticsComponent,
     ReportComponent,
+    PassengerMarkRideComponent,
     CanvasJSChart
   ],
   imports: [
@@ -102,7 +108,7 @@ const routes: Routes = [
     CdkStepperModule,
   ],
   exports: [RouterModule],
-  providers: [MarkerService, UnregisteredMapComponent, {
+  providers: [MarkerService, RideService, UnregisteredMapComponent, {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi: true,

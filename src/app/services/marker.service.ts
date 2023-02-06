@@ -85,28 +85,7 @@ export class MarkerService {
         "distance" : distance});})
   }
 
-  simulateMovement(start: L.LatLng, end: L.LatLng, map: L.Map, route : L.Routing.Control) {
-    const currentLocationMarker = new L.Marker([start.lat, start.lng], {icon : currentLocationIcon}).addTo(map);
-    route.route();
-    route.on('routesfound', (e) => {
-      if (e.routes && e.routes[0]) {
-        const route = e.routes[0];
-        const routeCoordinates = route.coordinates.map((c: { lat: any; lng: any; }) => [c.lat, c.lng]);
-        let currentIndex = 0;
-        const interval = setInterval(() => {
-          if (currentIndex === routeCoordinates.length - 1) {
-            clearInterval(interval);
-          } else {
-            currentLocationMarker.setLatLng(routeCoordinates[++currentIndex]);
-          }
-        }, 1000);
-      }
-    });
 
-    
-    
-    
-}
 
 followLocation(map : L.Map){
   if (navigator.geolocation) {

@@ -1,4 +1,3 @@
-import { Locations } from "./location";
 import { VehicleType } from "./vehicle.model";
 
 export class RideRequest{
