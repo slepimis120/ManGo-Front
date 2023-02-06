@@ -89,5 +89,10 @@ export class NavbarComponent implements OnInit {
     this.signupModal?.show()
   }
 
-  logout(){}
+  logout(){
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['home']));
+  }
+
 }
