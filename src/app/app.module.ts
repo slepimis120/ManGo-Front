@@ -53,7 +53,9 @@ const routes: Routes = [
   { path: 'passenger', component: PassengerHomeComponent },
   { path: 'driver', component: DriverHomeComponent },
   { path: 'passenger/active', component:PassengerCurrentRideComponent},
-  { path: 'profile', component:AccountinformationComponent},
+  { path: ':id/profile', component: AccountinformationComponent },
+  { path: ':id/statistics', component: StatisticsComponent },
+  { path: ':id/report', component: ReportComponent },
   { path: '**', component: UnregisteredHomeComponent },
 ];
 
