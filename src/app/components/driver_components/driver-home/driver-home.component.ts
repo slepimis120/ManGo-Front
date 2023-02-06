@@ -1,9 +1,6 @@
-import { Component, ComponentFactoryResolver, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
-import { thisMonth } from '@igniteui/material-icons-extended';
-import * as bootstrap from 'bootstrap';
-import * as L from 'leaflet';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { invisibleIcon, MarkerStep, RideStep, VehicleType } from 'src/app/constants/constants';
+import { MarkerStep, RideStep, VehicleType } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { AcceptRideService } from 'src/app/services/accept-ride.service';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -13,6 +10,10 @@ import { Ride } from 'src/app/models/ride.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Passenger } from 'src/app/models/passenger.model';
 import {Location } from "src/app/models/location.model";
+import { Message } from '../../../models/message'
+
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-driver-home',
@@ -26,9 +27,13 @@ export class DriverHomeComponent implements OnInit{
   endCoordinate : CoordinateModel | undefined = undefined;
   statusText : string  =  "START RIDE";
   status : boolean = false; 
-  currentRide : Ride;
   currentTime : number;
   currentDistance : number;
+  currentRide: Ride;
+  isLoaded: boolean = false;
+  private serverUrl = "http://localhost:8080/socket";
+  private stompClient: any;
+  messages: Message[] = [];
 
   @ViewChild('ride_details', {static: false}) rideDetails: ElementRef | undefined;
   @ViewChild('map_container', {static: false}) mapContainer: ElementRef | undefined;
@@ -85,6 +90,7 @@ export class DriverHomeComponent implements OnInit{
           
         }
       })
+      this.initializeWebSocketConnection();
   }
 
   handleAccept(){
@@ -125,6 +131,16 @@ export class DriverHomeComponent implements OnInit{
     //TODO: In this function we will be sending data to the server
   }
 
+  initializeWebSocketConnection() {
+    let ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+
+    this.stompClient.connect({}, function () {
+      that.isLoaded = true;
+      that.openSocket()
+    });
+  }
 
   handleClick(){
     if(this.status){
@@ -153,7 +169,17 @@ export class DriverHomeComponent implements OnInit{
 
   }
 
-
+  openSocket() {
+    if (this.isLoaded) {
+      const accessToken: any = localStorage.getItem('user');
+      let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+      let id = decodedJWT.id;
+  
+      this.stompClient.subscribe("/socket-publisher/" + id, (message: { body: string; }) => {
+        this.handleResult(message);
+      });
+    }
+  }
 
   ngAfterViewInit(): void {
     if(this.rideDetails !=undefined){
@@ -168,5 +194,15 @@ export class DriverHomeComponent implements OnInit{
     if(this.modal != undefined){
       this.modal.show();
     }
+    
   }
+
+    // Funkcija koja se poziva kada server posalje poruku na topic na koji se klijent pretplatio
+    handleResult(message: { body: string; }) {
+      if (message.body) {
+        let messageResult: Message = JSON.parse(message.body);
+        console.log(messageResult);
+        //this.messages.push(messageResult);
+      }
+    }
 }

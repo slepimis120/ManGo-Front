@@ -2,13 +2,13 @@ import { CdkStepper } from '@angular/cdk/stepper';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import * as bootstrap from 'bootstrap';
-import { timeout } from 'rxjs';
 import { MarkerStep } from 'src/app/constants/constants';
 import { RideRequest } from 'src/app/models/rideRequest.model';
-import { Vehicle } from 'src/app/models/vehicle';
 import { MarkerService } from 'src/app/services/marker.service';
 import { RideService } from 'src/app/services/ride-service.service';
+import { Message } from '../../../models/message'
+import { CreateRideMessage } from '../../../models/createRideMessage'
+
 
 
 @Component({
@@ -36,6 +36,7 @@ export class PassengerHomeComponent {
   invalidTime : boolean = false;
   startLocation! : L.Marker;
   endLocation! : L.Marker;
+  private stompClient: any;
 
   @ViewChild('cdkStepperPassenger') cdkStepper: CdkStepper | undefined;
   @ViewChild('ride_time') rideTime!: ElementRef<HTMLInputElement>;
@@ -196,6 +197,22 @@ export class PassengerHomeComponent {
     }
   }
 
+  sendMessageUsingSocket() {
+      let message: CreateRideMessage = {
+        vehicleType: "Standard",
+        babyTransport: false,
+        petTransport: false,
+        scheduledTime: null,
+
+        
+        
+      };
+
+      // Primer slanja poruke preko web socketa sa klijenta. URL je 
+      //  - ApplicationDestinationPrefix definisan u config klasi na serveru (configureMessageBroker() metoda) : /socket-subscriber
+      //  - vrednost @MessageMapping anotacije iz kontrolera na serveru : /send/message
+      this.stompClient.send("/getAvailableDrivers", {}, JSON.stringify(message));
+  }
 
   collectRideInfo(startAddress : string, endAddress: string, selected : string, childrenTag : boolean, petsTag : boolean, scheduledTime : string){
 
