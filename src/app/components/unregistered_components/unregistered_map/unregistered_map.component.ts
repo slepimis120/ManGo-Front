@@ -118,6 +118,7 @@ export class UnregisteredMapComponent implements AfterViewInit {
   }
 
   private initMap(): void {
+    if (this.map != undefined) this.map = this.map.remove();
     this.map = L.map('map', {
       center: [45.2396, 19.8227],
       zoom: 13,
