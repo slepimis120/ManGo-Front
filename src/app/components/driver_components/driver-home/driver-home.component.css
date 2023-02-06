@@ -78,9 +78,8 @@ hr{
     padding: 0 2vw;
 }
 
-.yellow_button{
+.my_button{
     display: inline;
-    background: var(--orange);
     color: white !important;
     border: 0 !important;
     font-family: 'Assistant', sans-serif;
@@ -92,6 +91,14 @@ hr{
     text-align: center;
     justify-content: center !important;
     
+}
+
+.dark_gray{
+    background:  darkgray;
+}
+
+.yellow{
+    background: #FDB600;
 }
 
 .button {

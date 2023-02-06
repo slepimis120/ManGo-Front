@@ -37,11 +37,10 @@ export class PassengerMapComponent{
           this.route = res["route"];
           break;
         case MarkerStep.SimulateMovement:
-          console.log("sta je bilo?");
           setTimeout(() => {
             let coordinates = this.startMarker.getLatLng();
             let marker = new L.Marker([coordinates.lat, coordinates.lng], {icon : currentLocationIcon}).addTo(this.map);
-            this.rideService.simulateMovement(this.startMarker.getLatLng(), this.endMarker.getLatLng(), this.map, this.route, marker);
+            this.rideService.simulateMovement(this.startMarker.getLatLng(), this.endMarker.getLatLng(), this.map, marker, false);
           }, 2000);
           break;
       }

@@ -25,10 +25,13 @@ export enum MarkerStep {
     GetMarkers,
     SendMarkers,
     SimulateMovement,
+    GetCurrentLocation,
   }
 
 export enum RideStep{
   FinishRidePassenger,
+  OnStartArrival,
+  OnEndArrival,
 }
 
 export const startIcon = L.icon({

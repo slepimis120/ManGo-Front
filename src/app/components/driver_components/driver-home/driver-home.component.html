@@ -8,7 +8,7 @@
             <div id="destination_departure">
                 <div class="address_container">
                     <div id="start_address" class="address_info">
-                        <p class="address">{{currentRide.startAddress}}</p>
+                        <p class="address">{{currentRide.locations[0].address}}</p>
                         
                     </div>
                     <p class="time">13:23</p>
@@ -16,7 +16,7 @@
 
             <div class="address_container">
                 <div id="end_address" class="address_info">
-                    <p class="address">{{currentRide.endAddress}}</p>
+                    <p class="address">{{currentRide.locations[1].address}}</p>
                     
                 </div>
                 <p class="time">13:35</p>
@@ -51,11 +51,11 @@
                 </div>
             </div>
             <div class="remaining_details" id="remaining_details">
-                <p>Remaining time: 3min</p>
-                <p>Remaining distance: 0.6km</p>
+                <p>Remaining time: {{currentTime}}min</p>
+                <p>Remaining distance: {{currentDistance}}km</p>
             </div>
             <div class="button">
-                <button class="yellow_button assistant" id="end_ride">END RIDE</button>
+                <button #my_button class="my_button assistant" id="end_ride" (click)="handleClick()">{{statusText}}</button>
             </div>
             
         </div>

@@ -98,7 +98,6 @@ export class UnregisteredHomeComponent{
   
 
   calculate_price(selected : string){
-    //const httpHeaders = new HttpHeaders().set('Content-Type', 'text');
     const options: any = {
       responseType: 'text',
     };

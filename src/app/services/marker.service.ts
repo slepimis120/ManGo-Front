@@ -17,12 +17,22 @@ export class MarkerService {
   private addressSubject : BehaviorSubject<any>;
   private address$!:Observable<any>;
   private currentLocation : L.Marker | undefined;
+  private currentCoordinatesSubject = new Subject<L.LatLng>();
+  currentLocation$ = this.currentCoordinatesSubject.asObservable();
+  
 
   constructor(private http: HttpClient) {
     this.subject = new Subject();
     this.observable$ = this.subject.asObservable();
     this.addressSubject = new BehaviorSubject<any>(null);
    }
+
+  getCurrentLocation() : L.Marker | void{
+    if(this.currentLocation != undefined)
+    return this.currentLocation;
+  }
+
+  
 
 
   sendData(data: any) {
@@ -89,9 +99,12 @@ export class MarkerService {
 
 followLocation(map : L.Map){
   if (navigator.geolocation) {
+    console.log("one")
     navigator.geolocation.getCurrentPosition(position => {
+      console.log("two");
       map.setView([position.coords.latitude, position.coords.longitude], 13);
       this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon}).addTo(map);  
+      this.currentCoordinatesSubject.next(this.currentLocation.getLatLng());
       this.currentLocation.bindPopup("This is your current location").openPopup();
     });
 
@@ -99,6 +112,7 @@ followLocation(map : L.Map){
       map.setView([position.coords.latitude, position.coords.longitude], 13);
       if(this.currentLocation != undefined){
         this.currentLocation.setLatLng([position.coords.latitude, position.coords.longitude]);
+        this.currentCoordinatesSubject.next(new L.LatLng(position.coords.latitude, position.coords.longitude));
       }
     });
   } else {
@@ -106,7 +120,20 @@ followLocation(map : L.Map){
   }
 }
 
+placeCurrentLocation(map : L.Map){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log("uslo?");
+      map.setView([position.coords.latitude, position.coords.longitude], 13);
+      this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon}).addTo(map);  
+      this.currentLocation.bindPopup("This is your current location").openPopup();
+      this.currentCoordinatesSubject.next(this.currentLocation.getLatLng());
+
+    
+    });
+}
+
 }
 
 
-
+}

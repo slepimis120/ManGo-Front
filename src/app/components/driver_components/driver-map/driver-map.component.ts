@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { invisibleIcon, MarkerStep, MarkerType } from 'src/app/constants/constants';
+import { currentLocationIcon, invisibleIcon, MarkerStep, MarkerType, RideStep } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { MapService } from 'src/app/services/map.service';
 import { MarkerService } from 'src/app/services/marker.service';
+import { RideService } from 'src/app/services/ride-service.service';
 
 @Component({
   selector: 'app-driver-map',
@@ -18,6 +19,7 @@ export class DriverMapComponent {
   private startMarker!: L.Marker<any>;
   private endMarker! : L.Marker<any>;
   private route! : L.Routing.Control;
+  private currentLocationMarker! : L.Marker;
   
   getMap(){
     return this.map;
@@ -27,7 +29,7 @@ export class DriverMapComponent {
     this.map = newMap;
   }
 
-  constructor(private mapService: MapService, private http:HttpClient, private markerService : MarkerService) {
+  constructor(private rideService: RideService, private http:HttpClient, private markerService : MarkerService) {
     this.getIncomingData();
   }
 
@@ -46,6 +48,31 @@ export class DriverMapComponent {
         case MarkerStep.ReturnRoute:
           this.route = res["route"];
           break;
+        case MarkerStep.SimulateMovement:
+          let startCoordinate : L.LatLng;
+          let endCoordinate : L.LatLng;
+          let indicator : boolean;
+          setTimeout(() => {
+            if(res["type"] == "to-start"){
+              startCoordinate = res["start"].getLatLng();
+              endCoordinate = this.startMarker.getLatLng();
+              indicator = true;
+              this.currentLocationMarker = new L.Marker([startCoordinate.lat, startCoordinate.lng], {icon : currentLocationIcon}).addTo(this.map);
+            }else{
+              startCoordinate = this.startMarker.getLatLng();
+              endCoordinate = this.endMarker.getLatLng()
+              indicator = false;
+            }
+          
+            this.rideService.simulateMovement(startCoordinate, endCoordinate, this.map, this.currentLocationMarker, indicator);
+          }, 2000);
+          break;
+      }
+    })
+    this.rideService.getData().subscribe((res) => {
+      switch(res["step"]){
+        case RideStep.OnStartArrival:
+          this.markerService.sendData({"step" : MarkerStep.SimulateMovement, "type" : "to-end"});
       }
     })
   }
@@ -114,7 +141,7 @@ export class DriverMapComponent {
   ngAfterViewInit(): void {
     L.Marker.prototype.options.icon = invisibleIcon;
     this.initMap();
-    this.markerService.followLocation(this.map);
+    this.markerService.placeCurrentLocation(this.map);
   }
 
 

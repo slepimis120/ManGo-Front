@@ -3,6 +3,7 @@ import { currentLocationIcon, RideStep, VehicleType } from '../constants/constan
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Ride } from '../models/ride.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,14 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 export class RideService {
   private subject!: Subject<any>;
   private observable$!: Observable<any>;
-  private addressSubject : BehaviorSubject<any>;
-  private address$!:Observable<any>;
-  private currentLocation : L.Marker | undefined;
+
 
   constructor(private http: HttpClient) {
     this.subject = new Subject();
     this.observable$ = this.subject.asObservable();
-    this.addressSubject = new BehaviorSubject<any>(null);
    }
+
+
 
 
   sendData(data: any) {
@@ -46,7 +46,14 @@ getVehicleType(type : string) : VehicleType{
     }
   }
 
-  simulateMovement(start: L.LatLng, end: L.LatLng, map: L.Map, route : L.Routing.Control, locationMarker : L.Marker) {
+  simulateMovement(start: L.LatLng, end: L.LatLng, map: L.Map, locationMarker : L.Marker, indicator : boolean) {
+    console.log(start, end);
+    let route = L.Routing.control({
+      waypoints: [
+        L.latLng(start.lat, start.lng),
+        L.latLng(end.lat, end.lng)
+      ],
+    })
     locationMarker.setLatLng(start);
     route.route();
     route.on('routesfound', (e) => {
@@ -57,11 +64,14 @@ getVehicleType(type : string) : VehicleType{
         const interval = setInterval(() => {
           if (currentIndex === routeCoordinates.length - 1) {
             clearInterval(interval);
-            this.sendData({"step" : RideStep.FinishRidePassenger})
+            if(indicator)
+            this.sendData({"step" : RideStep.OnStartArrival});
+            else
+            this.sendData({"step": RideStep.OnEndArrival});
           } else {
             locationMarker.setLatLng(routeCoordinates[++currentIndex]);
           }
-        }, 10);
+        }, 300);
       }
     }); 
   }
