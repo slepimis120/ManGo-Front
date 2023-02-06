@@ -4,7 +4,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { timeout } from 'rxjs';
-import { MarkerStep } from 'src/app/constants/constants';
+import { MarkerStep, Users } from 'src/app/constants/constants';
 import { RideRequest } from 'src/app/models/rideRequest.model';
 import { Vehicle } from 'src/app/models/vehicle';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -17,6 +17,7 @@ import { RideService } from 'src/app/services/ride-service.service';
   styleUrls: ['./passenger-home.component.css']
 })
 export class PassengerHomeComponent {
+  role = Users.Passenger;
   price! : number;
   distance! : number;
   duration! : number;

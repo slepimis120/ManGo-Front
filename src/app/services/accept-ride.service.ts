@@ -8,7 +8,7 @@ export class AcceptRideService {
   private rideAcceptedSource = new Subject<boolean>();
   rideAccepted$ = this.rideAcceptedSource.asObservable();
 
-  private rideDeclinedSource = new Subject<boolean>();
+  private rideDeclinedSource = new Subject<string>();
   rideDeclined$ = this.rideDeclinedSource.asObservable();
 
   constructor() { }
@@ -19,6 +19,6 @@ export class AcceptRideService {
   }
 
   declineRide(reason : string) {
-    this.rideDeclinedSource.next(true);
+    this.rideDeclinedSource.next(reason);
   }
 }

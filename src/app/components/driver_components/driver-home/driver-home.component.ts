@@ -3,7 +3,7 @@ import { thisMonth } from '@igniteui/material-icons-extended';
 import * as bootstrap from 'bootstrap';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
-import { invisibleIcon, MarkerStep, RideStep, VehicleType } from 'src/app/constants/constants';
+import { invisibleIcon, MarkerStep, RideStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { AcceptRideService } from 'src/app/services/accept-ride.service';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -13,6 +13,7 @@ import { Ride } from 'src/app/models/ride.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Passenger } from 'src/app/models/passenger.model';
 import {Location } from "src/app/models/location.model";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-driver-home',
@@ -20,6 +21,7 @@ import {Location } from "src/app/models/location.model";
   styleUrls: ['./driver-home.component.css']
 })
 export class DriverHomeComponent implements OnInit{
+  role = Users.Driver;
   acceptSubscription: Subscription | undefined;
   declineSubscription: Subscription | undefined;
   startCoordinate : CoordinateModel | undefined = undefined;
@@ -36,7 +38,7 @@ export class DriverHomeComponent implements OnInit{
   @ViewChild(DriverRideRequestComponent) modal: DriverRideRequestComponent | undefined;
 
 
-  constructor(private handleRideService: AcceptRideService, private markerService: MarkerService, private rideService : RideService) {
+  constructor(private handleRideService: AcceptRideService, private http:HttpClient, private markerService: MarkerService, private rideService : RideService) {
     let startLocation = new Location("Mise Dimitrijevica 34 Novi Sad", 0, 0);
     let endLocation = new Location("Jevrejska 8 Novi Sad", 0, 0);
     let driver = new Driver(0, "Aleksandar", "Mitrovic", "Neki url", "0600538922", "aleksa@gmail.com", "Stevana Mokranjca 92", "sifra", false);
@@ -63,8 +65,7 @@ export class DriverHomeComponent implements OnInit{
       });
       this.declineSubscription = this.handleRideService.rideDeclined$.subscribe(
         rideDeclined => {
-
-          this.handleDecline()
+          this.handleDecline(rideDeclined)
       });
       this.rideService.getData().subscribe((res) => {
         switch(res["step"]){
@@ -88,9 +89,6 @@ export class DriverHomeComponent implements OnInit{
   }
 
   handleAccept(){
-    //TODO: handle acceptance, send to the backend that this driver has accepted this ride.
-    this.sendResponseToServer(true);
-
 
     if(this.rideDetails !=undefined){
       this.rideDetails.nativeElement.style.display = 'block';
@@ -105,7 +103,11 @@ export class DriverHomeComponent implements OnInit{
       "step" : MarkerStep.PlaceMarker,
       "end-address" : this.currentRide.locations[1].address});
 
-    this.simulateMoving()
+    this.sendResponseToServer(true);
+    setTimeout(() => {
+      this.simulateMoving()
+      }, 2000);
+    
 
   }
 
@@ -116,13 +118,22 @@ export class DriverHomeComponent implements OnInit{
       "start" : this.markerService.getCurrentLocation()})
   }
 
-  handleDecline(){
-    //TODO: handle rejection, send to the backend that this driver has rejected the ride with this reason
-    this.sendResponseToServer(false)
+  handleDecline(myReason : string){
+    const options: any = {
+      responseType: 'text',
+    };
+    this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/cancel", {reason: myReason}, options).subscribe((res) => {
+      });
   }  
 
   sendResponseToServer(accepted : boolean){
-    //TODO: In this function we will be sending data to the server
+   if(accepted){
+    const options: any = {
+      responseType: 'text',
+    };
+    this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/accept", options).subscribe((res) => {
+      });
+   }
   }
 
 
@@ -130,12 +141,22 @@ export class DriverHomeComponent implements OnInit{
     if(this.status){
       if(this.statusText == "START RIDE"){
         this.markerService.sendData({"step" : MarkerStep.SimulateMovement, "type" : "to-end"});
+        const options: any = {
+          responseType: 'text',
+        };
+        this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/start", options).subscribe((res) => {
+          });
         this.statusText = "END RIDE";
         if(this.my_button != undefined){
           this.my_button.nativeElement.classList.remove('yellow');
           this.my_button.nativeElement.classList.add('dark_gray');
         }
       }else{
+        const options: any = {
+          responseType: 'text',
+        };
+        this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/end", options).subscribe((res) => {
+          });
         if(this.my_button != undefined){
           this.my_button.nativeElement.classList.remove('yellow');
           this.my_button.nativeElement.classList.add('dark_gray');

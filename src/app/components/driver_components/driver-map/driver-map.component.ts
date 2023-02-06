@@ -63,16 +63,9 @@ export class DriverMapComponent {
               endCoordinate = this.endMarker.getLatLng()
               indicator = false;
             }
-          
             this.rideService.simulateMovement(startCoordinate, endCoordinate, this.map, this.currentLocationMarker, indicator);
           }, 2000);
           break;
-      }
-    })
-    this.rideService.getData().subscribe((res) => {
-      switch(res["step"]){
-        case RideStep.OnStartArrival:
-          this.markerService.sendData({"step" : MarkerStep.SimulateMovement, "type" : "to-end"});
       }
     })
   }

@@ -1,10 +1,18 @@
 import * as L from "leaflet";
+import { Passenger } from "../models/passenger.model";
 
 export enum MarkerType {
     StartLocation,
     EndLocation,
     CurrentLocation
   }
+
+export enum Users{
+  Driver,
+  Passenger,
+  UnregisteredUser,
+  Admin
+}
 
 export enum VehicleType{
   Van,

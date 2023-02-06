@@ -1,7 +1,7 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import { MarkerService } from 'src/app/services/marker.service';
 import * as bootstrap from 'bootstrap';
-import { MarkerStep, VehicleType } from 'src/app/constants/constants';
+import { MarkerStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./unregistred_home.component.css']
 })
 export class UnregisteredHomeComponent{
+  role = Users.UnregisteredUser;
   price! : number;
   distance! : number;
   duration! : number;

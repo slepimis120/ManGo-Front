@@ -1,4 +1,5 @@
 
+<app-navbar [role]="role"></app-navbar>
 <app-driver-header></app-driver-header>
 <div class="main_frame " id="driver_main_container">
     <div class="row">
@@ -52,7 +53,7 @@
             </div>
             <div class="remaining_details" id="remaining_details">
                 <p>Remaining time: {{currentTime}}min</p>
-                <p>Remaining distance: {{currentDistance}}km</p>
+                <p>Remaining distance: {{currentDistance.toFixed(1)}}km</p>
             </div>
             <div class="button">
                 <button #my_button class="my_button assistant" id="end_ride" (click)="handleClick()">{{statusText}}</button>
