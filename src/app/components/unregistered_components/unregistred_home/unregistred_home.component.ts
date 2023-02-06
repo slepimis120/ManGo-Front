@@ -1,8 +1,9 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import { MarkerService } from 'src/app/services/marker.service';
 import * as bootstrap from 'bootstrap';
-import { MarkerStep } from 'src/app/constants/constants';
+import { MarkerStep, VehicleType } from 'src/app/constants/constants';
 import { CdkStepper } from '@angular/cdk/stepper';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ export class UnregisteredHomeComponent{
 
   @ViewChild('cdkStepperUnregistered') cdkStepper: CdkStepper | undefined;
 
-  constructor(private markerService : MarkerService) {
+  constructor(private markerService : MarkerService, private http : HttpClient) {
     
    }
 
@@ -96,22 +97,22 @@ export class UnregisteredHomeComponent{
     }
   
 
-  calculate_price(selected :any){
+  calculate_price(selected : string){
     //const httpHeaders = new HttpHeaders().set('Content-Type', 'text');
-    //this.http.get<string>("http://localhost:8080/api/unregisteredUser", {headers: httpHeaders}).subscribe((res) => {
-    //  console.log(res);
-    //});
-    this.price = this.distance * 120;
-    if(selected == "standard"){
-      this.price += 120;
-    }else if(selected == "luxury"){
-      this.price += 200;
-    }else {
-      this.price += 180
-    }
+    const options: any = {
+      responseType: 'text',
+    };
+    console.log(this.distance, selected.toUpperCase());
+    this.http.put<string>("http://localhost:8080/api/unregisteredUser/calculatePrice", {distance: this.distance, vehicleType: selected.toUpperCase()}, options).subscribe((res) => {
+      var json = JSON.parse(JSON.stringify(res));
+      console.log(json);
+      console.log(typeof json);
+      let price = json['estimatedCost'];
+      console.log(price);
+      });
+    
   }
 
-
-
-
 }
+
+
