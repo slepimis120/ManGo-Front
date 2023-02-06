@@ -37,7 +37,6 @@ import { NavbarComponent } from './components/header_components/navbar/navbar.co
 import { PassengerRideDetailsComponent } from './components/passenger_components/passenger-ride-details/passenger-ride-details.component';
 import { DriverHeaderComponent } from './components/driver_components/driver-header/driver-header.component';
 import { LeftmenuComponent } from './components/registered_components/leftmenu/leftmenu.component';
-import { ProfilesettingsComponent } from './components/registered_components/profilesettings/profilesettings.component';
 import { AccountinformationComponent } from './components/registered_components/accountinformation/accountinformation.component';
 import { StatisticsComponent } from './components/registered_components/statistics/statistics.component';
 import { ReportComponent } from './components/registered_components/report/report.component';
@@ -80,7 +79,6 @@ const routes: Routes = [
     PassengerRideDetailsComponent,
     DriverHeaderComponent,
     LeftmenuComponent,
-    ProfilesettingsComponent,
     AccountinformationComponent,
     StatisticsComponent,
     ReportComponent,

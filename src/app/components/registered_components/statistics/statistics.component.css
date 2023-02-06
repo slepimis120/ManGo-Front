@@ -47,3 +47,24 @@
     border-color:darkgrey;
     border-style:solid;
   }
+
+  .flex-parent-element-parent {
+    display: flex;
+    width: 100%;
+  }
+  
+  .flex-child-element-parent {
+    border: 2px solid grey;
+    margin: 5%;
+  }
+  
+  #firstElement {
+    margin-right: 20px;
+    width: 25%;
+  }
+
+  #secondElement {
+    margin-right: 20px;
+    width: 75%;
+  }
+  

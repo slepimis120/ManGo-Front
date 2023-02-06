@@ -1,39 +1,52 @@
-<div class="accountInformation">
-    <h3 class="title">Account Information</h3>
-    <img src="assets/images/icons/accountIcon.png" id="profileImg">
+<app-navbar></app-navbar>
+<div class="flex-parent-element">
+    <div class="flex-child-element" id="firstElement"  style="background-color: white;">
+        <app-leftmenu></app-leftmenu>
+    </div>
+    <div class="flex-child-element" id="secondElement"  style="background-color: white;">
+        <div class="accountInformation">
+            <h3 class="title">Account Information</h3>
+            <img src="assets/images/icons/accountIcon.png" id="profileImg">
+        
+            <div class="row">
+                <div class="flex-child-element">
+                    <p class="titles">First and Last name</p>
+                    <input type="text" name="firstLastName" class="inputField" [(ngModel)]="firstLastName">
+                </div>
+                <div class="flex-child-element">
+                    <p class="titles">Email</p>
+                    <input type="text" name="email" class="inputField" [(ngModel)]="email">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="flex-child-element">
+                    <p class="titles">Phone</p>
+                    <input type="text" name="phone" class="inputField" [(ngModel)]="phone">
+                </div>
+                <div class="flex-child-element">
+                    <p class="titles">Address</p>
+                    <input type="text" name="address" class="inputField"  [(ngModel)]="address">
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="row" style="margin-bottom: 5%;">
+                <div class="flex-child-element">
+                    <p class="titles">Old Password</p>
+                    <input type="password" name="oldPassword" class="inputField" [(ngModel)]="oldPassword">
+                </div>
+                <div class="flex-child-element">
+                    <p class="titles">New Password</p>
+                    <input type="password" name="newPassword" class="inputField"  [(ngModel)]="newPassword">
+                </div>
+            </div>
+            <button id = "submitBtn" (click)="changeData()">Submit</button>
+        </div>
+    </div>
+  </div>
+  
 
-    <div class="row">
-        <div class="flex-child-element">
-            <p class="titles">First and Last name</p>
-            <input type="text" name="firstLastName" class="inputField" [(ngModel)]="firstLastName">
-        </div>
-        <div class="flex-child-element">
-            <p class="titles">Email</p>
-            <input type="text" name="email" class="inputField" [(ngModel)]="email">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="flex-child-element">
-            <p class="titles">Phone</p>
-            <input type="text" name="phone" class="inputField" [(ngModel)]="phone">
-        </div>
-        <div class="flex-child-element">
-            <p class="titles">Address</p>
-            <input type="text" name="address" class="inputField"  [(ngModel)]="address">
-        </div>
-    </div>
-    <br>
-    <hr>
-    <div class="row" style="margin-bottom: 5%;">
-        <div class="flex-child-element">
-            <p class="titles">Old Password</p>
-            <input type="password" name="oldPassword" class="inputField" [(ngModel)]="oldPassword">
-        </div>
-        <div class="flex-child-element">
-            <p class="titles">New Password</p>
-            <input type="password" name="newPassword" class="inputField"  [(ngModel)]="newPassword">
-        </div>
-    </div>
-    <button id = "submitBtn" (click)="changeData()">Submit</button>
-</div>
+  <app-footer></app-footer>
+
