@@ -178,6 +178,7 @@ export class PassengerHomeComponent {
 
   //TODO: send a ride request to the driver 
   sendDriverRequest(driverList : any[]){
+    console.log("JEBEM TI MAJKU");
     for(const driver of driverList){
       //TODO : send a request to the driver and wait for the response
       //if the driver declines you send a reqest to the other driver 
@@ -211,13 +212,16 @@ export class PassengerHomeComponent {
 
 
   collectRideInfo(startAddress : string, endAddress: string, selected : string, childrenTag : boolean, petsTag : boolean, scheduledTime : string){
-
+    console.log("koji kurac");
     const accessToken: any = localStorage.getItem('user');
     let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
     let id = decodedJWT.id;
 
     this.markerService.sendData({"step" :MarkerStep.GetMarkers});
-    while(this.startLocation == undefined){}
+    while(this.startLocation == undefined){
+      console.log("koji kurac");
+
+    }
     let startLocation = this.startLocation.getLatLng();
     let endLocation = this.endLocation.getLatLng();
     let vehicleType = this.rideService.getVehicleType(selected);
@@ -226,7 +230,7 @@ export class PassengerHomeComponent {
     date.setHours(parseInt(timeParts[0]));
     date.setMinutes(parseInt(timeParts[1]));
     let rideRequest : RideRequest= new RideRequest(id, startLocation, endLocation, startAddress, endAddress, vehicleType, childrenTag, petsTag, date );
-    
+
     this.findDriver(rideRequest);
 
   }

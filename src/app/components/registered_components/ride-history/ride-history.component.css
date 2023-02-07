@@ -165,7 +165,8 @@ hr {
 
 
 .history_container {
-  width: inherit;
+  width: 100%;
+  min-width: 12vw;
 }
 
 .history-title {
@@ -175,7 +176,6 @@ hr {
   color: white;
   justify-content: center;
   width: 100%;
-  min-width: max-content;
 }
 
 
