@@ -45,6 +45,8 @@ import { Interceptor } from './components/auth/interceptor/interceptor.intercept
 import { RideService } from './services/ride-service.service';
 import { PassengerMarkRideComponent } from './components/passenger_components/passenger-mark-ride/passenger-mark-ride.component';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+import { RideHistoryComponent } from './components/registered_components/ride-history/ride-history.component';
+import { FavoriteRidesComponent } from './components/registered_components/favorite-rides/favorite-rides.component';
 
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
@@ -53,9 +55,11 @@ const routes: Routes = [
   { path: 'passenger', component: PassengerHomeComponent },
   { path: 'driver', component: DriverHomeComponent },
   { path: 'passenger/active', component:PassengerCurrentRideComponent},
-  { path: ':id/profile', component: AccountinformationComponent },
-  { path: ':id/statistics', component: StatisticsComponent },
-  { path: ':id/report', component: ReportComponent },
+  { path: ':role`/profile', component: AccountinformationComponent },
+  { path: ':role/statistics', component: StatisticsComponent },
+  { path: ':role/report', component: ReportComponent },
+  { path: ':role/favorite_rides', component: FavoriteRidesComponent },
+  { path: ':role/history', component: RideHistoryComponent },
   { path: '**', component: UnregisteredHomeComponent },
 ];
 
@@ -86,7 +90,9 @@ const routes: Routes = [
     StatisticsComponent,
     ReportComponent,
     PassengerMarkRideComponent,
-    CanvasJSChart
+    CanvasJSChart,
+    RideHistoryComponent,
+    FavoriteRidesComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
