@@ -124,7 +124,7 @@ placeCurrentLocation(map : L.Map){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
       map.setView([position.coords.latitude, position.coords.longitude], 13);
-      this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon}).addTo(map);  
+      this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon});
       this.currentLocation.bindPopup("This is your current location").openPopup();
       this.currentCoordinatesSubject.next(this.currentLocation.getLatLng());
     });

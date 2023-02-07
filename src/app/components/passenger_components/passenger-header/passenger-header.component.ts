@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 
 @Component({
@@ -8,6 +9,11 @@ import * as bootstrap from 'bootstrap';
 })
 export class PassengerHeaderComponent {
 
+  constructor(private router: Router) { }
+
+  rideHistory(){
+    this.router.navigate(['passenger/history']);
+  }
   
 
 }
