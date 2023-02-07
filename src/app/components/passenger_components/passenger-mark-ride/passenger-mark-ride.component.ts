@@ -8,48 +8,38 @@ import { Component } from '@angular/core';
 export class PassengerMarkRideComponent {
 
   showModal: boolean = false;
-
-  ratings1 = [
-    { filled: false },
-    { filled: false },
-    { filled: false },
-    { filled: false },
-    { filled: false }
-  ];
-
-  ratings2 = [
-    { filled: false },
-    { filled: false },
-    { filled: false },
-    { filled: false },
-    { filled: false }
-  ];
+  rideStars = [1, 2, 3, 4, 5];
+  driverStars = [1, 2, 3, 4, 5];
+  rideFilled = 0;
+  driverFilled = 0;
+  rideHovered = 0;
+  driverHovered = 0;
 
   constructor() { }
 
-  onStarHover(rate: { filled: boolean; }) {
-    this.ratings1.forEach((r, index) => {
-      if (index <= this.ratings1.indexOf(rate)) {
-        r.filled = true;
-      } else {
-        r.filled = false;
-      }
-    });
+  fillStars(index: number, type: string) {
+    if (type === 'ride') {
+      this.rideFilled = index + 1;
+    } else {
+      this.driverFilled = index + 1;
+    }
   }
 
-  onStarClick(rate: { filled: boolean; }) {
-    this.ratings1.forEach((r) => {
-      r.filled = false;
-    });
-
-    this.ratings1.forEach((r, index) => {
-      if (index <= this.ratings1.indexOf(rate)) {
-        r.filled = true;
-      }
-    });
+  onStarHover(index: number, type: string) {
+    if (type === 'ride') {
+      this.rideHovered = index + 1;
+    } else {
+      this.driverHovered = index + 1;
+    }
   }
 
-
+  onStarLeave(type: string) {
+    if (type === 'ride') {
+      this.rideHovered = 0;
+    } else {
+      this.driverHovered = 0;
+    }
+  }
 
 
 

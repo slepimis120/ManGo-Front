@@ -71,7 +71,7 @@ getVehicleType(type : string) : VehicleType{
           } else {
             locationMarker.setLatLng(routeCoordinates[++currentIndex]);
           }
-        }, 300);
+        }, 10);
       }
     }); 
   }

@@ -53,7 +53,7 @@ export class PassengerCurrentRideComponent {
 
   getIncomingData(){
     this.rideService.getData().subscribe((res) => {
-      if(res["step"] == RideStep.FinishRidePassenger){
+      if(res["step"] == RideStep.OnEndArrival){
         if(this.modal != undefined){
           this.modal.show();
         }
