@@ -27,13 +27,13 @@ export class MarkerService {
     this.addressSubject = new BehaviorSubject<any>(null);
    }
 
-  getCurrentLocation() : L.Marker | void{
-    if(this.currentLocation != undefined)
-    return this.currentLocation;
+
+  simulateMovement(){
+    this.sendData({
+      "step" : MarkerStep.SimulateMovement,
+      "type" : "to-start",
+      "start" : this.currentLocation})
   }
-
-  
-
 
   sendData(data: any) {
     this.subject.next(data);
@@ -123,13 +123,10 @@ followLocation(map : L.Map){
 placeCurrentLocation(map : L.Map){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log("uslo?");
       map.setView([position.coords.latitude, position.coords.longitude], 13);
       this.currentLocation = L.marker([position.coords.latitude, position.coords.longitude],{icon: currentLocationIcon}).addTo(map);  
       this.currentLocation.bindPopup("This is your current location").openPopup();
       this.currentCoordinatesSubject.next(this.currentLocation.getLatLng());
-
-    
     });
 }
 

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Users } from 'src/app/constants/constants';
 import { LoginComponent } from '../login/login.component';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavbarComponent implements OnInit {
   @ViewChild(LoginComponent) loginModal: LoginComponent | undefined;
+  @ViewChild(SignupComponent) signupModal: SignupComponent | undefined;
   url : string
   @Input() role!: Users;
   registeredUser : boolean = false;
@@ -26,7 +28,8 @@ export class NavbarComponent implements OnInit {
     {linkId : 2, linkName : 'Panic', linkUrl : 'passenger/panic'},
     {linkId : 3, linkName : 'Profile', linkUrl : 'passenger/profile'},
     {linkId : 4, linkName : 'Report', linkUrl : 'passenger/report'},
-    {linkId : 5, linkName : 'Statistics', linkUrl : 'passenger/statistics'}
+    {linkId : 5, linkName : 'Statistics', linkUrl : 'passenger/statistics'},
+    {linkId : 6, linkName : 'Ride History', linkUrl : 'passenger/history'},
   ]
   driverMenu = [
     {linkId : 1, linkName : 'Home', linkUrl : 'driver/home'},
@@ -73,19 +76,15 @@ export class NavbarComponent implements OnInit {
     }
     
   }
-
-
-
-  modalName: bootstrap.Modal | undefined
-  signupModal: any;
   openloginModal(){
       if(this.loginModal != undefined){
         this.loginModal.show();
       }
   }
-  opensignupModal(element: string | Element){
-    this.signupModal = new bootstrap.Modal(element,{} ) 
-    this.signupModal?.show()
+  opensignupModal(){
+    if(this.signupModal != undefined){
+      this.signupModal.show();
+    }
   }
 
   logout(){

@@ -7,6 +7,7 @@ import { AcceptRideService } from 'src/app/services/accept-ride.service';
   styleUrls: ['./driver-ride-request.component.css']
 })
 export class DriverRideRequestComponent {
+  
   @Input() ride: any;
   showModal: boolean = false;
   declined : boolean = false;

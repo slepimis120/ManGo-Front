@@ -64,14 +64,20 @@ getVehicleType(type : string) : VehicleType{
         const interval = setInterval(() => {
           if (currentIndex === routeCoordinates.length - 1) {
             clearInterval(interval);
-            if(indicator)
-            this.sendData({"step" : RideStep.OnStartArrival});
-            else
-            this.sendData({"step": RideStep.OnEndArrival});
+            if(indicator){
+              this.sendData({"step" : RideStep.OnStartArrival});
+              console.log("jel dodje ovde?");
+            }
+            
+            else{
+              this.sendData({"step": RideStep.OnEndArrival});
+              console.log("a ovde?");
+            }
+            
           } else {
             locationMarker.setLatLng(routeCoordinates[++currentIndex]);
           }
-        }, 10);
+        }, 100);
       }
     }); 
   }

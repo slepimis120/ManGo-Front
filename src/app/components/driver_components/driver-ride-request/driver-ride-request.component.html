@@ -10,11 +10,11 @@
       <div class="modal-body">
         <div class="line">
           <img src="../../../../assets/images/icons/start-location-icon.png" class="icon">
-          <p class="info">Starting Address: {{ ride.startAddress }}</p>
+          <p class="info">Starting Address: {{ ride.locations[0].address }}</p>
         </div>
         <div class="line">
           <img src="../../../../assets/images/icons/end-location-icon.png" class="icon">
-          <p class="info">Ending Address: {{ ride.endAddress }}</p>
+          <p class="info">Ending Address: {{ ride.locations[1].address }}</p>
         </div>
         <div class="line">
           <img src="../../../../assets/images/icons/dollar_icon.png" class="icon">

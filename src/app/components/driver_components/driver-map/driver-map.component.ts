@@ -49,25 +49,34 @@ export class DriverMapComponent {
           this.route = res["route"];
           break;
         case MarkerStep.SimulateMovement:
-          let startCoordinate : L.LatLng;
-          let endCoordinate : L.LatLng;
-          let indicator : boolean;
-          setTimeout(() => {
-            if(res["type"] == "to-start"){
-              startCoordinate = res["start"].getLatLng();
-              endCoordinate = this.startMarker.getLatLng();
-              indicator = true;
-              this.currentLocationMarker = new L.Marker([startCoordinate.lat, startCoordinate.lng], {icon : currentLocationIcon}).addTo(this.map);
-            }else{
-              startCoordinate = this.startMarker.getLatLng();
-              endCoordinate = this.endMarker.getLatLng()
-              indicator = false;
-            }
-            this.rideService.simulateMovement(startCoordinate, endCoordinate, this.map, this.currentLocationMarker, indicator);
-          }, 2000);
+            this.simulateMovement(res);
+          break;
+        case MarkerStep.ClearMap:
+          this.route.remove();
+          this.startMarker.remove();
+          this.endMarker.remove();
           break;
       }
     })
+  }
+
+  private simulateMovement(res : any){
+    let startCoordinate : L.LatLng;
+    let endCoordinate : L.LatLng;
+    let indicator : boolean;
+    setTimeout(() => {
+      if(res["type"] == "to-start"){
+        startCoordinate = res["start"].getLatLng();
+        endCoordinate = this.startMarker.getLatLng();
+        indicator = true;
+        this.currentLocationMarker = new L.Marker([startCoordinate.lat, startCoordinate.lng], {icon : currentLocationIcon}).addTo(this.map);
+      }else{
+        startCoordinate = this.startMarker.getLatLng();
+        endCoordinate = this.endMarker.getLatLng()
+        indicator = false;
+      }
+      this.rideService.simulateMovement(startCoordinate, endCoordinate, this.map, this.currentLocationMarker, indicator);
+    }, 2000);
   }
 
   private connectMarkers(){

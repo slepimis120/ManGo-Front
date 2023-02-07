@@ -4,7 +4,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { timeout } from 'rxjs';
-import { MarkerStep, Users } from 'src/app/constants/constants';
+import { MarkerStep, RideStep, Users } from 'src/app/constants/constants';
 import { RideRequest } from 'src/app/models/rideRequest.model';
 import { Vehicle } from 'src/app/models/vehicle';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -37,6 +37,7 @@ export class PassengerHomeComponent {
   invalidTime : boolean = false;
   startLocation! : L.Marker;
   endLocation! : L.Marker;
+
 
   @ViewChild('cdkStepperPassenger') cdkStepper: CdkStepper | undefined;
   @ViewChild('ride_time') rideTime!: ElementRef<HTMLInputElement>;
@@ -99,6 +100,7 @@ export class PassengerHomeComponent {
   }
 
   getIncomingData() {
+
     this.markerService.getData().subscribe((res) => {
       if(res["step"] == MarkerStep.ReturnRideDetails){
         this.price = Math.round(res["price"]);
@@ -125,6 +127,12 @@ export class PassengerHomeComponent {
         }
       }
     })
+    this.rideService.getData().subscribe((res) => {
+      if(res["step"] == RideStep.OnStartArrival){
+        this.router.navigate(['passenger/active']);
+      }
+    })
+    
   }  
 
   checkTime(){
@@ -182,8 +190,12 @@ export class PassengerHomeComponent {
       }
     }
     //No driver will perform the ride so we say no drivers available :(
-    this.driverFound = true;
-    this.showLoadingScreen = false;
+    setTimeout(() => {
+      this.driverFound = true;
+      this.showLoadingScreen = false;
+      this.markerService.sendData({"step" : MarkerStep.SimulateVehicleMovement});
+    }, 3000);
+    
 
   
   }

@@ -5,6 +5,7 @@ import { MarkerService } from 'src/app/services/marker.service';
 import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../../../models/vehicle';
 import { invisibleIcon, MarkerStep, MarkerType, startIcon } from 'src/app/constants/constants';
+import { RideService } from 'src/app/services/ride-service.service';
 
 @Component({
   selector: 'app-map',
@@ -24,6 +25,7 @@ export class UnregisteredMapComponent implements AfterViewInit {
   lastLayer: any;
   vehicles: Vehicle[] = [];
   carIcon: L.Icon;
+  vehicle! : L.Marker;
   
 
   getMap(){
@@ -34,7 +36,7 @@ export class UnregisteredMapComponent implements AfterViewInit {
     this.map = newMap;
   }
 
-  constructor( private markerService: MarkerService, private http:HttpClient) {
+  constructor( private markerService: MarkerService, private http:HttpClient, private rideService : RideService) {
     this.getIncomingData();
     this.carIcon = L.icon({
       iconUrl: 'assets/images/icons/caricon.png',
@@ -75,6 +77,9 @@ export class UnregisteredMapComponent implements AfterViewInit {
             }
           }, 1000);
           break;
+          case MarkerStep.SimulateVehicleMovement:
+            this.rideService.simulateMovement(this.vehicle.getLatLng(), this.startMarker.getLatLng(), this.map, this.vehicle, true)
+            break;
           case MarkerStep.GetMarkers:
             this.markerService.sendData({"step" : MarkerStep.SendMarkers, "start" : this.startMarker, "end" : this.endMarker});
       }
@@ -187,6 +192,9 @@ export class UnregisteredMapComponent implements AfterViewInit {
   addVehiclesToMap(){
     for(let i=0; i<this.vehicles.length; i++){
       let marker = L.marker([this.vehicles[i].currentLocation.latitude, this.vehicles[i].currentLocation.longitude],{icon:this.carIcon}).addTo(this.map);
+      if(i == 0){
+        this.vehicle = marker;
+      }
     }
   }
 }

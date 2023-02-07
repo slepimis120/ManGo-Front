@@ -21,6 +21,9 @@ export enum VehicleType{
 }
 
 export enum MarkerStep {
+    ClearMap,
+    SimulateVehicleMovement,
+    GetVehicle,
     ConnectMarkers,
     PlaceMarker,
     ReturnCoordinate,
