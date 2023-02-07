@@ -1,18 +1,57 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins|Noto Sans">
-<body>
-    <form name="RegistracijaForma" id="RegistracijaForma">
-        <div class="modal-body text-center">
-            <h1 style="font-size:40px">Register</h1>
-            <p style = "font-size:17px;color:red;visibility:hidden" id="response">Check your email for verification!</p>
-            <p style="font-size:17px">Hey! Enter your credentials to create a new account!</p>
-            <input type="text" name="ime_registracija" id="ime_registracija" placeholder="First name" [(ngModel)]="firstName">
-            <input type="text" name="prezime_registracija" id="prezime_registracija" placeholder="Last name" [(ngModel)]="lastName">
-            <input type="text" name="email_registracija" id="email_registracija" placeholder="Email" [(ngModel)]="email">
-            <input type="text" name="korisnickoime_registracija" id="korisnickoime_registracija" placeholder="Username" [(ngModel)]="username">
-            <input type="password" name="sifra_registracija" id="sifra_registracija" placeholder="Password" [(ngModel)]="password">
-            <input type="text" name="adresa_registracija" id="adresa_registracija" placeholder="Address" [(ngModel)]="address">
-            <input type="tel" name="telefon_registracija" id="telefon_registracija" placeholder="Telephone" [(ngModel)]="telephone">
-            <button type="submit" class="btn btn-primary" (click)="createPassenger()">Register</button>
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}"
+    [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Register</h4>
+                <button type="button" class="close-btn" (click)="hide()">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="subtitle" *ngIf="!validCredentials">Hey! Enter your credentials to create a new account!</p>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!validCredentials">
+                    <div class="credentials">
+                        <div>
+                            <label for="fname" class="label">First Name:</label>
+                            <input type="text" id="fname" placeholder="First name" formControlName="fname">
+                            <p *ngIf="form?.get('fname')?.invalid && form?.get('fname')?.touched" class="warning">!</p>
+                        </div>
+                        <div>
+                            <label for="lname" class="label"> Last Name:</label>
+                            <input type="text" id="lname" placeholder="Last name" formControlName="lname">
+                            <p *ngIf="form?.get('lname')?.invalid && form?.get('lname')?.touched" class="warning">!</p>
+                        </div>
+
+                        <div>
+                            <label for="email" class="label">Email:</label>
+                            <input type="text" id="email" placeholder="E-mail" formControlName="email">
+                            <p *ngIf="form?.get('email')?.invalid && form?.get('email')?.touched" class="warning">!</p>
+                        </div>
+                        <div>
+                            <label for="password" class="label">Password:</label>
+                            <input type="password" id="password" placeholder="Password" formControlName="password">
+                            <p *ngIf="form?.get('password')?.invalid && form?.get('password')?.touched" class="warning">!</p>
+                        </div>
+                        <div>
+                            <label for="address" class="label">Address:</label>
+                            <input type="text" id="address" placeholder="Address" formControlName="address">
+                            <p *ngIf="form?.get('address')?.invalid && form?.get('address')?.touched" class="warning">!</p>
+                        </div>
+                        <div>
+                            <label for="phone" class="label">Phone Number:</label>
+                            <input type="tel" id="phone" placeholder="Phone Number" formControlName="phone">
+                            <p *ngIf="form?.get('phone')?.invalid && form?.get('phone')?.touched" class="warning">!</p>
+                        </div>
+                       
+                    </div>
+                    <hr>
+                    <button type="button" class="btn login_btn"   type="submit"(click)="createPassenger()">Register</button>
+                </form>
+                <p class="check-email" *ngIf="validCredentials">Check your e-mail!</p>
+                
+            </div>
+
         </div>
-    </form>
-</body>
+    </div>
+</div>
