@@ -15,13 +15,13 @@ import { Location } from 'src/app/models/location.model';
 export class RideHistoryComponent {
   isChecked = false;
 
+  rideHistory : Ride[] = [];
+
   toggleChecked() {
     this.isChecked = !this.isChecked;
   }
   
   currentRide : Ride;
-  currentTime : number;
-  currentDistance : number;
 
   constructor(private rideService : RideService, private markerService: MarkerService) {
     let startLocation = new Location("Mise Dimitrijevica 34 Novi Sad", 0, 0);
@@ -30,17 +30,16 @@ export class RideHistoryComponent {
     let passenger = new Passenger(0, "Svetlana", "Raznatovic", "neki url", "0613191670", "ceca@gmail.com", "Jevrejska 8", "sifrica", false);
     let scheduledTime = new Date();
     this.currentRide = new Ride(driver, [startLocation, endLocation], [passenger], VehicleType.Standard, true, true, scheduledTime, 190, 12, 1.3);
-    this.currentTime = this.currentRide.duration;
-    this.currentDistance = this.currentRide.distance;
-    setInterval(() => {
-      if(this.currentTime != 0){
-        this.currentTime -= 1;
-        if(this.currentDistance != 0){
-          this.currentDistance -= this.currentDistance / this.currentTime;
-        }
-      }
-    }, 60000);
+    this.rideHistory.push(this.currentRide);
+    startLocation = new Location("Bulevar Oslobodjenja 13 Novi Sad", 0, 0);
+    endLocation = new Location("Bulevar Oslobodjenja 123 Novi Sad", 0, 0);
+    driver = new Driver(0, "Dusan", "Vlahovic", "Neki url2", "060258922", "dusan@gmail.com", "Borova 23", "sifra", false);
+    scheduledTime = new Date();
+    this.currentRide = new Ride(driver, [startLocation, endLocation], [passenger], VehicleType.Standard, true, true, scheduledTime, 400, 20, 3.1);
+    this.rideHistory.push(this.currentRide);
   }
-  
-  
+
+  toggleRide(i : number){
+    this.currentRide = this.rideHistory[i];
+  }
 }

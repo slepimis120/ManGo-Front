@@ -9,14 +9,12 @@
   background-color: white;
 }
 
-#menuOptions{
-  width: 25%;
-}
 
 .fa-star {
   color: #cccccc;
   font-size: 20px;
   cursor: pointer;
+  margin-right: 2vw;
 }
 
 .checked {
@@ -148,7 +146,12 @@ hr {
   width: fit-content;
   padding-left: 1vw;
   float: right;
+  margin-right: 1vw;
 
+}
+
+.driver_container{
+  width: 50%;
 }
 
 .car-color {
@@ -171,7 +174,11 @@ hr {
   background-color: black;
   color: white;
   justify-content: center;
+  width: 100%;
+  min-width: max-content;
 }
+
+
 
 .history-title p {
   font-size: 20px;
@@ -189,4 +196,50 @@ hr {
 
 .details{
   display: flex;
+}
+
+.icon{
+  width: 1vw;
+}
+
+.label-ride{
+  width: max-content;
+  margin: 0;
+  padding: 0 1vw;
+}
+
+.hr{
+  width: 100%;
+  margin: 1vw 0;
+}
+
+.ride_one{
+  margin: 0.5vw 0;
+  width: 100%;
+    background: white;
+    border: none;
+}
+
+.title{
+  background-color: black;
+  color: white;
+  font-size: 25px;
+  padding: 1vw;
+  text-align: center;
+  opacity: 0.95;
+  margin-top: 0;
+}
+
+.repeat-btn{
+  width: -webkit-fill-available;
+  background: white;
+  font-size: 25px;
+  border: none;
+  font-weight: bold;
+  margin-top: 3vw;
+  margin-bottom: 1vw;
+}
+
+.time-date{
+  margin: 0;
 }

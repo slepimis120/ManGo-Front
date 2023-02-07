@@ -112,10 +112,7 @@ export class DriverHomeComponent implements OnInit{
   }
 
   simulateMoving(){
-    this.markerService.sendData({
-      "step" : MarkerStep.SimulateMovement,
-      "type" : "to-start",
-      "start" : this.markerService.getCurrentLocation()})
+    this.markerService.simulateMovement();
   }
 
   handleDecline(myReason : string){
@@ -167,6 +164,7 @@ export class DriverHomeComponent implements OnInit{
           }   
           if(this.mapContainer != undefined){
             this.mapContainer.nativeElement.classList.remove('col-8');
+            this.markerService.sendData({"step" : MarkerStep.ClearMap});
           }
         }, 2000);
       }

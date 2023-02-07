@@ -28,7 +28,8 @@ export class NavbarComponent implements OnInit {
     {linkId : 2, linkName : 'Panic', linkUrl : 'passenger/panic'},
     {linkId : 3, linkName : 'Profile', linkUrl : 'passenger/profile'},
     {linkId : 4, linkName : 'Report', linkUrl : 'passenger/report'},
-    {linkId : 5, linkName : 'Statistics', linkUrl : 'passenger/statistics'}
+    {linkId : 5, linkName : 'Statistics', linkUrl : 'passenger/statistics'},
+    {linkId : 6, linkName : 'Ride History', linkUrl : 'passenger/history'},
   ]
   driverMenu = [
     {linkId : 1, linkName : 'Home', linkUrl : 'driver/home'},

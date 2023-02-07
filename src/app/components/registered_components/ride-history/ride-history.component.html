@@ -1,11 +1,24 @@
 <app-navbar></app-navbar>
 <div class="container" id="container">
     <div class="element" id="menuOptions">
-        <app-leftmenu></app-leftmenu>
+        <p class="title">Ride history</p>
+        <button *ngFor="let ride of rideHistory; let i = index" class="ride_one" (click)="toggleRide(i)">
+            <p class="time-date">{{currentRide.scheduledTime.toLocaleDateString()}} {{currentRide.scheduledTime.toLocaleTimeString()}}</p>
+            <p class="label-ride">
+                <img src="../../../../assets/images/icons/start-location-icon.png" alt="star-icon" class="icon">
+                {{ride.locations[0].address}}
+            </p>
+            <p class="label-ride">
+                <img src="../../../../assets/images/icons/end-location-icon.png" alt="star-icon" class="icon">
+                {{ride.locations[1].address}}
+            </p>
+            <hr class="hr">
+        </button>
+        
     </div>
     <div class="element history_container" id="rideHistory">
         <div class="history-title">
-            <p>Mise Dimitrijevica 40 Novi Sad - Bulevar Oslobodjenja 132 Novi Sad</p>
+            <p>{{currentRide.locations[0].address}} - {{currentRide.locations[1].address}}</p>
             <i class="fa fa-star" [ngClass]="{'checked': isChecked}" (click)="toggleChecked()"></i>
         </div>
         <div class="details">
@@ -50,7 +63,7 @@
                     <img src="../../../../assets//images/mockPhotos/mock_photo2.jpg" alt="Mock Photo 2"
                         class="circle-img" id="driver-profile-pic">
                     <div>
-                        <div class="name-title" id="driver-name-title">Aleksandar Mitrovic</div>
+                        <div class="name-title" id="driver-name-title">{{currentRide.driver.firstName}} {{currentRide.driver.lastName}}</div>
                         <div id="rate">
                             <img src="../../../../assets//images/icons/star-icon.png" class="star-icon" alt="Rate"
                                 id="star-icon">
@@ -68,7 +81,9 @@
                                 <div id="car-color" class="car-color"></div>
                             </div>
                         </div>
+                    
                 </div>
+                <button class="repeat-btn">Repeat ride</button> 
             </div>
         </div>
     </div>

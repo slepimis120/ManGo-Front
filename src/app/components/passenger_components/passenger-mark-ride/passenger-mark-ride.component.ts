@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-passenger-mark-ride',
@@ -15,7 +16,7 @@ export class PassengerMarkRideComponent {
   rideHovered = 0;
   driverHovered = 0;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   fillStars(index: number, type: string) {
     if (type === 'ride') {
@@ -50,5 +51,10 @@ export class PassengerMarkRideComponent {
 
   hide() {
     this.showModal = false;
+  }
+
+  rate(){
+    this.hide();
+    this.router.navigate(['passenger']);
   }
 }

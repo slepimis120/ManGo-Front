@@ -92,7 +92,7 @@ const routes: Routes = [
     PassengerMarkRideComponent,
     CanvasJSChart,
     RideHistoryComponent,
-    FavoriteRidesComponent
+    FavoriteRidesComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -3,7 +3,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Ride ended - Rate the ride?</h4>
-          <button type="button" class="close-btn" (click)="hide()">
+          <button type="button" class="close-btn" (click)="rate()">
            &times;
           </button>
         </div>
@@ -29,7 +29,7 @@
 
         <div class="modal-footer">
   
-          <button type="button" class="btn btn-decline">Rate</button>
+          <button type="button" class="btn btn-decline" (click)="rate()">Rate</button>
         </div>
       </div>
     </div>
