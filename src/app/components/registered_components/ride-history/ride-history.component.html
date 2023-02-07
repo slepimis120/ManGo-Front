@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="container" id="container">
+    <div class="element" id="menuOptions">
+        <app-leftmenu></app-leftmenu>
+    </div>
+    <div class="element history_container" id="rideHistory">
+        <div class="history-title">
+            <p>Mise Dimitrijevica 40 Novi Sad - Bulevar Oslobodjenja 132 Novi Sad</p>
+            <i class="fa fa-star" [ngClass]="{'checked': isChecked}" (click)="toggleChecked()"></i>
+        </div>
+        <div class="details">
+            <div class="ride_container">
+
+                <p class="info-title">Ride details</p>
+                <hr>
+                <div id="destination_departure">
+                    <div class="address_container">
+                        <div id="start_address" class="address_info">
+                            <p class="address">{{currentRide.locations[0].address}}</p>
+                        </div>
+                        <p class="time">13:23</p>
+                    </div>
+                    <div class="address_container">
+                        <div id="end_address" class="address_info">
+                            <p class="address">{{currentRide.locations[1].address}}</p>
+
+                        </div>
+                        <p class="time">13:35</p>
+                    </div>
+                </div>
+                <div id="details" class="details">
+                    <div id="price" class="detail">
+                        <img src="../../../../assets/images/icons/dollar_icon.png" alt="Price" class="icon">
+                        <p id="price">Price: {{currentRide.price}}din</p>
+                    </div>
+                    <div class="detail" id="duaration">
+                        <img src="../../../../assets/images/icons/hourglass_icon.png" alt="Duration" class="icon">
+                        <p id="duration">Duration: {{currentRide.duration}}min</p>
+                    </div>
+                    <div class="detail" id="distance">
+                        <img src="../../../../assets/images/icons/running_icon.png" alt="Distance" class="icon">
+                        <p id="distance">Distance: {{currentRide.distance}}km</p>
+                    </div>
+                </div>
+            </div>
+            <div class="driver_container">
+                <p class="info-title">Driver details</p>
+                <hr>
+                <div class="driver-details" id="driver-details-container">
+                    <img src="../../../../assets//images/mockPhotos/mock_photo2.jpg" alt="Mock Photo 2"
+                        class="circle-img" id="driver-profile-pic">
+                    <div>
+                        <div class="name-title" id="driver-name-title">Aleksandar Mitrovic</div>
+                        <div id="rate">
+                            <img src="../../../../assets//images/icons/star-icon.png" class="star-icon" alt="Rate"
+                                id="star-icon">
+                            <p id="rate-value" class="rate-value">3.4</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="car-details">
+                        <img src="../../../../assets/images/icons/car-icon.png" alt="car" class="car-icon"
+                            id="car-icon">
+                        <p class="car-title">Wolkswagen Golf 5</p>
+                        <div>
+
+                            <div class="car-title">Red
+                                <div id="car-color" class="car-color"></div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>

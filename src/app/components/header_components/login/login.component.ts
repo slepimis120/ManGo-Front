@@ -11,6 +11,7 @@ import { accesstoken } from 'src/app/models/accesstoken';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  showModal: boolean = false;
 
   accessToken:accesstoken;
   email:String;
@@ -59,8 +60,15 @@ export class LoginComponent {
     return this.http.post<string>(url, {email: this.email, password: this.password}, options);
   }
 
-  
+  show() {
+    this.showModal = true;
+  }
+
+  hide() {
+    this.showModal = false;
+  }
 }
+  
 
 
 

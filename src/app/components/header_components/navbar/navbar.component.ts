@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Users } from 'src/app/constants/constants';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,7 @@ import { Users } from 'src/app/constants/constants';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild(LoginComponent) loginModal: LoginComponent | undefined;
   url : string
   @Input() role!: Users;
   registeredUser : boolean = false;
@@ -75,14 +77,11 @@ export class NavbarComponent implements OnInit {
 
 
   modalName: bootstrap.Modal | undefined
-  loginModal: any;
   signupModal: any;
-  save(){
-      this.loginModal?.toggle()
-  }
-  openloginModal(element: string | Element){
-    this.loginModal = new bootstrap.Modal(element,{} ) 
-    this.loginModal?.show()
+  openloginModal(){
+      if(this.loginModal != undefined){
+        this.loginModal.show();
+      }
   }
   opensignupModal(element: string | Element){
     this.signupModal = new bootstrap.Modal(element,{} ) 

@@ -111,7 +111,7 @@
                                 Vehicle details
                           </a>
                         </button>
-                        <button cdkStepperNext class="stepper-footer" (click)="openloginModal(loginModal)">
+                        <button cdkStepperNext class="stepper-footer" (click)="openloginModal()">
                             <a id="set-route" class="open-sans">
                               Book ride
                             <img  id="next-stepper-icon" src="../../../../assets/images/icons/nextIcon.png">
@@ -129,19 +129,6 @@
         </div>
     </div>
 
-    <div class="modal" tabindex="-1" #loginModal id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <app-login></app-login>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal" tabindex="-1" #signupModal id="signupModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <app-signup></app-signup>
-        </div>
-    </div>
+    <app-login></app-login>
 
 </div>

@@ -4,6 +4,7 @@ import * as bootstrap from 'bootstrap';
 import { MarkerStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginComponent } from '../../header_components/login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -21,12 +22,13 @@ export class UnregisteredHomeComponent{
   invalidMarkers: boolean = false;
 
   @ViewChild('cdkStepperUnregistered') cdkStepper: CdkStepper | undefined;
+  @ViewChild(LoginComponent) modal: LoginComponent | undefined;
 
   constructor(private markerService : MarkerService, private http : HttpClient) {
     
    }
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.getIncomingData();
   }
 
@@ -88,9 +90,12 @@ export class UnregisteredHomeComponent{
     save(){
       this.loginModal?.toggle()
   }
-    openloginModal(element: string | Element){
-      this.loginModal = new bootstrap.Modal(element,{} ) 
-      this.loginModal?.show()
+    openloginModal(){
+      console.log("tuutuut");
+      if(this.modal != undefined){
+        console.log("tuutuut2");
+        this.modal.show();
+      }
     }
     opensignupModal(element: string | Element){
       this.signupModal = new bootstrap.Modal(element,{} ) 
