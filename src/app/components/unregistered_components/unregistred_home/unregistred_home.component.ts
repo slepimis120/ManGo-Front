@@ -1,10 +1,11 @@
-import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { MarkerService } from 'src/app/services/marker.service';
 import * as bootstrap from 'bootstrap';
 import { MarkerStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CdkStepper } from '@angular/cdk/stepper';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from '../../header_components/login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,12 +25,27 @@ export class UnregisteredHomeComponent{
   @ViewChild('cdkStepperUnregistered') cdkStepper: CdkStepper | undefined;
   @ViewChild(LoginComponent) modal: LoginComponent | undefined;
 
-  constructor(private markerService : MarkerService, private http : HttpClient) {
+  constructor(private markerService : MarkerService, private http : HttpClient, private router: Router) {
     
    }
 
   ngAfterViewInit() {
     this.getIncomingData();
+  }
+
+  ngOnInit() {
+    const accessToken: any = localStorage.getItem('user');
+    if(accessToken != null){
+      let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+      if(decodedJWT.role == "PASSENGER"){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/passenger']));
+      }else if(decodedJWT.role == "DRIVER"){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/driver']));
+      }
+    }
+    
   }
 
   createRoute() : void { 
