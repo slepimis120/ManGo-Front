@@ -1,17 +1,28 @@
+.logo_container{
+    display: flex;
+    align-items: center;
+}
 
 .footer_logo {
-
     font-family: 'Unica One', cursive;
-    font-size: 64px ;
+    font-size: 80px ;
     text-align: center;
     justify-content: left;
-    padding: 2vmax 1vmax 0vmax 0;
     line-height: 60px;
     height: fit-content;
+    padding: 3vw;
+    border-right: 1px solid;
+    line-height: 5vw;
+    margin: 0;
 }
+
 
 .vertical_line{
     border-right: thin solid white;
+}
+
+.footer_logo_description{
+    padding: 2vw;
 }
 
 .footer_logo_description p{
@@ -28,11 +39,20 @@ h5{
     width: fit-content;
 }
 
+.navigation{
+    padding-left: 4vw;
+}
+
+.navigation h5{
+    margin-bottom: 2vw;
+}
+
 .navigation p {
-    font-size: 16px;
+    font-size: 20px;
     color: var(--dark_orange);
     text-decoration: underline;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 0;
 }
 
 .join_us p{
@@ -58,6 +78,23 @@ h5{
 
 }
 
-.contact_info div p{
-    display: inline;
+.contact_info p{
+    margin-top: 0;
+}
+
+h5{
+    margin-bottom: 2vw;
+}
+
+.footer-copyright{
+    margin-top: 2vw;
+    padding: 1vw;
+    border-top: 1px solid gray;
+}
+
+.footer-copyright span{
+    opacity: 0.8;
+    margin-right: 1.5vw;
+    font-size: 16px;
+    font-weight: 100;
 }

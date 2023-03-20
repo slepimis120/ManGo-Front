@@ -219,7 +219,6 @@ export class PassengerHomeComponent {
 
     this.markerService.sendData({"step" :MarkerStep.GetMarkers});
     while(this.startLocation == undefined){
-      console.log("koji kurac");
 
     }
     let startLocation = this.startLocation.getLatLng();
