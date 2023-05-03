@@ -1,9 +1,6 @@
-import { Component, ComponentFactoryResolver, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
-import { thisMonth } from '@igniteui/material-icons-extended';
-import * as bootstrap from 'bootstrap';
-import * as L from 'leaflet';
-import { Subscription } from 'rxjs';
-import { invisibleIcon, MarkerStep, RideStep, Users, VehicleType } from 'src/app/constants/constants';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { MarkerStep, RideStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CoordinateModel } from 'src/app/models/coordinate.model';
 import { AcceptRideService } from 'src/app/services/accept-ride.service';
 import { MarkerService } from 'src/app/services/marker.service';
@@ -13,7 +10,7 @@ import { Ride } from 'src/app/models/ride.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Passenger } from 'src/app/models/passenger.model';
 import {Location } from "src/app/models/location.model";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-driver-home',
@@ -31,6 +28,9 @@ export class DriverHomeComponent implements OnInit{
   currentRide : Ride;
   currentTime : number;
   currentDistance : number;
+  requestModal: any;
+  subscription: Subscription;
+
 
   @ViewChild('ride_details', {static: false}) rideDetails: ElementRef | undefined;
   @ViewChild('map_container', {static: false}) mapContainer: ElementRef | undefined;
@@ -47,6 +47,9 @@ export class DriverHomeComponent implements OnInit{
     this.currentRide = new Ride(driver, [startLocation, endLocation], [passenger], VehicleType.Standard, true, true, scheduledTime, 190, 12, 1.3);
     this.currentTime = this.currentRide.duration;
     this.currentDistance = this.currentRide.distance;
+    const source = interval(10000);
+    this.subscription = source.subscribe(val => this.openRequestModal());
+
     setInterval(() => {
       if(this.currentTime != 0){
         this.currentTime -= 1;
@@ -116,21 +119,42 @@ export class DriverHomeComponent implements OnInit{
   }
 
   handleDecline(myReason : string){
+    const accessToken: any = localStorage.getItem('user');
+    let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
     const options: any = {
       responseType: 'text',
     };
-    this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/cancel", {reason: myReason}, options).subscribe((res) => {
+    this.http.put<string>("http://localhost:8080/api/ride/" + decodedJWT.id + "/cancel", {reason: myReason}, options).subscribe((res) => {
       });
   }  
 
   sendResponseToServer(accepted : boolean){
+    const accessToken: any = localStorage.getItem('user');
+    let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
    if(accepted){
     const options: any = {
       responseType: 'text',
     };
-    this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/accept", options).subscribe((res) => {
+    this.http.put<string>("http://localhost:8080/api/ride/" + decodedJWT + "/accept", options).subscribe((res) => {
       });
    }
+  }
+
+  openRequestModal(){
+
+    const accessToken: any = localStorage.getItem('user');
+    let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+    this.http.get<string>("http://localhost:8080/api/ride/" + decodedJWT.id + "/isAssigned", {headers: 
+    {'Access-Control-Allow-Origin': '*' }}).subscribe((res) => {
+      if(res == "1234"){
+
+      }else{
+        if(this.modal != undefined){
+          this.modal.show();
+        }
+      }
+          });
+
   }
 
 
@@ -141,7 +165,9 @@ export class DriverHomeComponent implements OnInit{
         const options: any = {
           responseType: 'text',
         };
-        this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/start", options).subscribe((res) => {
+        const accessToken: any = localStorage.getItem('user');
+        let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+        this.http.put<string>("http://localhost:8080/api/ride/" + decodedJWT.id + "/start", options).subscribe((res) => {
           });
         this.statusText = "END RIDE";
         if(this.my_button != undefined){
@@ -152,7 +178,9 @@ export class DriverHomeComponent implements OnInit{
         const options: any = {
           responseType: 'text',
         };
-        this.http.put<string>("http://localhost:8080/api/ride/" + "1" + "/end", options).subscribe((res) => {
+        const accessToken: any = localStorage.getItem('user');
+        let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+        this.http.put<string>("http://localhost:8080/api/ride/" + decodedJWT.id + "/end", options).subscribe((res) => {
           });
         if(this.my_button != undefined){
           this.my_button.nativeElement.classList.remove('yellow');
@@ -183,9 +211,6 @@ export class DriverHomeComponent implements OnInit{
     }
     if(this.my_button != undefined){
       this.my_button.nativeElement.classList.add('dark_gray');
-    }
-    if(this.modal != undefined){
-      this.modal.show();
     }
   }
 }
