@@ -7,7 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { UnregisteredHomeComponent } from './components/unregistered_components/unregistred_home/unregistred_home.component';
 import { FooterComponent } from './components/footer_components/footer/footer.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { SignupComponent } from './components/header_components/signup/signup.component';
+import { SignupComponent } from './components/passenger_components/signup/signup.component';
 import { UnregisteredMapComponent} from './components/unregistered_components/unregistered_map/unregistered_map.component';
 import { MapModule } from './components/unregistered_components/unregistered_map/unregistered_map.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Users } from 'src/app/constants/constants';
 import { LoginComponent } from '../../auth/login/login.component';
-import { SignupComponent } from '../signup/signup.component';
+import { SignupComponent } from '../../passenger_components/signup/signup.component';
 
 @Component({
   selector: 'app-navbar',

@@ -4,7 +4,7 @@ import { catchError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { accesstoken } from 'src/app/models/accesstoken';
-import { SignupComponent } from '../../header_components/signup/signup.component';
+import { SignupComponent } from '../../passenger_components/signup/signup.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginResponse } from '../model/LoginResponse';
 import { LoginService } from '../login-service/login.service';

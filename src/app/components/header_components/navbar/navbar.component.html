@@ -21,11 +21,11 @@
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto" *ngIf="!registeredUser">
                     <li class="nav-item">
-                        <button class="btn btn-primary" (click)="openloginModal()">Log in</button>
+                        <button class="btn btn-primary" id="navbar-login" (click)="openloginModal()">Log in</button>
                     
                     </li>
                     <li  class="nav-item" >
-                        <button class="btn btn-primary" (click)="opensignupModal()">Sign up</button>
+                        <button class="btn btn-primary" id="navbar-signup" (click)="opensignupModal()">Sign up</button>
                     </li>`
             </ul>
             <ul class="navbar-nav ms-auto" *ngIf="registeredUser">

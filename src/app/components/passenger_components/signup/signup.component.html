@@ -10,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <p class="subtitle" *ngIf="!validCredentials">Hey! Enter your credentials to create a new account!</p>
+                <p class="check-email" *ngIf="errorCode">{{errorMessage}}</p>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!validCredentials">
                     <div class="credentials">
                         <div>
