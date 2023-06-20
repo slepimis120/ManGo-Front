@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Users } from 'src/app/constants/constants';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../../auth/login/login.component';
 import { SignupComponent } from '../signup/signup.component';
 
 @Component({

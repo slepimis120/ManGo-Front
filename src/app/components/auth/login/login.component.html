@@ -1,0 +1,39 @@
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="modal-header">
+          <h4 class="modal-title">Login</h4>
+          <button type="button" class="close-btn" (click)="hide()">
+           &times;
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="text-center">
+                    <p class="subtitle">Hey! Enter your credentials to sign in to your account!</p>
+                    <div class="credentials">
+                      <p class="check-email" *ngIf="errorCode">{{errorMessage}}</p>
+                      
+                      <div>
+                        <input type="text" id="email" placeholder="E-mail" formControlName="email">
+                        <p *ngIf="form?.get('email')?.invalid && form?.get('email')?.touched" class="warning">!</p>
+                    </div>
+                    <div>
+                      <input type="password" id="password" placeholder="Password" formControlName="password">
+                      <p *ngIf="form?.get('password')?.invalid && form?.get('password')?.touched" class="warning">!</p>
+                  </div>                    </div>
+                  
+                    <p style="margin-top:2vw; cursor: pointer;" (click)="openRegistration()">Don't have an account?<b> Register now</b></p>
+                </div>
+        </div>
+        <div class="modal-footer">
+  
+          <button class="btn login_btn" type="submit" (click)="getAccessToken()">Login</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+
+  <app-signup></app-signup>

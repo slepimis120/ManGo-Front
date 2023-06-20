@@ -4,7 +4,7 @@ import * as bootstrap from 'bootstrap';
 import { MarkerStep, Users, VehicleType } from 'src/app/constants/constants';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { HttpClient } from '@angular/common/http';
-import { LoginComponent } from '../../header_components/login/login.component';
+import { LoginComponent } from '../../auth/login/login.component';
 import { Router } from '@angular/router';
 
 @Component({

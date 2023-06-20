@@ -19,6 +19,14 @@
     margin: 0;
 }
 
+.warning{
+    display: inline;
+    margin-left: 0.5vw;
+    vertical-align: middle;
+    color: red;
+    font-size: 30px;
+}
+
 .close-btn{
     border: none;
     background-color: white;
@@ -70,7 +78,7 @@
 }
 
 input{
-    display: block;
+    display: inline;
     background: black;
     color: white;
     padding: 0.2vw 1vw;
