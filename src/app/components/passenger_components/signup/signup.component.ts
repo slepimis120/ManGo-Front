@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SignupService } from '../service/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,14 +23,22 @@ export class SignupComponent {
   showModal: boolean = false;
   validCredentials = false;
 
-  constructor(private http:HttpClient){ }
+  constructor(private http:HttpClient, private signupService : SignupService){ }
 
   ngOnInit(): void {
   }
 
   public createPassenger() {
     if (this.form.valid) {
-      this.setUser().subscribe((res) => {
+      let firstName = this.form.get('fname')?.value;
+      let lastName = this.form.get('lname')?.value;
+      let phone = this.form.get('phone')?.value;
+      let address = this.form.get('address')?.value;
+      let password = this.form.get('password')?.value;
+      let email = this.form.get('email')?.value;
+      this.signupService.register({name: firstName, surname: lastName, profilePicture : "", telephoneNumber : phone, email : email, address : address, password : password })
+      .subscribe((res) =>{
+
         console.log(res);
         this.validCredentials = true;
         this.errorCode = false;
@@ -44,17 +53,6 @@ export class SignupComponent {
     }
   }
 
-  public setUser(): Observable<any> {
-    let url = "http://localhost:8080/api/passenger";
-    let firstName = this.form.get('fname')?.value;
-    let lastName = this.form.get('lname')?.value;
-    let phone = this.form.get('phone')?.value;
-    let address = this.form.get('address')?.value;
-    let password = this.form.get('password')?.value;
-    let email = this.form.get('email')?.value;
-
-    return this.http.post<string>(url, {name: firstName, surname: lastName, profilePicture : "", telephoneNumber : phone, email : email, address : address, password : password });
-  }
 
   show() {
     this.showModal = true;
@@ -68,7 +66,6 @@ export class SignupComponent {
     if (this.form.valid) {
       console.log('Form is valid');
       this.errorCode = false;
-      this.setUser();
 
     } else {
       console.log('Form is invalid');

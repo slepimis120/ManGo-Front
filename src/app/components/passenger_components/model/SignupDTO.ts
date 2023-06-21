@@ -1,10 +1,10 @@
-interface SignupDTO {
-    name: string;
-    surname: string;
-    profilePicture?: string;
-    telephoneNumber?: string;
-    email: string;
-    address: string;
-    password: string;
+export interface SignupDTO {
+    name: any;
+    surname: any;
+    profilePicture?: any;
+    telephoneNumber?: any;
+    email: any;
+    address: any;
+    password: any;
   }
   
