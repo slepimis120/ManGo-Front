@@ -23,7 +23,7 @@ export class SignupComponent {
   showModal: boolean = false;
   validCredentials = false;
 
-  constructor(private http:HttpClient, private signupService : SignupService){ }
+  constructor(private signupService : SignupService){ }
 
   ngOnInit(): void {
   }
