@@ -134,15 +134,15 @@
                 <cdk-step>
                     <div class="white-bg main-container loading-screen">
                         <div *ngIf="showLoadingScreen" >
-                            <p >{{ message }}</p>
+                            <p id="loading-screen">{{ message }}</p>
                         </div>
                         <div *ngIf="noDriverAvailible">
                             <img src="../../../../assets/images/icons/sad-face-icon.png" class="sad-face">
-                            <p>No availible driver. Try again later or schedule a ride!</p>
-                            <button class="yellow-btn titilium-web" (click)="resetForm()">Try again</button>
+                            <p >Cannot create a ride while you have one already pending!</p>
+                            <button id="no-ride-error"  class="yellow-btn titilium-web" (click)="resetForm()">Try again</button>
                         </div>
-                        <div *ngIf="driverFound">
-                            <app-passenger-ride-details></app-passenger-ride-details>
+                        <div *ngIf="driverFound" >
+                            <app-passenger-ride-details ></app-passenger-ride-details>
                         </div>
 
                     </div>

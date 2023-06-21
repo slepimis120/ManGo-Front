@@ -25,11 +25,12 @@ export class DriverHomeComponent implements OnInit{
   endCoordinate : CoordinateModel | undefined = undefined;
   statusText : string  =  "START RIDE";
   status : boolean = false; 
+  isBusy : boolean = false;
   currentRide : Ride;
   currentTime : number;
   currentDistance : number;
   requestModal: any;
-  //subscription: Subscription;
+  subscription: Subscription;
 
 
   @ViewChild('ride_details', {static: false}) rideDetails: ElementRef | undefined;
@@ -48,8 +49,9 @@ export class DriverHomeComponent implements OnInit{
     this.currentTime = this.currentRide.duration;
     this.currentDistance = this.currentRide.distance;
     this.openRequestModal();
-    //const source = interval(100000);
-    //this.subscription = source.subscribe(val => this.openRequestModal());
+    const source = interval(50000);
+    this.subscription = source.subscribe(val => {
+      this.openRequestModal()});
 
     setInterval(() => {
       if(this.currentTime != 0){
@@ -93,7 +95,7 @@ export class DriverHomeComponent implements OnInit{
   }
 
   handleAccept(){
-
+    this.isBusy = true;
     if(this.rideDetails !=undefined){
       this.rideDetails.nativeElement.style.display = 'block';
     }   
@@ -106,7 +108,7 @@ export class DriverHomeComponent implements OnInit{
     this.markerService.sendData({
       "step" : MarkerStep.PlaceMarker,
       "end-address" : this.currentRide.locations[1].address});
-
+    
     this.sendResponseToServer(true);
     setTimeout(() => {
       this.simulateMoving()
@@ -120,6 +122,7 @@ export class DriverHomeComponent implements OnInit{
   }
 
   handleDecline(myReason : string){
+    this.isBusy = false;
     const accessToken: any = localStorage.getItem('user');
     let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
     const options: any = {

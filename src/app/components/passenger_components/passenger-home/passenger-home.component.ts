@@ -1,5 +1,5 @@
 import { CdkStepper } from '@angular/cdk/stepper';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
@@ -9,6 +9,7 @@ import { RideRequest } from 'src/app/models/rideRequest.model';
 import { Vehicle } from 'src/app/models/vehicle';
 import { MarkerService } from 'src/app/services/marker.service';
 import { RideService } from 'src/app/services/ride-service.service';
+import {CreateRideDTO} from 'src/app/components/passenger_components/model/RideDTOs';
 
 
 @Component({
@@ -129,7 +130,10 @@ export class PassengerHomeComponent {
     })
     this.rideService.getData().subscribe((res) => {
       if(res["step"] == RideStep.OnStartArrival){
-        this.router.navigate(['passenger/active']);
+        setTimeout(() => {
+          this.router.navigate(['passenger/active']);
+        }, 3000);
+       
       }
     })
     
@@ -151,6 +155,54 @@ export class PassengerHomeComponent {
 
   }
 
+  createRide() {
+    const accessToken: any = localStorage.getItem('user');
+    let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
+    const createRideDto: CreateRideDTO = {
+      passengers: [
+        { id: decodedJWT.id, email: decodedJWT.email },
+      ],
+      vehicleType: 'VAN',
+      babyTransport: false,
+      petTransport: true,
+      locations: [
+        {
+          departure: {
+            address: 'Start Address',
+            latitude: this.startLocation.getLatLng().lat,
+            longitude: this.startLocation.getLatLng().lng
+          },
+          destination: {
+            address: 'End Address',
+            latitude: this.endLocation.getLatLng().lat,
+            longitude: this.startLocation.getLatLng().lng
+          }
+        }
+      ],
+      scheduledTime: new Date()
+    };
+
+    const headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*' });
+
+    this.http.post<string>("http://localhost:8080/api/ride", createRideDto, { headers }).subscribe(
+      (res) => {
+        let driverList: any[] = [];
+
+        this.sendDriverRequest(driverList);
+      },
+      (error: any) => {
+        setTimeout(() => {
+          console.log(error);
+        this.noDriverAvailible = true;
+        this.showLoadingScreen = false;
+        }, 2000);
+        
+      }
+    );
+  }
+
+
   calculatePrice(selected :any){
     //const httpHeaders = new HttpHeaders().set('Content-Type', 'text');
     //this.http.get<string>("http://localhost:8080/api/unregisteredUser", {headers: httpHeaders}).subscribe((res) => {
@@ -160,25 +212,20 @@ export class PassengerHomeComponent {
 
   //TODO2: find available driver
   findDriver(rideRequest : RideRequest){
-    //Connect to server and gather response 
-    //GATHER A LIST OF ALL CURRENTLY AVAILABLE DRIVERS
-        //temporary variable
+
     let serverRespone = true;
-    let driverList: any[] = [];
 
 
     if(serverRespone) {
-      this.sendDriverRequest(driverList);
+      
     }
     else {
-      this.noDriverAvailible = true;
-      this.showLoadingScreen = false;
+      
     }
   }
 
   //TODO: send a ride request to the driver 
   sendDriverRequest(driverList : any[]){
-    console.log("JEBEM TI MAJKU");
     for(const driver of driverList){
       //TODO : send a request to the driver and wait for the response
       //if the driver declines you send a reqest to the other driver 
@@ -212,7 +259,6 @@ export class PassengerHomeComponent {
 
 
   collectRideInfo(startAddress : string, endAddress: string, selected : string, childrenTag : boolean, petsTag : boolean, scheduledTime : string){
-    console.log("koji kurac");
     const accessToken: any = localStorage.getItem('user');
     let decodedJWT = JSON.parse(window.atob(accessToken.split('.')[1]));
     let id = decodedJWT.id;
@@ -229,8 +275,8 @@ export class PassengerHomeComponent {
     date.setHours(parseInt(timeParts[0]));
     date.setMinutes(parseInt(timeParts[1]));
     let rideRequest : RideRequest= new RideRequest(id, startLocation, endLocation, startAddress, endAddress, vehicleType, childrenTag, petsTag, date );
-
-    this.findDriver(rideRequest);
+    this.createRide();
+    //this.findDriver(rideRequest);
 
   }
 

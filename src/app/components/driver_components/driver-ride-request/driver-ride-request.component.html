@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+<div class="modal" tabindex="-1" role="dialog" id="ride-request"  [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,7 +39,7 @@
       <div class="modal-footer">
 
         <button type="button" class="btn btn-decline" (click)="declineRide(decline_reason.value)">Decline</button>
-        <button type="button" class="btn btn-accept" (click)="acceptRide()">Accept</button>
+        <button type="button" class="btn btn-accept" id="request-accept-btn" (click)="acceptRide()">Accept</button>
       </div>
     </div>
   </div>
