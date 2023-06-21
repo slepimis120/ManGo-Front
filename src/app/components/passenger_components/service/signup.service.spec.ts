@@ -4,6 +4,7 @@ import { SignupService } from './signup.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SignupDTO } from '../model/SignupDTO';
 import { SignupResponse } from '../model/SignupResponse';
+import { HttpErrorResponse } from '@angular/common/http';
 describe('SignupService', () => {
   let service: SignupService;
   let httpController: HttpTestingController;
@@ -37,6 +38,8 @@ describe('SignupService', () => {
     telephoneNumber: '0600538922',
   };
 
+  const  url : string = "http://localhost:8080/api/passenger";
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -50,5 +53,34 @@ describe('SignupService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  
+  it('should register a valid user', () => {
+    service.register(validData).subscribe((res) => {
+      expect(res).toEqual(registeredUser);
+    });
+    const request = httpController.expectOne(url);
+    expect(request.request.method).toEqual('POST');
+
+    request.flush(registeredUser);
+    httpController.verify();
+  });
+  it('should show error for already existing username', () => {
+    let errorMessage = "User with that email already exists!"
+    service.register(existingUserData).subscribe({
+      next: () => {},
+      error: (error: HttpErrorResponse) => {
+        expect(error.status).withContext('status').toEqual(400);
+        expect(error.error)
+          .withContext('message')
+          .toEqual(errorMessage);
+      },
+    });
+
+    const request = httpController.expectOne(url);
+    expect(request.request.method).toEqual('POST');
+
+    request.flush(errorMessage, {
+      status: 400,
+      statusText: 'Bad Request',
+    });
+  });
 });
