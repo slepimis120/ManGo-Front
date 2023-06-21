@@ -29,7 +29,7 @@ export class DriverHomeComponent implements OnInit{
   currentTime : number;
   currentDistance : number;
   requestModal: any;
-  subscription: Subscription;
+  //subscription: Subscription;
 
 
   @ViewChild('ride_details', {static: false}) rideDetails: ElementRef | undefined;
@@ -47,8 +47,9 @@ export class DriverHomeComponent implements OnInit{
     this.currentRide = new Ride(driver, [startLocation, endLocation], [passenger], VehicleType.Standard, true, true, scheduledTime, 190, 12, 1.3);
     this.currentTime = this.currentRide.duration;
     this.currentDistance = this.currentRide.distance;
-    const source = interval(10000);
-    this.subscription = source.subscribe(val => this.openRequestModal());
+    this.openRequestModal();
+    //const source = interval(100000);
+    //this.subscription = source.subscribe(val => this.openRequestModal());
 
     setInterval(() => {
       if(this.currentTime != 0){

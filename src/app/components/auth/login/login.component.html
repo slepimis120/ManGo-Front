@@ -10,16 +10,16 @@
         </div>
         <div class="modal-body">
                 <div class="text-center">
-                    <p class="subtitle">Hey! Enter your credentials to sign in to your account!</p>
+                    <p class="subtitle" id="login-subtitle">Hey! Enter your credentials to sign in to your account!</p>
                     <div class="credentials">
-                      <p class="check-email" *ngIf="errorCode">{{errorMessage}}</p>
+                      <p class="check-email" id="login-error"  *ngIf="errorCode">{{errorMessage}}</p>
                       
                       <div>
-                        <input type="text" id="email" placeholder="E-mail" formControlName="email">
+                        <input type="text" id="login-email" placeholder="E-mail" formControlName="email">
                         <p *ngIf="form?.get('email')?.invalid && form?.get('email')?.touched" class="warning">!</p>
                     </div>
                     <div>
-                      <input type="password" id="password" placeholder="Password" formControlName="password">
+                      <input type="password" id="login-password" placeholder="Password" formControlName="password">
                       <p *ngIf="form?.get('password')?.invalid && form?.get('password')?.touched" class="warning">!</p>
                   </div>                    </div>
                   
@@ -28,7 +28,7 @@
         </div>
         <div class="modal-footer">
   
-          <button class="btn login_btn" type="submit" (click)="getAccessToken()">Login</button>
+          <button class="btn login_btn" id="login-submit" type="submit" (click)="getAccessToken()">Login</button>
         </div>
       </form>
       </div>

@@ -76,7 +76,7 @@ export class DriverMapComponent {
         indicator = false;
       }
       this.rideService.simulateMovement(startCoordinate, endCoordinate, this.map, this.currentLocationMarker, indicator);
-    }, 2000);
+    }, 5000);
   }
 
   private connectMarkers(){

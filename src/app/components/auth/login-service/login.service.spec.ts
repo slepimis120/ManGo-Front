@@ -20,8 +20,8 @@ describe('LoginService', () => {
     password: 'password'
   }
   let blockedCredentials =  {
-    accessToken: 'masamisic@gmail.com',
-    refreshToken: 'masamisic@gmail.com'
+    accessToken: 'saki@saki.com',
+    refreshToken: 'saki@saki.com'
   }
   let notActivatedCredentials = {
     accessToken: 'mock',

@@ -28,9 +28,9 @@
                         <button class="btn btn-primary" id="navbar-signup" (click)="opensignupModal()">Sign up</button>
                     </li>`
             </ul>
-            <ul class="navbar-nav ms-auto" *ngIf="registeredUser">
+            <ul class="navbar-nav ms-auto"  *ngIf="registeredUser">
                 <li class="nav-item">
-                    <button class="btn btn-primary" (click)="logout()">Log out</button>
+                    <button class="btn btn-primary" id="navbar-logout" (click)="logout()">Log out</button>
                 
                 </li>
         </ul>

@@ -30,10 +30,12 @@ export class SignupComponent {
   public createPassenger() {
     if (this.form.valid) {
       this.setUser().subscribe((res) => {
-        console.log(res.statusCode);
-        if (res.status === 200) {
-          this.validCredentials = true;
-        }
+        console.log(res);
+        this.validCredentials = true;
+        this.errorCode = false;
+      }, (err) =>{
+        this.errorCode = true;
+        this.errorMessage = "User with that email already exists!"
       });
     } else {
       console.log('Form is invalid');
